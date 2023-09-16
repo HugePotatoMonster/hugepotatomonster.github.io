@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>GAMES101课程笔记（一）——Transformation</title>
+      <link href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/"/>
+      <url>/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/</url>
+      
+        <content type="html"><![CDATA[<h1 id="GAMES101课程笔记（一）——Transformation"><a href="#GAMES101课程笔记（一）——Transformation" class="headerlink" title="GAMES101课程笔记（一）——Transformation"></a>GAMES101课程笔记（一）——Transformation</h1><p>本文基于闫老师的GAMES101课程，是笔者个人的学习笔记，如果想要更好的阅读体验，建议搭配原课程一起食用。</p><div style="position: relative;width: 80%;height: 0;padding-bottom: 50%;"><iframe src="//player.bilibili.com/player.html?aid=90798049&amp;bvid=BV1X7411F744&amp;cid=155049937&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%"> </iframe></div><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>笔者是一位刚刚入学的研究生，浑浑噩噩了一整个大四以后终于决定干点正事。由于自己对计算机图形学很感兴趣，将来也希望能从事游戏相关的行业，所以就慕名来学习GAMES101的课程，并开启此系列作为自己的学习记录，如果文中有任何不正确的地方，还请各位大佬指正。</p><p>本系列略去了很大一部分的基础数学知识，尤其是线性代数部分，如果在阅读本系列时发现公式部分难以理解，建议自行补充对应的数学知识。</p><h2 id="2D-Transformation"><a href="#2D-Transformation" class="headerlink" title="2D Transformation"></a>2D Transformation</h2><h3 id="Linear-Transforms——线性变换"><a href="#Linear-Transforms——线性变换" class="headerlink" title="Linear Transforms——线性变换"></a>Linear Transforms——线性变换</h3><p>在图像的变换中，如果变换前后的坐标满足如下关系</p><script type="math/tex; mode=display">x'=ax+by \\y'=cx+dy</script><p>我们就说这是一个线性变换，依据矩阵的知识，我们可以将上述变换写为矩阵形式</p><script type="math/tex; mode=display">\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}a & b\\c & d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p>其中矩阵<script type="math/tex">\begin{bmatrix}a & b\\c & d\end{bmatrix}</script>就称为该变换的变换矩阵。</p><p>接下来我们先介绍几种基础的线性变换。</p><h4 id="Scale——缩放变换"><a href="#Scale——缩放变换" class="headerlink" title="Scale——缩放变换"></a>Scale——缩放变换</h4><p>该变换中，图片仅在x轴和y轴上成比例缩放，如下图所示</p><p><img src="/1.png" alt=""></p><p><img src="Games101%E8%AF%BE%E7%A8%8B%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89%20%E2%80%94%E2%80%94%20Transformation/1.png" alt=""></p><p>缩放变换的矩阵表达形式为：</p><script type="math/tex; mode=display">\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}s_x & 0\\0 & s_y\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><h4 id="Reflection——反射变换"><a href="#Reflection——反射变换" class="headerlink" title="Reflection——反射变换"></a>Reflection——反射变换</h4><p>在缩放变换的基础之上，如果我们将$s_x$（$s_y$同理）取为负值，则可以实现将图像翻转，例如如果我们做如下变换：</p><script type="math/tex; mode=display">\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}-1 & 0\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p> 则变换的效果就会变成这样</p><p><img src="/2.png" alt=""></p><h4 id="Shear——错切变换"><a href="#Shear——错切变换" class="headerlink" title="Shear——错切变换"></a>Shear——错切变换</h4><p>错切变换比较抽象，在该变换中，我们需要先指定一个方向，假如我们指定$x$轴方向，则所有点的坐标变换都满足这样的条件：仅有$x$方向上的坐标发生改变，改变后的值为其原始各方向坐标的线性组合。</p><p>这么解释非常抽象，我们从课程中的具体例子来进行解释</p><p><img src="/3.png" alt=""></p><p>在图示变换中，这个正方形在x轴方向上进行了错切变换。不难发现，变换前后所有的点，其$y$轴坐标都没有发生变化，因此我们只需关注$x$轴的坐标，依据错切变换的定义，它应满足</p><script type="math/tex; mode=display">x'=mx+ny</script><p>原始正方形的左上角顶点坐标为$(0,1)$，变换后其坐标为$(a,1)$；右上角顶点的原始坐标为$(1,1)$，变换后为$(a+1,1)$。</p><p>代入上述方程，解得$m=1,n=a$</p><p>从而得到该变换的变换矩阵为：</p><script type="math/tex; mode=display">\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}-1 & a\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><script type="math/tex; mode=display"></script><h4 id="Rotation——旋转变换"><a href="#Rotation——旋转变换" class="headerlink" title="Rotation——旋转变换"></a>Rotation——旋转变换</h4><p>注意，我们这里说的旋转变换是指图像绕<strong>原点</strong>进行旋转，将图像沿逆时针旋转$\theta$的变换如下所示</p><p><img src="/4.png" alt=""></p><p>不难推导出该变换的变换矩阵为</p><script type="math/tex; mode=display">\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}cos\theta & -sin\theta\\sin\theta & cos\theta\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p>（使用高中数学知识就可以进行推导，此处不再赘述）</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
