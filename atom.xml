@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>PotatoMonster</title>
+  
+  <subtitle>PotatoMonster</subtitle>
+  <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://hugepotatomonster.github.io/"/>
+  <updated>2023-10-24T06:51:22.516Z</updated>
+  <id>http://hugepotatomonster.github.io/</id>
+  
+  <author>
+    <name>PotatoMonster</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101课程笔记（二）——Rasterization</title>
+    <link href="http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/"/>
+    <id>http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/</id>
+    <published>2023-10-01T05:13:02.000Z</published>
+    <updated>2023-10-24T06:51:22.516Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（二）——Rasterization&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（二）——Rasterization&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GANES101" scheme="http://hugepotatomonster.github.io/tags/GANES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（一）——Transformation</title>
+    <link href="http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/"/>
+    <id>http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/</id>
+    <published>2023-09-14T06:30:12.000Z</published>
+    <updated>2023-10-24T05:37:34.934Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（一）——Transformation&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（一）——Transformation&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GANES101" scheme="http://hugepotatomonster.github.io/tags/GANES101/"/>
+    
+  </entry>
+  
+</feed>

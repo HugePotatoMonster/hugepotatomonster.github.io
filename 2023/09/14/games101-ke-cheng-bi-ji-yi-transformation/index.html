@@ -1,0 +1,1381 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMES101课程笔记（一）——Transformation, PotatoMonster">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMES101课程笔记（一）——Transformation | PotatoMonster</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="PotatoMonster" type="application/atom+xml">
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">土豆大魔王</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">PotatoMonster</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HugePotatoMonster" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Here Here!
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        // color: #0f9d58;
+        color: #1a1a1a;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HugePotatoMonster" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Here Here!" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMES101课程笔记（一）——Transformation</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
+                            </a>
+                        
+                            <a href="/tags/GANES101/">
+                                <span class="chip bg-color">GANES101</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-09-14
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="GAMES101课程笔记（一）——Transformation"><a href="#GAMES101课程笔记（一）——Transformation" class="headerlink" title="GAMES101课程笔记（一）——Transformation"></a>GAMES101课程笔记（一）——Transformation</h1><p>本文基于闫老师的GAMES101课程，如果想要更好的阅读体验，建议搭配原课程一起食用。</p>
+<div style="position: relative;width: 80%;height: 0;padding-bottom: 50%;">
+<iframe src="//player.bilibili.com/player.html?aid=90798049&amp;bvid=BV1X7411F744&amp;cid=155049937&amp;p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%"> </iframe></div>
+
+
+<h2 id="写在本系列之前"><a href="#写在本系列之前" class="headerlink" title="写在本系列之前"></a>写在本系列之前</h2><p>笔者是一位刚刚入学的研究生，浑浑噩噩了一整个大四以后终于决定干点正事。由于自己对计算机图形学很感兴趣，将来也希望能从事游戏相关的行业，所以就慕名来学习GAMES101的课程，并开启此系列作为自己的学习记录，如果文中有任何不正确的地方，还请各位大佬指正。</p>
+<p>本系列略去了很大一部分的基础数学知识，尤其是线性代数部分，如果在阅读本系列时发现公式部分难以理解，建议自行补充对应的数学知识。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>本文的主题是变换（Transformation），从简单的平移、旋转和缩放，到复杂的仿射变换和透视变换，变换为我们提供了控制和呈现图像的有力工具。</p>
+<p>变换不仅仅是计算机图形学的核心，它还渗透到各种领域，如视频游戏、动画制作、虚拟现实、计算机辅助设计和医学成像等。</p>
+<p><img src="25.png" width="60%"></p>
+<p>在图形学中，我们使用矩阵来表达变换，接下来的内容也据此展开。</p>
+<h2 id="2D-Transformation"><a href="#2D-Transformation" class="headerlink" title="2D Transformation"></a>2D Transformation</h2><h3 id="Linear-Transforms——线性变换"><a href="#Linear-Transforms——线性变换" class="headerlink" title="Linear Transforms——线性变换"></a>Linear Transforms——线性变换</h3><p>在图像的变换中，如果变换前后的坐标满足如下关系：</p>
+<script type="math/tex; mode=display">
+x'=ax+by \\
+y'=cx+dy</script><p>我们就说这是一个线性变换，依据矩阵的知识，我们可以将上述变换写为矩阵形式：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}a & b\\c & d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p>其中矩阵<script type="math/tex">\begin{bmatrix}a & b\\c & d\end{bmatrix}</script>就称为该变换的变换矩阵。</p>
+<p>接下来我们先介绍几种基础的线性变换。</p>
+<h4 id="Scale——缩放变换"><a href="#Scale——缩放变换" class="headerlink" title="Scale——缩放变换"></a>Scale——缩放变换</h4><p>该变换中，图片仅在x轴和y轴上成比例缩放，如下图所示：</p>
+<p><img src="1.png" width="60%"></p>
+<p>缩放变换的矩阵表达形式为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+x'\\
+y'
+\end{bmatrix}
+=
+\begin{bmatrix}
+s_x & 0\\
+0 & s_y
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y
+\end{bmatrix}</script><h4 id="Reflection——反射变换"><a href="#Reflection——反射变换" class="headerlink" title="Reflection——反射变换"></a>Reflection——反射变换</h4><p>在缩放变换的基础之上，如果我们将$s_x$（$s_y$同理）取为负值，则可以实现将图像翻转，例如如果我们做如下变换：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}-1 & 0\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p> 则变换的效果就会变成这样：</p>
+<p><img src="2.png" width="60%"></p>
+<h4 id="Shear——错切变换"><a href="#Shear——错切变换" class="headerlink" title="Shear——错切变换"></a>Shear——错切变换</h4><p>错切变换比较抽象，在该变换中，我们需要先指定一个方向。</p>
+<p>假如我们指定$x$轴方向，则所有点的坐标变换都满足这样的条件：仅有$x$方向上的坐标发生改变，改变后的值为其原始各方向坐标的线性组合。</p>
+<p>这么解释非常抽象，我们从课程中的具体例子来进行解释：</p>
+<p><img src="3.png" width="60%"></p>
+<p>在图示变换中，这个正方形在x轴方向上进行了错切变换。不难发现，变换前后所有的点，其$y$轴坐标都没有发生变化，因此我们只需关注$x$轴的坐标，依据错切变换的定义，它应满足</p>
+<script type="math/tex; mode=display">
+x'=mx+ny</script><p>原始正方形的左上角顶点坐标为$(0,1)$，变换后其坐标为$(a,1)$；右上角顶点的原始坐标为$(1,1)$，变换后为$(a+1,1)$。</p>
+<p>代入上述方程，解得$m=1,n=a$</p>
+<p>从而得到该变换的变换矩阵为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}-1 & a\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><script type="math/tex; mode=display">
+</script><h4 id="Rotation——旋转变换"><a href="#Rotation——旋转变换" class="headerlink" title="Rotation——旋转变换"></a>Rotation——旋转变换</h4><p>注意，我们这里说的旋转变换是指图像绕<strong>原点</strong>进行旋转，将图像沿逆时针旋转$\theta$的变换如下所示：</p>
+<p><img src="4.png" width="60%"></p>
+<p>不难推导出该变换的变换矩阵为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}cos\theta & -sin\theta\\sin\theta & cos\theta\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}</script><p>（使用高中数学知识就可以进行推导，此处不再赘述）</p>
+<h3 id="Homogeneous-Coordinates——齐次坐标"><a href="#Homogeneous-Coordinates——齐次坐标" class="headerlink" title="Homogeneous Coordinates——齐次坐标"></a>Homogeneous Coordinates——齐次坐标</h3><h4 id="什么是齐次坐标"><a href="#什么是齐次坐标" class="headerlink" title="什么是齐次坐标"></a>什么是齐次坐标</h4><p>我们思考这样一个问题：我们如何用矩阵表示平面上的平移变换？就像下图中的这种情况：</p>
+<p><img src="5.png" width="60%"></p>
+<p>我们可以很简单地写出这样一个形式：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}1 & 0\\0 & 1\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}+\begin{bmatrix}t_x\\t_y \end{bmatrix}</script><p>我们发现，这个矩阵并没法写作线性变换的形式，所以平移<strong>不是线性变换</strong>。</p>
+<p>但作为一个简单且常用的变换，我们希望平移也能和线性变换的矩阵形式统一，于是我们在二维坐标上额外加上一维$w$，变为齐次坐标，形式为$(x,y,w)$。</p>
+<p>其中$w$的取值决定了该坐标表示的是一个点还是一个向量，也就是说：</p>
+<script type="math/tex; mode=display">
+2D\ point = (x,y,w)^T (w\not=0)\\
+2D\ vector = (x,y,0)^T</script><p>这也导致在齐次坐标下，<strong>点的表示并不唯一</strong>，对于任何一个坐标$(x,y,w)(w\not=0)$，它代表的其实就是点$(x/w,y/w,1)$。</p>
+<p>（这其实解决了欧式空间中，无穷远点无法表示的问题，以后有空再说8）</p>
+<p>于是，上述的平移变换我们就可以写成：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+x'\\
+y'\\
+1
+\end{bmatrix}=
+\begin{bmatrix}
+1 & 0 & t_x\\
+0 & 1 & t_y\\
+0 & 0  & 1
+\end{bmatrix}
+\begin{bmatrix}
+x\\
+y\\
+1
+\end{bmatrix}</script><p>这样，我们就可以将所有的线性变换，加上平移变换，统一地写为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}a & b & t_x\\c & d & t_y\\0 & 0  & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}</script><h4 id="齐次坐标的运算"><a href="#齐次坐标的运算" class="headerlink" title="齐次坐标的运算"></a>齐次坐标的运算</h4><p>刚才提到过，齐次坐标通过第三维的数值来区分点和向量，这么设计使得原坐标下的运算仍然兼容，例如：</p>
+<script type="math/tex; mode=display">
+vector+vector=vector\ (0+0=0)\\
+point+vector=point\ (1+0=1)</script><p>此外由于齐次坐标点的表达方式，还支持一种运算：</p>
+<script type="math/tex; mode=display">
+point+point=point\ (1+1=2)</script><p>这种运算的本质是求两个相加点的中点，结合前文内容应该不难理解。</p>
+<h3 id="Inverse-Transform——逆变换"><a href="#Inverse-Transform——逆变换" class="headerlink" title="Inverse Transform——逆变换"></a>Inverse Transform——逆变换</h3><p>逆变换，指的是将变换后的图像变回原图像的过程，如下图：</p>
+<p><img src="6.png" alt=""></p>
+<p>在矩阵形式下，假设原变换的变换矩阵为$M$，则其逆变换的变换矩阵为其逆矩阵$M^{-1}$。</p>
+<p>值得一提的是，对于旋转变换矩阵：</p>
+<script type="math/tex; mode=display">
+R_\theta=\begin{bmatrix}cos\theta & -sin\theta\\sin\theta & cos\theta\end{bmatrix}</script><p>由于$R_\theta$一个正交矩阵，所以有：</p>
+<script type="math/tex; mode=display">
+R_{-\theta}=\begin{bmatrix}cos(-\theta) & -sin(-\theta)\\sin(-\theta) & cos(-\theta)\end{bmatrix}=\begin{bmatrix}cos\theta & sin\theta\\-sin\theta & cos\theta\end{bmatrix}=R_\theta^T=R_\theta^{-1}</script><h3 id="Composing-Transforms——复合变换"><a href="#Composing-Transforms——复合变换" class="headerlink" title="Composing Transforms——复合变换"></a>Composing Transforms——复合变换</h3><p>很多时候，我们对图像的变换会涉及多个基础变换，考虑下图所示的变换：</p>
+<p><img src="7.png" width="60%"></p>
+<p>这个变换的一种分解是先进行一个45°的旋转，再向右平移一个单位，即：</p>
+<p><img src="8.png" width="60%"></p>
+<p>使用矩阵来表达上述过程，就是：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\\w'\end{bmatrix}=\begin{bmatrix}cos45° & -sin45° & 0\\sin45°& cos45° & 0\\
+0 & 0 & 1\end{bmatrix}\begin{bmatrix}1 & 0 & 1\\0 & 1 & 1\\0 & 0  & 1\end{bmatrix}\begin{bmatrix}x\\y\\w\end{bmatrix}</script><p>中间的两个矩阵刚好对应上述两步变换，应用顺序是从右往左。</p>
+<p>这里之所以强调顺序，是因为如果我们交换两个步骤的顺序，也就是先平移再旋转，那产生的结果会完全不同：</p>
+<p><img src="9.png" width="60%"></p>
+<p>这对应的矩阵特性就是矩阵乘法不具有交换律，具体到本例子，就是：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}cos45° & -sin45° & 0\\sin45°& cos45° & 0\\
+0 & 0 & 1\end{bmatrix}\begin{bmatrix}1 & 0 & 1\\0 & 1 & 1\\0 & 0  & 1\end{bmatrix}\not=
+\begin{bmatrix}1 & 0 & 1\\0 & 1 & 1\\0 & 0  & 1\end{bmatrix}\begin{bmatrix}cos45° & -sin45° & 0\\sin45°& cos45° & 0\\
+0 & 0 & 1\end{bmatrix}</script><p>总结来说，假如我们现在有一系列变换$A_1,A_2,A_3,…$，那对应的矩阵表达就是：</p>
+<script type="math/tex; mode=display">
+x^T =...·A_3·A_2·A_1·x</script><p>另外，由我们的变换一般式：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\end{bmatrix}=\begin{bmatrix}a & b\\c & d\end{bmatrix}\begin{bmatrix}x\\y\end{bmatrix}+\begin{bmatrix}t_x\\t_y \end{bmatrix}
+\Rightarrow
+\begin{bmatrix}x'\\y'\\1\end{bmatrix}=\begin{bmatrix}a & b & t_x\\c & d & t_y\\0 & 0  & 1\end{bmatrix}\begin{bmatrix}x\\y\\1\end{bmatrix}</script><p>不难看出，<strong>使用齐次坐标表达变换时，线性变换总是先于平移变换进行</strong>。</p>
+<h2 id="3D-Transformation"><a href="#3D-Transformation" class="headerlink" title="3D Transformation"></a>3D Transformation</h2><p>三维的变换可以看做是二维变换的推广，其一般式也与二维变换的类似：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x'\\y'\\z'\\1\end{bmatrix}=\begin{bmatrix}a & b & c & t_x\\d & e & f & t_y\\g & h & i & t_z\\0 & 0 & 0  & 1\end{bmatrix}\begin{bmatrix}x\\y\\z\\1\end{bmatrix}</script><h3 id="简单三维变换"><a href="#简单三维变换" class="headerlink" title="简单三维变换"></a>简单三维变换</h3><p>三维下的缩放变换与平移变换仍比较简单，与二维的情况比较相似。</p>
+<p>缩放变换的变换矩阵式为：</p>
+<script type="math/tex; mode=display">
+S(s_x,s_y,s_z)=\begin{bmatrix}s_x & 0 & 0 & 0\\0 & s_y & 0 & 0\\0 & 0 & s_z & 0\\0 & 0 & 0  & 1\end{bmatrix}</script><p>平移变换的变换矩阵为：</p>
+<script type="math/tex; mode=display">
+T(t_x,t_y,t_z)=\begin{bmatrix}1 & 0 & 0 & t_x\\0 & 1 & 0 & t_y\\0 & 0 & 1 & t_z\\0 & 0 & 0  & 1\end{bmatrix}</script><h3 id="旋转变换"><a href="#旋转变换" class="headerlink" title="旋转变换"></a>旋转变换</h3><p>在三维情形下，旋转变换变为了绕特定<strong>轴</strong>进行，如下是绕$x$轴进行旋转变换的情况：</p>
+<p><img src="10.png" alt=""></p>
+<p>（本系列按右手定则来进行描述，即右手竖起大拇指握拳，拇指指向正方向，其余四指的方向为旋转正方向）</p>
+<p>据此，我们可以分别写出绕三个轴进行旋转变换的变换矩阵：</p>
+<script type="math/tex; mode=display">
+R_x(\alpha)=\begin{pmatrix}1 & 0 & 0 & 0\\0 & cos\alpha & -sin\alpha & 0\\ 0 & sin\alpha & cos\alpha & 0\\ 0 & 0 &0 & 1\end{pmatrix}\\
+R_y(\alpha)=\begin{pmatrix}cos\alpha & 0 & sin\alpha & 0\\0 & 1 & 0 & 0\\ -sin\alpha & 0 & cos\alpha & 0\\ 0 & 0 &0 & 1\end{pmatrix}\\
+R_z(\alpha)=\begin{pmatrix}cos\alpha & -sin\alpha & 0 & 0\\sin\alpha & cos\alpha & 0 & 0\\ 0 & 0 & 1 & 0\\ 0 & 0 &0 & 1\end{pmatrix}</script><p>其中$R_x(\alpha)$和$R_z(\alpha)$都包含有子矩阵$\begin{pmatrix}cos\alpha &amp; -sin\alpha \ sin\alpha &amp; cos\alpha\end{pmatrix}$，只有$R_y(\alpha)$是相反的旋转角。</p>
+<p>以$z$轴举例（$x$轴同理），设$x$，$y$，$z$三个坐标轴上正方向的单位向量分别为$\boldsymbol{i}$，$\boldsymbol{j}$，$\boldsymbol{k}$，我们有：</p>
+<script type="math/tex; mode=display">
+i×j=k</script><p>也就是在右手定则下，绕$z$轴旋转的正方向会是先$x$后$y$，符合坐标顺序（也就是$xyz$顺序）。</p>
+<p>反观$y$轴，由于：</p>
+<script type="math/tex; mode=display">
+k×i=j</script><p>顺序为先$z$后$x$，而在坐标顺序中，$x$排在$z$前面，顺序是相反的，所以这里加上负号。</p>
+<p>（其实这么解释有点笼统，如果把变换矩阵和坐标乘出来看会比较好理解一点，但闫老师就是这么讲的。）</p>
+<h3 id="Euler-angles——欧拉角"><a href="#Euler-angles——欧拉角" class="headerlink" title="Euler angles——欧拉角"></a>Euler angles——欧拉角</h3><p>在三维空间中，旋转是一个非常复杂的问题，因为在平面中仅有两个方向（顺时针与逆时针），但在空间中旋转的方向可以是任意的。</p>
+<p>不过刚才我们知道了，绕坐标轴旋转的变换矩阵是很容易得到的。因此我们可以思考：是否有办法将任意的旋转变换，用这三个基础的旋转来进行描述？</p>
+<p>也就是按下述方式分解任意旋转：</p>
+<script type="math/tex; mode=display">
+R=R_x(\alpha)R_y(\beta)R_z(\gamma)</script><p>答案是肯定的，这种方式就是所谓的<strong>欧拉角</strong>，旋转所绕轴为$Yaw$（偏航角），$Yaw$（俯仰角），$Roll$（滚动角）。</p>
+<p><img src="11.png" alt=""></p>
+<h3 id="Rodrigues’-Rotation-formula"><a href="#Rodrigues’-Rotation-formula" class="headerlink" title="Rodrigues’ Rotation formula"></a>Rodrigues’ Rotation formula</h3><p>罗德里格斯旋转公式（Rodrigues’ Rotation formula）描述了另外一种旋转变换，即<strong>“物体绕任意轴$\boldsymbol{n}$旋转角度$\boldsymbol{\alpha}$”</strong>的旋转变换。</p>
+<p>在别的地方这种方式也可能被称为“轴角”，即通过一轴一角表示旋转，其具体表达式为：</p>
+<script type="math/tex; mode=display">
+R(n,\alpha)=cos\alpha·\boldsymbol{I}+(1-cos\alpha)\boldsymbol{nn}^T+sin\alpha·\begin{pmatrix}0 & -n_z & n_y \\
+n_z & 0 & -n_x\\
+-n_y & n_x & 0\end{pmatrix}</script><p>其中$\boldsymbol{I}$为单位矩阵，该公式的证明以后有空单独开篇文章写（画饼），有兴趣的读者可以先自行查阅。</p>
+<h2 id="MVP-Transformation"><a href="#MVP-Transformation" class="headerlink" title="MVP Transformation"></a>MVP Transformation</h2><p>现在假想一个场景，就是你正在拍摄一张风景照，那么从三维场景变成相机中的一张照片，这个过程中都发生了些什么呢？</p>
+<p>我们可以认为是进行了这样的三步：</p>
+<ol>
+<li>找到一处漂亮的风景（<strong>model</strong> transformation）</li>
+<li>找到相机的完美角度（<strong>view</strong> transformation）</li>
+<li>按下快门（<strong>projection</strong> transformation）</li>
+</ol>
+<p>以上三步就是计算机图形学中的MVP变换，接下来要重点讲解这些内容。</p>
+<p>在开始之前先在这里写下一个重要的思想，<strong>MVP变换的本质是坐标系的转换</strong>。</p>
+<h3 id="Model-Transformation——模型变换"><a href="#Model-Transformation——模型变换" class="headerlink" title="Model Transformation——模型变换"></a>Model Transformation——模型变换</h3><p>模型变换效果是将<strong>局部坐标</strong>转换至<strong>世界坐标</strong>。</p>
+<p>局部坐标系，有时也被叫做模型空间（Model Space），在游戏引擎或者建模软件中非常常见，一般每个模型都会有一个局部坐标系。</p>
+<p><img src="16.png" alt=""></p>
+<p>“头在脖子的上面”，这句话其实就是在用局部坐标系描述人的构成。</p>
+<p>课程中没有提到这一部分，是因为在很多问题中，给出的信息都已经是在世界坐标系下的，但我认为学习计算机图形学，还是得写一下这部分的内容。</p>
+<p>至于变换矩阵的部分，与视图变换的过程还是比较相似的，这里就不详细展开了。</p>
+<h3 id="View-Transformation——视图变换"><a href="#View-Transformation——视图变换" class="headerlink" title="View Transformation——视图变换"></a>View Transformation——视图变换</h3><p>视图变换就是怎么放置相机的问题，其实质是将<strong>世界坐标</strong>转换至<strong>相机坐标</strong>。</p>
+<h4 id="相机的表达与相机坐标系"><a href="#相机的表达与相机坐标系" class="headerlink" title="相机的表达与相机坐标系"></a>相机的表达与相机坐标系</h4><p>讨论怎么放置相机，就要先对相机进行定义，相机的定义需要三个信息：</p>
+<p>位置$e$、朝向$\vec{g}$、上方向$\vec{t}$</p>
+<p>（注意$\vec{t}$与$\vec{g}$都是单位向量，且相互垂直）</p>
+<p><img src="12.png" width="40%"></p>
+<p>这样定义相机的同时，其实也建立起了一个<strong>相机坐标系</strong>。考虑下面的两种情况：</p>
+<p><img src="13.png" alt=""></p>
+<p>由于物体和相机的<strong>相对位置完全一致</strong>，相机拍摄出的照片也是完全一致的。</p>
+<p>这时如果我们使用相机坐标系，就可以将两种情况统一到一起，就像下图所示：</p>
+<p><img src="14.png" alt=""></p>
+<p>在本系列中，我们规定$e$为相机坐标系原点，$\vec{t}$为$y$轴正方向，$\vec{g}$为$z$轴负方向。</p>
+<h4 id="世界坐标到相机坐标"><a href="#世界坐标到相机坐标" class="headerlink" title="世界坐标到相机坐标"></a>世界坐标到相机坐标</h4><p>那么现在问题在于，我们的物体坐标和相机的$e$，$\vec{g}$，$\vec{t}$信息，都是在空间坐标系下的表达，我们该如何将其转换为相机坐标系下的表达呢？</p>
+<p><img src="15.png" alt=""></p>
+<p>以上图为例，我们考虑如何将右上的坐标系变为左下的坐标系。</p>
+<p>其实思路是很简单的，我们先将$e$移动到原点，然后依次将各坐标轴旋转到对应位置即可。</p>
+<p>于是我们能将视图变换的变换矩阵$M_{view}$拆解为一个旋转矩阵和一个平移矩阵的乘积：</p>
+<script type="math/tex; mode=display">
+M_{view}=R_{view}T_{view}</script><p>平移矩阵$T_{view}$是很容易写出来的，只需要利用$e$就可以得出：</p>
+<script type="math/tex; mode=display">
+T_{view}=\begin{bmatrix}1 & 0 & 0 & -x_e\\0 & 1 & 0 & -y_e\\0 & 0 & 1 & -z_e\\0 & 0 & 0 & 1\\\end{bmatrix}</script><p>旋转矩阵$R<em>{view}$就比较复杂，现在我们的目标是将$\vec{g}$旋转到$z$轴负方向，$\vec{t}$旋转到$y$轴正方向，这其实是很难写的，但如果我们先求$R</em>{view}^{-1}$，那么就会变得容易一点。</p>
+<p>那$R_{view}^{-1}$的目标，就是将$z$轴负方向旋转到$\vec{g}$，$y$轴正方向旋转到$\vec{t}$，我们可以使用取特殊点的方式来进行求解。</p>
+<p>假设$xyz$坐标系下有一点$(0,1,0)$，那在旋转后的坐标系下，其坐标应为$(x_t,y_t,z_t)$，也就是$\vec{t}$的三维</p>
+<p>（这里就是先前将$\vec{t}$取为单位向量的好处）</p>
+<p>那我们再设：</p>
+<script type="math/tex; mode=display">
+R_{view}^{-1}=\begin{bmatrix}a & b & c & 0\\d & e & f & 0\\g & h & i & 0\\0 & 0 & 0  & 1\end{bmatrix}</script><p>应该有：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}x_t\\y_t\\z_t\\1\end{bmatrix}=\begin{bmatrix}a & b & c & 0\\d & e & f & 0\\g & h & i & 0\\0 & 0 & 0  & 1\end{bmatrix}\begin{bmatrix}0\\1\\0\\1\end{bmatrix}</script><p>不难得到$b=x_t$，$e=y_t$，$h=z_t$。</p>
+<p>按照这一解法，我么最终可以得到：</p>
+<script type="math/tex; mode=display">
+R_{view}^{-1}=\begin{bmatrix}x_{g×t} & x_t & x_{-g} & 0\\y_{g×t} & y_t & y_{-g} & 0\\x_{g×t} & z_t & z_{-g} & 0\\0 & 0 & 0  & 1\end{bmatrix}</script><p>最巧妙的一步就在这里，我们能够发现，$R_{view}^{-1}$是一个<strong>正交矩阵</strong>，所以我们得到：</p>
+<script type="math/tex; mode=display">
+R_{view}={(R_{view}^{-1})}^T=\begin{bmatrix}x_{g×t} & y_{g×t} & z_{g×t} & 0\\x_t & y_t & z_t & 0\\x_{-g} & y_{-g} & z_{-g} & 0\\0 & 0 & 0  & 1\end{bmatrix}</script><p>至此，我们就得到了整个视图变换的变换矩阵。</p>
+<h3 id="Projection-Transformation——投影变换"><a href="#Projection-Transformation——投影变换" class="headerlink" title="Projection Transformation——投影变换"></a>Projection Transformation——投影变换</h3><p>最后一步投影变换变换是进行“照相”，将三维变为二维，也就是<strong>相机坐标</strong>到<strong>屏幕坐标</strong>的转换。</p>
+<p>常见的投影变换有两种，一种是<strong>透视投影</strong>，另一种是<strong>正交投影</strong>。</p>
+<p><img src="17.png" alt=""></p>
+<p>（相信学过美术和设计的同学一定不陌生）</p>
+<h4 id="Orthographic-Projection——正交投影"><a href="#Orthographic-Projection——正交投影" class="headerlink" title="Orthographic Projection——正交投影"></a>Orthographic Projection——正交投影</h4><p>正交投影是最简单的一种投影，它所做的就是直接将物体沿坐标轴投射到平面上。</p>
+<p><img src="18.png" width="60%"></p>
+<p>最简单的做法，就是直接丢掉所有点的$z$坐标，再将其平移缩放至矩形$[-1 ， 1]^2$中。</p>
+<p>（平移缩放的目的是为了方便后续的计算，也是一种约定俗成的做法）</p>
+<p>不过在图形学中，我们通常采用的是另外一种方法。</p>
+<p>首先我们提出一种表达空间长方体的新办法，那就是用$[l,r]×[b,t]×[f,n]$的形式，三个二元组分别表示该长方体在三个坐标轴上所占据的区间，如下图左：</p>
+<p>（其实就是left，right，bottom，top，far和near的首字母）</p>
+<p><img src="19.png" alt=""></p>
+<p>然后我们考虑将该长方体变换到$[-1,1]^3$的标准立方体，图中已经很清楚地展示了这一过程，即先将其平移到原点，再进行缩放即可，该过程的变换矩阵非常容易写出，即：</p>
+<script type="math/tex; mode=display">
+M_{ortho}=\begin{bmatrix}\frac{2}{r-l} & 0 & 0 & 0 \\0 & \frac{2}{t-b} & 0 & 0 \\0 & 0 & \frac{2}{n-f} &0 \\0 & 0 & 0 & 1 \end{bmatrix}\begin{bmatrix}1 & 0 & 0 & -\frac{r+l}{2}\\
+0 & 1 & 0 & -\frac{t+b}{2}\\0 & 0 & 1 & -\frac{n+f}{2}\\ 0 & 0 & 0 & 1\end{bmatrix}</script><h4 id="Prespective-Projection——透视投影"><a href="#Prespective-Projection——透视投影" class="headerlink" title="Prespective Projection——透视投影"></a>Prespective Projection——透视投影</h4><p>透视投影是一种更加符合人类视角的投影方式，拥有“近大远小”的特点。</p>
+<p><img src="20.png" alt=""></p>
+<p>在欧式几何中，有一条真理为“平行线永不相交”，但是在投影变换后，原先的两条平行线也会交于一点，就像下图中的两条铁轨</p>
+<p><img src="21.png" width="50%"></p>
+<p>那么我们该如何来做这样的透视投影呢？</p>
+<p>我们首先思考投影变换与正交变换的区别在哪里，在下图中</p>
+<p><img src="/22.png" alt=""></p>
+<p>右边的长方体代表的是正交变换，而在投影变换中，我们是对一个截锥体进行操作。</p>
+<p>在上一部分中，我们已经得到了正交变换的变换矩阵，那现在我们只需要将这个截锥体“挤压”成长方体，就可以直接沿用这一结论了。</p>
+<p>接下来我们详细解释这一过程。先从截锥体的侧面图来看：</p>
+<p><img src="23.png" alt=""></p>
+<p>注意这里的$(x,y,z)$代表的是任意点，$n$代表的近平面的$z$坐标，$(x’,y’,z’)$表示的<strong>不是挤压后的点坐标，而是挤压后的点在近平面上正交投影的点</strong>。</p>
+<p>原课程中似乎是直接将$(x’,y’,z’)$解释为挤压后的点坐标，但事实上，该点应该差不多在蓝点位置：</p>
+<p><img src="24.png" alt=""></p>
+<p>我们将变换后的点坐标记为$(x’’,y’’,z’’)$，由于从$(x’’,y’’,z’’)$到$(x’,y’,z’)$是正交变换，所以有$y’’=y’$。</p>
+<p>利用相似三角形的知识，我们可以得到$y’’=y’=\frac{n}{z}y$，同理有$x’’=\frac{n}{z}x$。</p>
+<p>但$z$轴坐标就不同了，我们第一反应是$z$坐标是不变的，但其实在这种挤压下，$z$坐标是<strong>会发生改变的</strong>。</p>
+<p>（当然，远近两个平面上的点$z$坐标确实不会变）</p>
+<p>根本原因在于我们想用矩阵来表达这种挤压，那其实就默认这种挤压是线性变换。</p>
+<p>如果$z$坐标不变，它就不是一个线性变换，也就无法用矩阵写出了。</p>
+<p>根据我们现在已知的信息，有：</p>
+<script type="math/tex; mode=display">
+\begin{pmatrix}x''\\y''\\z''\\1\end{pmatrix}=
+\begin{pmatrix}\frac{n}{z}x\\\frac{n}{z}y\\unknown\\1\end{pmatrix}==
+\begin{pmatrix}nx\\ny\\unknown\\z\end{pmatrix}</script><p>那我们要求的挤压矩阵$M_{persp\rightarrow{ortho}}$应满足：</p>
+<script type="math/tex; mode=display">
+M_{persp\rightarrow{ortho}}\begin{pmatrix}x\\y\\z\\1\end{pmatrix}=\begin{pmatrix}nx\\ny\\unknown\\z\end{pmatrix}
+\tag{1}</script><p>不难解得$M_{persp\rightarrow{ortho}}$的一部分参数为：</p>
+<script type="math/tex; mode=display">
+M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 0 & 1 \end{bmatrix}</script><p>其中$a$，$b$，$c$，$d$仍是未知数。</p>
+<p>刚才我们提到过，远近平面上的点，其$z$坐标不会改变，那我们可以取远近平面上的点来进一步求解。</p>
+<p>取近平面上任意一点$(x,y,n)$，该点变换后的坐标应仍是$(x,y,n)$，即为：</p>
+<script type="math/tex; mode=display">
+\begin{pmatrix}x''\\y''\\z''\\1\end{pmatrix}=\begin{pmatrix}x\\y\\n\\1\end{pmatrix}==\begin{pmatrix}nx\\ny\\n^2\\n\end{pmatrix}</script><p>由公式(1)，有：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 0 & 1 \end{bmatrix}\begin{pmatrix}x\\y\\n\\1\end{pmatrix}=\begin{pmatrix}nx\\ny\\n^2\\n\end{pmatrix}</script><p>即对任意的$(x,y,n)$，有：</p>
+<script type="math/tex; mode=display">
+ax+by+cn+d=n^2</script><p>可得$a=0$，$b=0$，所以该式可以简化为：</p>
+<script type="math/tex; mode=display">
+cn+d=n^2
+\tag{2}</script><p>我们再取远平面上一点$(0,0,f,1)$，这是远平面上的中心点，所以变换有的坐标不变，即：</p>
+<script type="math/tex; mode=display">
+\begin{pmatrix}x''\\y''\\z''\\1\end{pmatrix}=\begin{pmatrix}0\\0\\f\\1\end{pmatrix}==\begin{pmatrix}0\\0\\f^2\\f\end{pmatrix}</script><p>同上述步骤，我们代入(1)式，最终可得：</p>
+<script type="math/tex; mode=display">
+cf+d=f^2
+\tag{3}</script><p>联立（2）（3）两式，我们最终解得：</p>
+<script type="math/tex; mode=display">
+c=n+f\\
+d=-nf</script><p>至此，我们完成了$M_{persp\rightarrow{ortho}}$的求解，该矩阵的完整形式为：</p>
+<script type="math/tex; mode=display">
+M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\0 & 0 & n+f & -nf \\0 & 0 & 0 & 1 \end{bmatrix}</script><p>将其与正交投影的变换矩阵相乘，就得到了投影变换的变换矩阵$M_{persp}$：</p>
+<script type="math/tex; mode=display">
+M_{persp}=M_{ortho}M_{persp\rightarrow{ortho}}</script><h4 id="一些常见概念"><a href="#一些常见概念" class="headerlink" title="一些常见概念"></a>一些常见概念</h4><p>在很多时候我们会提到<strong>视场</strong>（Field-of-View，即FOV）以及<strong>纵横比</strong>（Aspect Ratio）这两个概念，在这里可以做出解释。</p>
+<p>之前提到过，我们可以用$[l,r]×[b,t]×[f,n]$的方式来表示三维空间中的长方体，于是我们定义：</p>
+<p><img src="26.png" alt=""></p>
+<script type="math/tex; mode=display">
+tan\frac{fovY}{y}=\frac{t}{|n|}\\
+aspect=\frac{r}{t}</script><p>其中$fovY$表示$y$方向上的视场，$x$方向同理。</p>
+<p>到这里，有关变换的部分就告一段落了，下篇笔记见！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">PotatoMonster</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">PotatoMonster</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
+                                </a>
+                            
+                                <a href="/tags/GANES101/">
+                                    <span class="chip bg-color">GANES101</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢老爷~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（二）——Rasterization">
+                        
+                        <span class="card-title">GAMES101课程笔记（二）——Rasterization</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我还要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-10-01
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GANES101/">
+                        <span class="chip bg-color">GANES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（一）——Transformation">
+                        
+                        <span class="card-title">GAMES101课程笔记（一）——Transformation</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GANES101/">
+                        <span class="chip bg-color">GANES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">PotatoMonster</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugePotatoMonster" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
