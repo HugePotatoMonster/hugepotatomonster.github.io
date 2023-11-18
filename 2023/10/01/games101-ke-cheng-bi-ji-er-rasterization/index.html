@@ -594,6 +594,35 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
 <p>但我们知道，实际上每个像素只能着一色，所以对于每个实际像素，我们计算在三角形内的小像素比例。</p>
 <p><img src="33.png" width="60%"></p>
 <p>例如上方这个角处的像素，它有三个小像素在三角形内，所以该像素的取值就应是0.75，按此方式计算完所有像素，就完成了该三角形的绘制，并达到抗锯齿的效果。</p>
+<h2 id="遮挡难题"><a href="#遮挡难题" class="headerlink" title="遮挡难题"></a>遮挡难题</h2><p>现在我们掌握了绘制平面图形的技术，但我们最初的问题可是绘制三维物体，三维物体转换到平面上时会出现<strong>遮挡</strong>问题，也就是物体互相覆盖的情形，为了保证正确成像，我们需要认真考虑这一问题。</p>
+<h3 id="Painter’s-Algorithm——画家算法"><a href="#Painter’s-Algorithm——画家算法" class="headerlink" title="Painter’s Algorithm——画家算法"></a>Painter’s Algorithm——画家算法</h3><p>一个最简单的想法就是由远及近地进行绘制，这样近的物体就会覆盖远的物体，从而自然地处理遮挡问题，以画一个立方体为例：</p>
+<p><img src="34.png" width="60%"></p>
+<p>我们先绘制其后面，然后绘制左、右、下面，最后绘制上、前面，这样就可以准确表达立方体各个面间的遮挡关系，这一算法就是画家算法。</p>
+<p>从程序的角度思考，我们需要对每个三角的深度来进行排序，假设有$n$个三角形，时间复杂度为$O(n\log(n))$。</p>
+<p><img src="35.png" width="40%"></p>
+<p>但画家算法的适用场景仅限于简单遮挡，如果面临上图中这种情况，那不管我们怎么调整每个三角的绘制顺序，都无法正确表达。</p>
+<h3 id="Z-Buffer——深度缓存"><a href="#Z-Buffer——深度缓存" class="headerlink" title="Z-Buffer——深度缓存"></a>Z-Buffer——深度缓存</h3><p><strong>首先提醒，本文假设相机放在原点，向$z$轴正方向看去，所以默认$z$值为正。</strong></p>
+<p>图形学中我们更常用的一种算法是深度缓存，相比于画家算法，它适用于更多的场景。</p>
+<p>深度缓存的基本思想就是<strong>为每个像素记录最小的z值</strong>（也就是最小的深度值、最浅的距离），然后以此为依据来进行绘制。</p>
+<p>为了实现这一过程，我们使用<strong>DepthBuffer</strong>和<strong>FrameBuffer</strong>来存储信息，其中DepthBuffer用以保存深度信息，Framebuffer用以保存色彩信息。</p>
+<p>这里的DepthBuffer其实就是我们平时所说的深度图，它与我们的绘制结果是同时生成的，我们可以用灰度的形式绘制出来：</p>
+<p><img src="36.png" width="60%"></p>
+<p>我们用伪代码来解释Z-Buffer的过程：</p>
+<pre class="line-numbers language-none"><code class="language-none">for (each triangle T)                   // go through each triangle
+	for (each sample (x, y, z) in T)
+		if (z&lt;zbuffer[x,y])             // closest sample so far
+			framebuffer[x,y] = rgb;     // update color
+			zbuffer[x,y] = z;           // update depth
+		else
+			... // do nothing<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>简单而言就是遍历所有的三角，然后依据$z$值更新对应的DepthBuffer（代码中的zbuffer）和FrameBuffer。</p>
+<p>下图是一个更加直观的示例，其中R代表无限大：</p>
+<p><img src="37.png" width="60%"></p>
+<p>在第一步中，由于红色三角形的深度（5）小于初始值（无限大），所以红色三角形对应的像素被全部更新为5。</p>
+<p>而在第二步中，重点关注蓝色三角形中，和红色三角形重合的地方，某些深度小于5，某些则大于5，对那些小于5的深度进行更新，从而获得了正确的深度缓存。</p>
+<p>假设有$n$个三角形，每个三角形覆盖的像素都是一个可估计的常数值，则时间复杂度为$O(n)$。</p>
+<p>之所以节省了这么多，是因为Z-Buffer解决问题的方式是<strong>最小值</strong>，而非排序。</p>
+<p>不难发现，在Z-Buffer算法中，遍历三角的顺序并不重要，无论顺序如何，最终的结果都是一致的。</p>
 <p>OK，第二篇光栅化笔记，就此完结！</p>
 
                 
@@ -834,29 +863,28 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">
+                <a href="/2023/11/13/games101-ke-cheng-bi-ji-san-shading/">
                     <div class="card-image">
                         
-                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（二）——Rasterization">
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（三）——Shading">
                         
-                        <span class="card-title">GAMES101课程笔记（二）——Rasterization</span>
+                        <span class="card-title">GAMES101课程笔记（三）——Shading</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            我还要成为计算机图形学高手！
+                            我又要成为计算机图形学高手！
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-10-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-13
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -865,7 +893,6 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
