@@ -6,7 +6,7 @@
   <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
   
   <link href="http://hugepotatomonster.github.io/"/>
-  <updated>2024-01-15T09:07:32.454Z</updated>
+  <updated>2024-01-16T09:31:23.455Z</updated>
   <id>http://hugepotatomonster.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101课程笔记（四）——Geometry</title>
+    <link href="http://hugepotatomonster.github.io/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/"/>
+    <id>http://hugepotatomonster.github.io/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/</id>
+    <published>2024-01-16T06:32:31.000Z</published>
+    <updated>2024-01-16T09:31:23.455Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（四）——Geometry&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（四）——Geometry&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GANES101" scheme="http://hugepotatomonster.github.io/tags/GANES101/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101课程笔记（三）——Shading</title>
