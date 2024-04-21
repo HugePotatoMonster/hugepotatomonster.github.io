@@ -6,7 +6,7 @@
   <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
   
   <link href="http://hugepotatomonster.github.io/"/>
-  <updated>2024-04-13T11:35:36.131Z</updated>
+  <updated>2024-04-21T14:36:54.891Z</updated>
   <id>http://hugepotatomonster.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Diffusion Model入门</title>
+    <link href="http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/"/>
+    <id>http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/</id>
+    <published>2024-04-21T13:54:53.000Z</published>
+    <updated>2024-04-21T14:36:54.891Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Diffusion-Model——扩散模型&quot;&gt;&lt;a href=&quot;#Diffusion-Model——扩散模型&quot; class=&quot;headerlink&quot; title=&quot;Diffusion Model——扩散模型&quot;&gt;&lt;/a&gt;Diffusion</summary>
+        
+      
+    
+    
+    
+    
+    <category term="人工智能" scheme="http://hugepotatomonster.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101课程笔记（五）——Ray Tracing</title>
     <link href="http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/"/>
     <id>http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/</id>
     <published>2024-03-12T15:14:13.000Z</published>
-    <updated>2024-04-13T11:35:36.131Z</updated>
+    <updated>2024-04-21T14:38:17.717Z</updated>
     
     
       

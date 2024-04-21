@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="GAMES101课程笔记（二）——Rasterization, PotatoMonster">
+    <meta name="keywords" content="Diffusion Model入门, PotatoMonster">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>GAMES101课程笔记（二）——Rasterization | PotatoMonster</title>
+    <title>Diffusion Model入门 | PotatoMonster</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -248,12 +248,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/1.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">GAMES101课程笔记（二）——Rasterization</h1>
+                    <h1 class="description center-align post-title">Diffusion Model入门</h1>
                 </div>
             </div>
         </div>
@@ -369,12 +369,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-                                <span class="chip bg-color">计算机图形学</span>
-                            </a>
-                        
-                            <a href="/tags/GAMES101/">
-                                <span class="chip bg-color">GAMES101</span>
+                            <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                <span class="chip bg-color">人工智能</span>
                             </a>
                         
                     </div>
@@ -389,7 +385,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-10-01
+                    2024-04-21
                 </div>
                 
 
@@ -413,217 +409,136 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="GAMES101课程笔记（二）——Rasterization"><a href="#GAMES101课程笔记（二）——Rasterization" class="headerlink" title="GAMES101课程笔记（二）——Rasterization"></a>GAMES101课程笔记（二）——Rasterization</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>书接上文，经过了MVP矩阵的变换后，我们已经将三维世界的物体变换到了$[-1,1]^3$的标准立方体中，那接下来我们该如何将它绘制到我们的屏幕上呢？本文的主题光栅化（Rasterization）就是解决这一问题的钥匙。</p>
-<p>光栅化的背后是一系列复杂的数学和计算过程，它们将三维世界转化为我们计算机屏幕上的二维图像。这个过程包括了顶点转换、三角形裁剪、光栅化和像素渲染等关键步骤，每一个步骤都需要高效地执行，以实现流畅的图形渲染和动画展示。</p>
-<p>前文指路：</p>
-<p><a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">GAMES101课程笔记（一）——Transformation</a></p>
-<h2 id="Pixel——像素"><a href="#Pixel——像素" class="headerlink" title="Pixel——像素"></a>Pixel——像素</h2><p>为了解计算机如何显示图像，我们要先从屏幕开始说起，更具体一点，是从<strong>像素</strong>开始说起。</p>
-<p>在屏幕上，像素是组成图像的最基本单位，每个像素有红绿蓝三个颜色组成，它们像点阵一样分布在屏幕上。</p>
-<p><img src="1.png" width="60%"></p>
-<p>借由三原色的特性，每一个像素都可以展现出任何颜色，从而能够显示出任意图像。</p>
-<p>根据像素的排布特点，我们能联想到使用数组来对当前显示图像进行表达，数组中的每个元素包含有红（R）绿（G）蓝（B）三个颜色。</p>
-<p>我们使用坐标来标记屏幕上的每一个像素，这就是<strong>屏幕空间</strong>，例如下图中的蓝色像素坐标为$(2,1)$。</p>
-<p><img src="2.png" alt=""></p>
-<p>但实际中，<strong>像素并不是真正的一个点</strong>，它是有大小的，而我们在使用刚才像素坐标时，实际上描述的是该像素左下角点的位置。</p>
-<p>该像素的中心坐标实际上是$(2.5,1.5)$，占据的空间是$(2,1)$到$(3,2)$的这部分区域。</p>
-<p>本文的主题光栅化（Rasterization），就是要讲如何用像素来进行图像的绘制。</p>
-<h2 id="Rasterization——光栅化"><a href="#Rasterization——光栅化" class="headerlink" title="Rasterization——光栅化"></a>Rasterization——光栅化</h2><p>了解了屏幕的构成，我们接下来思考，如何将$[-1,1]^3$中的点转换到$[0,width]×[0,height]$的平面坐标上。</p>
-<p><img src="3.png" alt=""></p>
-<p>这里我们先不考虑空间中的$z$坐标，只考虑变换$x$与$y$坐标，那其实就是一个平移加缩放的变换，变换矩阵为：</p>
+                <h1 id="Diffusion-Model——扩散模型"><a href="#Diffusion-Model——扩散模型" class="headerlink" title="Diffusion Model——扩散模型"></a>Diffusion Model——扩散模型</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要依据引文[1]撰写，文中提到“论文”等名词时，若无特殊指明，均默认代指引文[1]。</p>
+<p>文中的图片来自于互联网和论文，来源列举于参考资料中。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>扩散模型用以进行图像生成，它的过程主要分为两步：前向过程和反向过程。</p>
+<p>前向过程是先经过一系列的步骤，为输入图像添加噪声。</p>
+<p>反向过程则是通过训练神经网络，将含噪声图片还原回原始数据，从而我们可以利用它来生成新的图片。</p>
+<h2 id="前向过程"><a href="#前向过程" class="headerlink" title="前向过程"></a>前向过程</h2><p>扩散模型中，前向过程的噪声添加建模为一个马尔科夫链：</p>
+<p><img src="1.png" width="50%"></p>
+<p>初始状态$x_0$代表原始图片，在马尔科夫链的状态$x_{t-1}$处，我们添加一个高斯噪声，从而使其转变为状态$x_t$。</p>
+<p>假设添加的高斯函数方差为$\beta_t$，条件概率$q(x_t|x_{t-1})$应是一个高斯分布概率密度函数：</p>
 <script type="math/tex; mode=display">
-M_{viewport}=\begin{pmatrix}
-\frac{width}{2} & 0 & 0 & \frac{width}{2}\\
-0 & \frac{height}{2} & 0 & \frac{height}{2}\\
-0 & 0 & 1 & 0\\
-0 & 0 & 0 & 1
-\end{pmatrix}</script><p>需要注意的是，我们的变换只是将点转换到平面坐标上，而没有将其转换到具体的像素点上。</p>
-<p>（理由正如刚才提到的，像素并不是真正的点，它是有大小的）</p>
-<p>接下来我们就要探讨，如何进行这一步的转换。</p>
-<h3 id="神奇的三角形"><a href="#神奇的三角形" class="headerlink" title="神奇的三角形"></a>神奇的三角形</h3><p>在图形学中，我们经常使用三角形来组成更复杂的多边形，例如下图中的圆球和海豚。</p>
-<p><img src="4.png" width="60%"></p>
-<p>这是因为三角形有很多优秀的性质，例如：</p>
+q(x_t|x_{t-1}) = N(x_t;\sqrt{1-\beta_t}x_{t-1},\beta_tI)</script><p>该分布均值为$\sqrt{1-\beta_t}x_{t-1}$，由于$\sqrt{1-\beta_t}&lt;1$，因此每一步都会渐弱上一步中图片的信息，让原始图片光滑地过渡到噪声；其方差为$\beta_tI$，意味着添加噪声的方差在各个通道上是相互独立的。</p>
+<p>而在整个时间步上的后验概率为：</p>
+<script type="math/tex; mode=display">
+q(x_{1:T}|x_0)= \prod_{t=1}^{T}q(x_t|x_{t-1})</script><p>由于$q(x_t|x_{t-1})$的采样涉及上一个状态，因此计算该后验概率时需要采样$T$次，为了方便采样，可以进行重参数化。</p>
+<p>通过引入随机性节点序列$\epsilon_{0},…,\epsilon_{t-2},\epsilon_{t-1} \sim N(0,I)$，加上定义：</p>
+<script type="math/tex; mode=display">
+\alpha_t = 1-\beta_t \\
+\overline{\alpha_t} = \prod_{s=0}^{t}\epsilon_{s}</script><p>利用高斯分布的性质，得到：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+x_t &= \sqrt{1-\beta_t}x_{t-1}+\sqrt{\beta_t}\epsilon_{t-1} \\
+&= \sqrt{\alpha_t}x_{t-1}+\sqrt{1-\alpha_t}\epsilon_{t-1} \\
+\end{align*}</script><p>逐步递推，最终获得：</p>
+<script type="math/tex; mode=display">
+x_t = \sqrt{\overline{\alpha}_t}x_{0}+\sqrt{1-\overline{\alpha}_t}\epsilon_{0}</script><p>也就是说$x_t$满足这样一个高斯分布：</p>
+<script type="math/tex; mode=display">
+x_t \sim N(x_t;\sqrt{\overline{\alpha}_t}x_{0},(1-\overline{\alpha}_t)I)</script><p>在这个分布中，所有的参数都可以预先计算，从而只需一次采样就可以得到任何一个时间步上的$x_t$。</p>
+<h2 id="反向过程"><a href="#反向过程" class="headerlink" title="反向过程"></a>反向过程</h2><p><img src="2.png" width="50%"></p>
+<p>反向过程中，由于我们的目的是还原图片，因此需要得知反向的分布$p_{\theta}(x_{t-1}|x_t)$，直接计算难以解决，不过可以使用神经网络来学习（近似）该分布。</p>
+<p>对于从$x_t$还原到$x_{t-1}$的过程，它仍然是一个高斯分布，因此只需参数化该分布的均值和方差：</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_{t-1}|x_t)=N(x_{t-1};\mu_{\theta}(x_t,t),\Sigma_{\theta}(x_t,t))</script><p>从而可以得到整个序列的分布：</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_{0:T})=p_{\theta}(x_T)\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_t)</script><h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><p>扩散模型的训练目标是最大化似然对数，即$L’=E_{q(x_0)}(\log[p_{\theta}(x_0)])$，类似于交叉熵，论文中使用了变分下限来进行优化。</p>
+<p>模型的$x_0$概率分布应是：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p_{\theta}(x_0) &= \int p_{\theta}(x_{0:T})dx_{1:T}
+\end{align*}</script><p>由于它并不好计算，因此在这个等式右边乘以一个值为1的项，并利用前向过程和反向过程中得到的等式，可以将其变形为：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p_{\theta}(x_0) &= \int p_{\theta}(x_{0:T}) \frac{q(x_{1:T}|x_0)}{q(x_{1:T}|x_0)}dx_{1:T} \\
+&= \int q(x_{1:T}|x_0) \frac{p_{\theta}(x_{0:T})}{q(x_{1:T}|x_0)}dx_{1:T} \\
+&= \int q(x_{1:T}|x_0) \frac{p_{\theta}(x_T)\prod_{t=1}^{T}p_{\theta}(x_{t-1}|x_t)}{\prod_{t=1}^{T}q(x_t|x_{t-1})}dx_{1:T} \\
+&= \int q(x_{1:T}|x_0)p_{\theta}(x_T)\prod_{t=1}^{T} \frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}dx_{1:T}
+\end{align*}</script><p>从而：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L' &= \int q(x_0)\log{[p_{\theta}(x_0)]}dx_0 \\
+&= \int q(x_0)\log{[\int q(x_{1:T}|x_0)p_{\theta}(x_T)\prod_{t=1}^{T} \frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}dx_{1:T}]}dx_0
+\end{align*}</script><p>由Jensen不等式，又有：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L' &\geq \int q(x_{0:T})\log{[p_{\theta}(x_T)\prod_{t=1}^{T} \frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}dx_{1:T}]}dx_{0:T} \\
+&= E_{q(x_{0:T})}\{\log [p_{\theta}(x_T)\prod_{t=1}^{T} \frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}]\} \\
+&= E_{q(x_{0:T})}[\log p_{\theta}(x_T)+\sum_{t=1}^{T}\log{\frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}} \\
+&= E_{q(x_{0:T})}[\log p_{\theta}(x_T)+\sum_{t=2}^{T}\log{\frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1})}} + \log {\frac{p_{\theta}(x_{0}|x_1)}{q(x_1|x_{0})}} \\
+&= E_{q(x_{0:T})}[\log p_{\theta}(x_T)+\sum_{t=2}^{T}\log{\frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1}, x_0)}}·\frac{q(x_{t-1}|x_0)}{q(x_{t}|x_0)} + \log {\frac{p_{\theta}(x_{0}|x_1)}{q(x_1|x_{0})}} \\
+&= E_{q(x_{0:T})}[\log \frac{p_{\theta}(x_T)}{q(x_T|x_0)}+\sum_{t=2}^{T}\log{\frac{p_{\theta}(x_{t-1}|x_t)}{q(x_t|x_{t-1}, x_0)}} + \log {p_{\theta}(x_{0}|x_1)} \\
+&= -E_{q(x_{0:T})}[D_{KL}(q(x_T|x_0)||p(x_T))+\sum_{t=2}^{T}D_{KL}(q(x_{t-1}|x_t,x_0)||p(x_{t-1}|x_t))-\log{p_{\theta}(x_0|x_1)}]
+\end{align*}</script><p>为了和损失函数的形式保持一致，使用负似然对数，令：</p>
+<script type="math/tex; mode=display">
+L = E_{q(x_{0:T})}[D_{KL}(q(x_T|x_0)||p(x_T))+\sum_{t=2}^{T}D_{KL}(q(x_{t-1}|x_t,x_0)||p(x_{t-1}|x_t))-\log{p_{\theta}(x_0|x_1)}]</script><p>从而我们的目标转变为最小化$L$，论文规定：</p>
+<script type="math/tex; mode=display">
+L_T = D_{KL}(q(x_T|x_0)||p(x_T)) \\
+L_{t-1} = D_{KL}(q(x_{t-1}|x_t,x_0)||p(x_{t-1}|x_t)) \\
+L_0 = -\log{p_{\theta}(x_0|x_1)}</script><h3 id="L-T"><a href="#L-T" class="headerlink" title="$L_T$"></a>$L_T$</h3><p>由于论文中$\beta _t$固定为常数，因此$L_T$中并没有需要学习的参数，可以忽略。</p>
+<h3 id="L-t"><a href="#L-t" class="headerlink" title="$L_{t}$"></a>$L_{t}$</h3><p>可以证明：</p>
+<script type="math/tex; mode=display">
+q(x_{t-1}|x_t,x_0) = N(x_{t-1};\tilde{\mu}(x_t,x_0),\tilde{\beta_t}I) \\
+\tilde{\beta_t} = \frac{1-\overline{\alpha}_{t-1}}{1-\overline{\alpha}_{t}}·\beta_t \\
+\tilde{\mu}(x_t,x_0) = \frac{\sqrt{\overline{\alpha}_{t-1}}\beta_t}{1-\overline{\alpha}_{t}}x_0+\frac{\sqrt{\alpha_t}(1-\overline{\alpha}_{t})}{1-\overline{\alpha}_{t}} x_t</script><p>由之前的重参数化技巧：</p>
+<script type="math/tex; mode=display">
+x_0 = \frac{1}{\sqrt{\alpha_t}}(x_t-\sqrt{1-\overline{\alpha}_t}\epsilon)</script><p>代入$\tilde{\mu}(x_t,x_0)$的表达式，整理可得：</p>
+<script type="math/tex; mode=display">
+\tilde{\mu}(x_t,x_0) = \frac{1}{\sqrt{\alpha_t}}(x_t-\frac{\beta_t}{\sqrt{1-\overline{\alpha}_t}}\epsilon) = \tilde{\mu}(x_t)</script><p>这么做能够将参数$x_0$消除，使得均值只与$x_t$相关，现在只需要用一个神经网络$\epsilon_{\theta}(x_t,t)$来近似$\epsilon$即可，即：</p>
+<script type="math/tex; mode=display">
+\tilde{\mu}(x_t) = \frac{1}{\sqrt{\alpha_t}}(x_t-\frac{\beta_t}{\sqrt{1-\overline{\alpha}_t}}\epsilon_{\theta}(x_t,t))</script><p>因此$L_T$可以表达为：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+L_t &= E_{x_0,t,\epsilon}[\frac{1}{2\sigma_t^2}||\tilde{\mu}(x_t)-\mu_{\theta}(x_t,t)||^2] \\
+&= E_{x_0,t,\epsilon}[\frac{\beta_t^2}{2\alpha_{t}(1-\overline{\alpha}_t)\sigma_{t}^2}||\epsilon-\epsilon_{\theta}(\sqrt{\overline{\alpha}_t}x_{0}+\sqrt{1-\overline{\alpha}_t}\epsilon,t)||^2]
+\end{align*}</script><p>论文中忽略了加权项，并说明这么做会优于目前的公式，即：</p>
+<script type="math/tex; mode=display">
+L_t^{simple} = E_{x_0,t,\epsilon}[||\epsilon-\epsilon_{\theta}(\sqrt{\overline{\alpha}_t}x_{0}+\sqrt{1-\overline{\alpha}_t}\epsilon,t)||^2]</script><p>其实到这里，损失函数的目标已经变成了预测噪声。</p>
+<h3 id="L-0"><a href="#L-0" class="headerlink" title="$L_0$"></a>$L_0$</h3><p>$L_0$其实就是$x_1$对$x_0$的极大似然估计，论文中对每个像素都运用极大似然估计，即：</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_0|x_1)=\prod_{i=1}^{D}p_{\theta}(x_0^i,x_1^i)</script><p>$i$代表图像中的某个像素位置，$D$代表所有维度。</p>
+<p>对于某个像素$i$，它的分布应为：</p>
+<script type="math/tex; mode=display">
+N(x;\mu_{\theta}^i(x_1,1),\sigma_1^2)</script><p>由于$x_1$的高斯分布方差为对角阵，因此将其分解：</p>
+<script type="math/tex; mode=display">
+N(x;\mu_{\theta}(x_1,1),\sigma_1^2I) = \prod_{i=1}^{D}N(x;\mu_{\theta}^i(x_1,1),\sigma_1^2)</script><p>假设图像的通道值范围为$[0,255]$，经过归一化后到$[-1,1]$，那么有：</p>
+<script type="math/tex; mode=display">
+p_{\theta}(x_0|x_1) = \prod_{i=1}^{D}\int_{\delta_-(x_0^i)}^{\delta_+(x_0^i)}N(x;\mu_{\theta}^i(x_1,1),\sigma_1^2)dx \\
+\delta_+(x_0^i) = \begin{cases} 
+\infty & \text{if } x = 1 \\
+x+\frac{1}{255} & \text{if } x < 1
+\end{cases} \\
+\delta_-(x_0^i) = \begin{cases} 
+-\infty & \text{if } x = -1 \\
+x-\frac{1}{255} & \text{if } x > -1
+\end{cases}</script><p>真实像素值是离散的，把离散值转换为连续值时，需要把每个离散值映射到一个区间，$\delta_+(x_0^i)$和$\delta_-(x_0^i)$对应的就是这一步。</p>
+<p>在论文中，$L_0$使用一个单独的解码器进行学习。</p>
+<h2 id="训练与采样"><a href="#训练与采样" class="headerlink" title="训练与采样"></a>训练与采样</h2><p>论文中使用了一个基于Wide ResNet的U-Net来训练$L_t$，包含组归一化、自注意力模块。</p>
+<p>其具体的训练和采样过程如下所示：</p>
+<p><img src="3.png" width="50%"></p>
+<p>训练过程的步骤为：</p>
 <ul>
-<li>本身是最基础的多边形，能构成其它任何多边形</li>
-<li>三角形一定是一个平面图形（三点确定一个平面）</li>
-<li>容易判断点在三角形内外</li>
-<li>在三角形内容易进行插值运算（后续会详细提及）</li>
+<li>从数据中随机抽取一个原始图片$x_0$</li>
+<li>从时间步中随机抽取一个时间$t$</li>
+<li>采样一个随机噪声$\epsilon$叠加到$x_0$，生成$x_t$，将$x_t$和$t$输入U-Net预测该噪声</li>
+<li>利用梯度下降法更新权重</li>
+<li>重复上述步骤直至收敛</li>
 </ul>
-<p>所以说，只要我们解决了如何绘制一个三角形的问题，就能解决绘制任何图形的问题。</p>
-<p>举一个具体的例子，现在有一个红色三角形，知道它的三个顶点坐标，我们该如何使用像素将其绘制出来呢？</p>
-<p><img src="5.png" width="60%"></p>
-<h3 id="Sampling——采样"><a href="#Sampling——采样" class="headerlink" title="Sampling——采样"></a>Sampling——采样</h3><p>采样，就是将连续值转化为离散值的过程。在我们的问题中，像素就是离散值，因此可以用采样的方法来解决。</p>
-<p>（想深入了解的话可以简单学习一下信号与系统）</p>
-<p>具体而言，是使用像素的中心坐标来对屏幕上的图形进行采样。最简单的做法就是判断像素中心是否在三角形内，如果在那就显示，否则就不显示，如下图所示：</p>
-<p><img src="6.png" alt=""></p>
-<p>对于平面上的所有点，应满足函数：</p>
-<script type="math/tex; mode=display">
-inside(t,x,y)=\begin{cases}1 & (x,y)\ in\ triangle\ t\\
-0 & otherwise\end{cases}</script><p>我们使用离散的像素来对该函数进行采样，制这个三角形的代码就可以写为：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (int x=0; x&lt;xmax; ++x)
-    for (int y=0; x&lt;ymax; ++y)
-        image[x][y]=inside(t, x+0.5, y+0.5)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>思路就是偏离所有的像素，逐个判断是否在三角形内。</p>
-<p>现在问题就落在：该如何判断这个点是否在三角形内部呢？</p>
-<p><img src="7.png" width="40%"></p>
-<p>一个简单的方法是使用叉积来进行判断，假设我们像上图已知三角形$P_0P_1P_2$（顶点已按逆时针排序）和一点$Q$。</p>
-<p>我们可以分别计算$\vec{P_0P_1}×\vec{P_0Q}$，$\vec{P_1P_2}×\vec{P_1Q}$，$\vec{P_2P_0}×\vec{P_2Q}$的结果，假如三者的结果都指向屏幕外，那就可以判断Q点在三角形内，反之则在三角形外。</p>
-<p>在本例中，由于$\vec{P_2P_0}×\vec{P_2Q}$的结果向量指向屏幕内，所以可以得到$Q$在三角形外的结论。</p>
-<p>当然，除了在三角形外和在三角形内，还有可能点刚好在三角形边上，就像下图中的点，我们究竟该说是在三角形1上，还是在三角形2上，或者说干脆不在任何一个上？</p>
-<p><img src="8.png" width="40%"></p>
-<p>答案是都可以，虽然在OpenGL等库中对此很严格的规定，但在我们学习的过程中并不重要，只要我们使用一套自洽的规则来进行判断，或者干脆不特殊处理就行。</p>
-<p>比如我们就可以规定：在边上就在三角形内。那么这个点就既在三角形1内，也在三角形2内。</p>
-<p>总而言之，不必过于纠结这种情况。</p>
-<h3 id="Bounding-Box——包围盒"><a href="#Bounding-Box——包围盒" class="headerlink" title="Bounding Box——包围盒"></a>Bounding Box——包围盒</h3><p>在刚才的代码中，我们遍历了屏幕上所有的像素，但事实上，很多三角形只占据了屏幕中的一小部分，遍历所有像素无疑会造成额外的开销。</p>
-<p>所以我们就可以只判断三角形所占据的那一块区域中的像素，这样就可以提高效率，这种将目标图形包含在内的图形，我们就称之为<strong>包围盒</strong>。</p>
-<p>下图中的蓝色像素就是一个典型的包围盒，我们做采样时只需要对这些像素进行处理就可以了。</p>
-<p><img src="9.png" width="40%"></p>
-<p>需要注意的是包围盒并不一定要是矩形的，只是这里举的例子是这样的，矩形也比较便于处理。</p>
-<p>这种边平行于坐标轴的包围盒非常常用，被简称为AABB（Axis-Aligned Bounding Box，轴对齐）包围盒。</p>
-<p>包围盒的获得非常容易，假设三角形的顶点坐标为$P_0(x_0,y_0)$，$P_1(x_1,y_1)$，$P_2(x_2,y_2)$，那么其包围盒就是以点$(min\begin{Bmatrix}x_0,x_1,x_2\end{Bmatrix},min\begin{Bmatrix}y_0,y_1,y_2\end{Bmatrix})$为左下角，点$(max\begin{Bmatrix}x_0,x_1,x_2\end{Bmatrix},\begin{Bmatrix}y_0,y_1,y_2\end{Bmatrix})$为右上角的矩形。</p>
-<h2 id="Antialiasing——反走样"><a href="#Antialiasing——反走样" class="headerlink" title="Antialiasing——反走样"></a>Antialiasing——反走样</h2><h3 id="Artifacts——瑕疵"><a href="#Artifacts——瑕疵" class="headerlink" title="Artifacts——瑕疵"></a>Artifacts——瑕疵</h3><p>很多时候，屏幕最终呈现出的画面会出现一些错误，例如锯齿、噪点等问题的出现，这些错误在图形学上我们都可以统称为Artifacts。</p>
-<p>（闫老师不是很喜欢说瑕疵，而是直接说英文Artifacts，我个人也觉得直接说英文比较顺口，其实这个单词在图形学里还挺常见的，已经是一个梗的程度了）</p>
-<p>这里我们介绍一些因采样引起的问题（Sampling Artifacts）。</p>
-<h4 id="Jaggies——锯齿"><a href="#Jaggies——锯齿" class="headerlink" title="Jaggies——锯齿"></a>Jaggies——锯齿</h4><p>像素毕竟是离散的，因此在绘制图像时难免会出现差异，其中最普遍的一个问题就是锯齿。</p>
-<p><img src="10.png" width="60%"></p>
-<p>我们期望中的三角形应该像左图一样——拥有三条平滑的边，完美地符合数学上的定义，但在屏幕上可做不到。</p>
-<p>真实的屏幕上的三角形像右图一样，其边缘为不规则的锯齿，如何解决锯齿也是图形学的一个经典课题。</p>
-<p>该问题的根源原因在于<strong>采样频率不够高</strong>，即像素点不够多，理论上当有无限个像素点时就能形成完美的直线。</p>
-<p>（我们平时说的高分辨率其实就是提高了采样频率，也就感觉锯齿减少了）</p>
-<h4 id="Moire-pattern——摩尔纹"><a href="#Moire-pattern——摩尔纹" class="headerlink" title="Moire pattern——摩尔纹"></a>Moire pattern——摩尔纹</h4><p>摩尔纹是另外一个经典问题，有时我们拍摄条纹密集的物体，最终的成像却会变成奇怪的波纹条纹，就像下图展示的一样：</p>
-<p><img src="11.png" width="60%"></p>
-<p>这同样是因为采样频率低而产生的问题，当重复图案的周期频率超过采样频率时，图案就会出现一部分的缺失，当我们再现时便会出现这种问题。</p>
-<p>闫老师给出了一个复现摩尔纹的办法，即将左图的奇数行奇数列删除，将其余部分重新拼合（也就是图片缩小为原来的1/4），再将其按原来的大小显示，就会变成右图这样的情况。</p>
-<p>这个过程相当于将横向和纵向的采样频率各下降一半，此时其频率低于原始图案的重复频率，便出现了摩尔纹。</p>
-<h4 id="Wagon-wheel-effect——车轮效应"><a href="#Wagon-wheel-effect——车轮效应" class="headerlink" title="Wagon wheel effect——车轮效应"></a>Wagon wheel effect——车轮效应</h4><p>在下图中，我们顺时针旋转一个轮盘，但奇怪的是，轮盘上的一些部分看上去像是在逆时针旋转。</p>
-<p><img src="12.gif" alt=""></p>
-<p>这种现象被称为车轮效应，与上述两者不同，这是时间维度上的采样频率不够而导致的。</p>
-<h3 id="了解频率"><a href="#了解频率" class="headerlink" title="了解频率"></a>了解频率</h3><p>到这里我们已经提到了很多次频率这个词了，现在我们需要深入介绍一下。</p>
-<h4 id="采样频率的影响"><a href="#采样频率的影响" class="headerlink" title="采样频率的影响"></a>采样频率的影响</h4><p>这里分析一般情况下，采样频率低为什么会造成走样。</p>
-<p>以下图为例，假设我们要对蓝色的正弦波进行采样，但采样频率偏低，采样到的几个点已经标注在了图上：</p>
-<p><img src="16.png" alt=""></p>
-<p>但如果我们再引入一个函数，即图中的黑色正弦波，用相同的频率进行采样，那我们的采样结果将和之前的一致。</p>
-<p>也就是说，用相同的办法对两个频率差距很大的函数进行采样，居然得到了一样的结果，这便是走样出现的原因。</p>
-<h4 id="Fourier-Transform——傅里叶变换"><a href="#Fourier-Transform——傅里叶变换" class="headerlink" title="Fourier Transform——傅里叶变换"></a>Fourier Transform——傅里叶变换</h4><p>在微积分当中我们应该学过傅里叶级数，即任何周期函数都可以用正弦函数和余弦函数构成的无穷级数来表示。</p>
-<p>其一般表达式为：</p>
-<script type="math/tex; mode=display">
-f(x) = \sum_{n=0}^{\infty} \left( a_n \cos\left(2\pi fnx\right) + b_n \sin\left(2\pi fnx\right) \right)</script><p>通常我们都是在有限范围内处理函数，所以我们可以近似地认为可以用傅里叶级数来表达任何函数。</p>
-<p> 而我们观察傅里叶级数可以知道，它实际上是无数个不同频率的正弦波和余弦波组成的，那么我们就可以将这个函数拆分为不同的频率段，为实现这一过程，我们使用的变换为傅里叶变换。</p>
-<p>傅里叶变换的公式为：</p>
-<script type="math/tex; mode=display">
-F(\omega) = \int_{-\infty}^{\infty} f(t) \cdot e^{-2\pi i\omega t} \, dt</script><p>其逆变换为：</p>
-<script type="math/tex; mode=display">
-f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</script><p>这样我们就可以把一个函数在其原始域（通常是时域）和频域之间进行相互转换了。</p>
-<p>下图展示了对图片应用傅里叶变换后的结果：</p>
-<p><img src="17.png" width="60%"></p>
-<p>右图的中心区域代表低频信号，越靠外表示的信号频率越高，不难看出这张图片的大多数信息都集中在低频区。</p>
-<p>（事实上很多图片的信息都是集中在低频区）</p>
-<p>另外在频率图中还有两条相互垂直的白线，这是因为我们在应用傅里叶变换时，都希望原函数是周期函数，于是我们会将原图复制很多份，像铺地板一样铺在一起，这样会导致在每张图的边界处产生信号的跳变，从而形成这两条白线。</p>
-<p>我们主要关注图片本身的信息，因此可以忽略这两条白线。</p>
-<p>所以说，傅里叶变换让我们能从频率上“看”到这张图。</p>
-<h4 id="Filtering——滤波"><a href="#Filtering——滤波" class="headerlink" title="Filtering——滤波"></a>Filtering——滤波</h4><p>滤波是信号处理领域中的一项重要任务，它指的是通过应用一种称为滤波器的函数或操作，对输入信号进行变换或修改，这里先介绍一些简单的滤波方式。</p>
-<p>首先是<strong>高通滤波</strong>，我们会将低频信号全部过滤掉，它就会产生这样的效果：</p>
-<p><img src="18.png" width="60%"></p>
-<p>可以看出，图片中剩下的信息基本上都是”边界“，这并不难理解，因为边界两边往往会发生剧烈的变化，所以会包含很更多的高频信号。</p>
-<p>相反地，还有<strong>低通滤波</strong>，即过滤掉高频信号，它的效果是这样的：</p>
-<p><img src="19.png" width="60%"></p>
-<p>图中只剩下了模糊的色块，原因与高通滤波是一致的，只是这里我们删除了边界。</p>
-<p>或者我们也可以只取中间的一部分信号：</p>
-<p><img src="20.png" width="60%"></p>
-<p>事实上，滤波的内容并不仅仅只是简单的删除一部分信号，针对不同的问题，我们会对原始信号进行不同的滤波方式（例如下文就要介绍的卷积）。</p>
-<p>我们可以看出，从频域的角度来分析图片，无疑是一个全新且实用的角度。</p>
-<h4 id="Convolution——卷积"><a href="#Convolution——卷积" class="headerlink" title="Convolution——卷积"></a>Convolution——卷积</h4><p>卷积是图像处理中非常常见的一种操作，为了进行卷积，我们首先需要定义一个卷积核。</p>
-<p>在下图中，我们定义的卷积核就是$[1/4,1/2,1/4]$，Signal是我们的原始信号。</p>
-<p>进行卷积操作，就是将卷积核与原始信号对齐，然后类似向量点积一样进行成绩求和得到结果：</p>
-<p><img src="21.png" width="60%"></p>
-<p>计算完后将卷积核向右移动，对齐下一个信号，再次进行计算：</p>
-<p><img src="22.png" width="60%"></p>
-<p>直到所有的信号都计算完毕，卷积操作也就结束了。</p>
-<p>如果Signal是我们的原始图片，那么从Signal到Result的过程就是一个滤波，Filter被称为滤波器。</p>
-<p>卷积操作拥有两个对偶的特性：</p>
-<ol>
-<li>在空间域上进行卷积操作，相当于在频域上进行乘积操作。</li>
-<li>在空间域上进行乘积操作，相当于在频域上进行卷积操作。</li>
-</ol>
-<p>该定理在这里我们不予证明，借由这个性质，我们进行卷积滤波时就可以有两种做法。</p>
-<p><strong>做法一</strong>：</p>
+<p>采样过程的步骤为：</p>
 <ul>
-<li>直接在空间域上计算卷积</li>
+<li>从标准正态分布采样$x_T$</li>
+<li>从$t=T$到$t=1$，进行以下步骤：<ul>
+<li>从正态分布采样$z$（重参数化）</li>
+<li>使用模型计算$x_{t-1}$</li>
 </ul>
-<p><strong>做法二</strong>：</p>
-<ul>
-<li>将图片和卷积核从空间域转换为频域（使用傅里叶变换）</li>
-<li>在频域上进行乘法运算</li>
-<li>将频域转换为空间域（使用逆傅里叶变换） </li>
+</li>
+<li>得到$x_0$</li>
 </ul>
-<p>下图展示了上述两种做法的过程：</p>
-<p><img src="23.png" width="60%"></p>
-<p>图中的这种滤波器被叫做方框滤波器（Box Filter），它是一个$n×n$的矩阵，其所有元素都是$\frac{1}{n×n}$。</p>
-<p>其本质是计算了区域内所有像素的平均值，它在空间域与频域上的情况如下所示：</p>
-<p><img src="24.png" width="50%"></p>
-<p>如果我们加大方框滤波器的尺寸，那它对应的频率信号会变低：</p>
-<p><img src="25.png" width="50%"></p>
-<p>反映在实际效果上，就是我们使用的方框滤波器越大，那么结果图就会越模糊。</p>
-<h4 id="从频域的角度理解采样"><a href="#从频域的角度理解采样" class="headerlink" title="从频域的角度理解采样"></a>从频域的角度理解采样</h4><p>现在我们可以从频域的角度来理解采样了。</p>
-<p>回想我们之前提到的采样，实际上是使用了一个冲激函数与原函数相乘。下图中，图（a）是原函数，图（c）是冲激函数，进行采样得到的就是图（e）中的函数。</p>
-<p><img src="26.png" width="60%"></p>
-<p>刚才我们说过，在空间域上进行乘积操作，相当于在频域上进行卷积操作。因此从频域的角度来看，我们是做了一个函数卷积，如图（b）（d）（f）所示。</p>
-<p>图（d）仍然是冲激函数，因为冲激函数在频域上依然是冲激函数，但周期不同。</p>
-<p>所以<strong>采样的本质，是在重复原始信号的频谱</strong>。采样的频率，影响了频谱中重复信号的距离。</p>
-<p>也就是说，如果我们的采样频率过低，会导致重复信号产生重叠，从而导致走样的出现。</p>
-<p><img src="27.png" width="60%"></p>
-<p>通过提高采样频率，能够从根本上解决走样的问题，但缺点是需要更大的开销，以及更多的像素。</p>
-<h3 id="Blurring（Pre-Filtering）——模糊"><a href="#Blurring（Pre-Filtering）——模糊" class="headerlink" title="Blurring（Pre-Filtering）——模糊"></a>Blurring（Pre-Filtering）——模糊</h3><p>解决采样的Artifacts，除了提高采样频率，我们还可以在采样前对原始图案进行模糊处理，如下图：</p>
-<p><img src="13.png" width="60%"></p>
-<p>这么做能让边界处的像素使用中间颜色值，从而降低视觉上的锯齿感，下面是应用模糊前后的对比图：</p>
-<p><img src="14.png" width="60%"></p>
-<p>从频域的角度上说，将图像模糊之后，高频信号被滤除，于是采样后的信号便不会再重叠。</p>
-<p><img src="28.png" width="60%"></p>
-<p>这也解释了为什么模糊操作一定要在采样前进行，而不能颠倒两者的顺序。</p>
-<p>具体的做法就是对图片进行一个卷积操作，然后采样即可。</p>
-<h3 id="Supersampling——超级采样"><a href="#Supersampling——超级采样" class="headerlink" title="Supersampling——超级采样"></a>Supersampling——超级采样</h3><p>对于像素点的着色，我们可以更加直观地来看，下图展示了几种状态的像素着色，它们的区别在于本身有多少比例在三角形外和三角形内。</p>
-<p><img src="29.png" width="60%"></p>
-<p>可以发现，在三角形内的部分比例越高，像素着色越白，反之则越黑。</p>
-<p>但其实这个覆盖比例是很难计算的，所以在实际应用中，我们使用另一种方法来近似。</p>
-<p>我们假设每一个像素是可以再分的，例如我们将一个像素看作16个更小的像素：</p>
-<p><img src="30.png" alt=""></p>
-<p>分别判断16个点是否在三角形内，然后根据结果来近似得出三角形的覆盖率。</p>
-<p>举一个具体的例子，我们用原始采样法来绘制三角形可能是这样的：</p>
-<p><img src="31.png" width="60%"></p>
-<p>使用超级采样的话，我们先将每个像素看作4个小像素，那么经过采样判断，结果应是：</p>
-<p><img src="32.png" width="60%"></p>
-<p>但我们知道，实际上每个像素只能着一色，所以对于每个实际像素，我们计算在三角形内的小像素比例。</p>
-<p><img src="33.png" width="60%"></p>
-<p>例如上方这个角处的像素，它有三个小像素在三角形内，所以该像素的取值就应是0.75，按此方式计算完所有像素，就完成了该三角形的绘制，并达到抗锯齿的效果。</p>
-<h2 id="遮挡难题"><a href="#遮挡难题" class="headerlink" title="遮挡难题"></a>遮挡难题</h2><p>现在我们掌握了绘制平面图形的技术，但我们最初的问题可是绘制三维物体，三维物体转换到平面上时会出现<strong>遮挡</strong>问题，也就是物体互相覆盖的情形，为了保证正确成像，我们需要认真考虑这一问题。</p>
-<h3 id="Painter’s-Algorithm——画家算法"><a href="#Painter’s-Algorithm——画家算法" class="headerlink" title="Painter’s Algorithm——画家算法"></a>Painter’s Algorithm——画家算法</h3><p>一个最简单的想法就是由远及近地进行绘制，这样近的物体就会覆盖远的物体，从而自然地处理遮挡问题，以画一个立方体为例：</p>
-<p><img src="34.png" width="60%"></p>
-<p>我们先绘制其后面，然后绘制左、右、下面，最后绘制上、前面，这样就可以准确表达立方体各个面间的遮挡关系，这一算法就是画家算法。</p>
-<p>从程序的角度思考，我们需要对每个三角的深度来进行排序，假设有$n$个三角形，时间复杂度为$O(n\log(n))$。</p>
-<p><img src="35.png" width="40%"></p>
-<p>但画家算法的适用场景仅限于简单遮挡，如果面临上图中这种情况，那不管我们怎么调整每个三角的绘制顺序，都无法正确表达。</p>
-<h3 id="Z-Buffer——深度缓存"><a href="#Z-Buffer——深度缓存" class="headerlink" title="Z-Buffer——深度缓存"></a>Z-Buffer——深度缓存</h3><p><strong>首先提醒，本文假设相机放在原点，向$z$轴正方向看去，所以默认$z$值为正。</strong></p>
-<p>图形学中我们更常用的一种算法是深度缓存，相比于画家算法，它适用于更多的场景。</p>
-<p>深度缓存的基本思想就是<strong>为每个像素记录最小的z值</strong>（也就是最小的深度值、最浅的距离），然后以此为依据来进行绘制。</p>
-<p>为了实现这一过程，我们使用<strong>DepthBuffer</strong>和<strong>FrameBuffer</strong>来存储信息，其中DepthBuffer用以保存深度信息，Framebuffer用以保存色彩信息。</p>
-<p>这里的DepthBuffer其实就是我们平时所说的深度图，它与我们的绘制结果是同时生成的，我们可以用灰度的形式绘制出来：</p>
-<p><img src="36.png" width="60%"></p>
-<p>我们用伪代码来解释Z-Buffer的过程：</p>
-<pre class="line-numbers language-none"><code class="language-none">for (each triangle T)                   // go through each triangle
-	for (each sample (x, y, z) in T)
-		if (z&lt;zbuffer[x,y])             // closest sample so far
-			framebuffer[x,y] = rgb;     // update color
-			zbuffer[x,y] = z;           // update depth
-		else
-			... // do nothing<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>简单而言就是遍历所有的三角，然后依据$z$值更新对应的DepthBuffer（代码中的zbuffer）和FrameBuffer。</p>
-<p>下图是一个更加直观的示例，其中R代表无限大：</p>
-<p><img src="37.png" width="60%"></p>
-<p>在第一步中，由于红色三角形的深度（5）小于初始值（无限大），所以红色三角形对应的像素被全部更新为5。</p>
-<p>而在第二步中，重点关注蓝色三角形中，和红色三角形重合的地方，某些深度小于5，某些则大于5，对那些小于5的深度进行更新，从而获得了正确的深度缓存。</p>
-<p>假设有$n$个三角形，每个三角形覆盖的像素都是一个可估计的常数值，则时间复杂度为$O(n)$。</p>
-<p>之所以节省了这么多，是因为Z-Buffer解决问题的方式是<strong>最小值</strong>，而非排序。</p>
-<p>不难发现，在Z-Buffer算法中，遍历三角的顺序并不重要，无论顺序如何，最终的结果都是一致的。</p>
-<p>OK，第二篇光栅化笔记，就此完结！</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] Ho, J., Jain, A., &amp; Abbeel, P. (2020). Denoising diffusion probabilistic models. Advances in neural information processing systems, 33, 6840-6851.</p>
+<p>[2] Sohl-Dickstein, J., Weiss, E., Maheswaranathan, N., &amp; Ganguli, S. (2015, June). Deep unsupervised learning using nonequilibrium thermodynamics. In International conference on machine learning (pp. 2256-2265). PMLR.</p>
+<p>[3] 扩散模型是如何工作的：从零开始的数学原理. HK-SHAO. <a target="_blank" rel="noopener" href="https://shao.fun/blog/w/how-diffusion-models-work.html">https://shao.fun/blog/w/how-diffusion-models-work.html</a>.</p>
+<p>[4] Diffusion model(二): 训练推导详解. CSDN. <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_41978699/article/details/128604001">https://blog.csdn.net/weixin_41978699/article/details/128604001</a></p>
+<p>[5] DDPM扩散模型公式推理——损失函数. CSDN. <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45453121/article/details/131223653">https://blog.csdn.net/weixin_45453121/article/details/131223653</a>.</p>
 
                 
             </div>
@@ -650,7 +565,7 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/</a>
+                    <a href="http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/">http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -688,12 +603,8 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-                                    <span class="chip bg-color">计算机图形学</span>
-                                </a>
-                            
-                                <a href="/tags/GAMES101/">
-                                    <span class="chip bg-color">GAMES101</span>
+                                <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                                    <span class="chip bg-color">人工智能</span>
                                 </a>
                             
                         </div>
@@ -863,28 +774,29 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/11/13/games101-ke-cheng-bi-ji-san-shading/">
+                <a href="/2024/04/21/diffusion-model-ru-men/">
                     <div class="card-image">
                         
-                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（三）——Shading">
+                        <img src="/medias/minefeatures/2.jpg" class="responsive-img" alt="Diffusion Model入门">
                         
-                        <span class="card-title">GAMES101课程笔记（三）——Shading</span>
+                        <span class="card-title">Diffusion Model入门</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            我又要成为计算机图形学高手！
+                            超简单的扩散模型介绍
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-11-13
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -893,15 +805,12 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
-                        <span class="chip bg-color">计算机图形学</span>
-                    </a>
-                    
-                    <a href="/tags/GAMES101/">
-                        <span class="chip bg-color">GAMES101</span>
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
                     </a>
                     
                 </div>
@@ -915,23 +824,23 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">
+                <a href="/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/">
                     <div class="card-image">
                         
-                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（一）——Transformation">
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（五）——Ray Tracing">
                         
-                        <span class="card-title">GAMES101课程笔记（一）——Transformation</span>
+                        <span class="card-title">GAMES101课程笔记（五）——Ray Tracing</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            我要成为计算机图形学高手！
+                            我就要成为计算机图形学高手！
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-09-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-03-12
                             </span>
                         <span class="publish-author">
                             
