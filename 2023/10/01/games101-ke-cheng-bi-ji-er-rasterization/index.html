@@ -459,9 +459,7 @@ M_{viewport}=\begin{pmatrix}
 <script type="math/tex; mode=display">
 inside(t,x,y)=\begin{cases}1 & (x,y)\ in\ triangle\ t\\
 0 & otherwise\end{cases}</script><p>我们使用离散的像素来对该函数进行采样，制这个三角形的代码就可以写为：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">for (int x=0; x&lt;xmax; ++x)
-    for (int y=0; x&lt;ymax; ++y)
-        image[x][y]=inside(t, x+0.5, y+0.5)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> x=<span class="number">0</span>; x&lt;xmax; ++x)</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> y=<span class="number">0</span>; x&lt;ymax; ++y)</span><br><span class="line">        image[x][y]=<span class="built_in">inside</span>(t, x+<span class="number">0.5</span>, y+<span class="number">0.5</span>)</span><br></pre></td></tr></tbody></table></figure>
 <p>思路就是偏离所有的像素，逐个判断是否在三角形内。</p>
 <p>现在问题就落在：该如何判断这个点是否在三角形内部呢？</p>
 <p><img src="7.png" width="40%"></p>
@@ -608,13 +606,7 @@ f(t) = \int_{-\infty}^{\infty} F(\omega) \cdot e^{2\pi i\omega t} \, d\omega</sc
 <p>这里的DepthBuffer其实就是我们平时所说的深度图，它与我们的绘制结果是同时生成的，我们可以用灰度的形式绘制出来：</p>
 <p><img src="36.png" width="60%"></p>
 <p>我们用伪代码来解释Z-Buffer的过程：</p>
-<pre class="line-numbers language-none"><code class="language-none">for (each triangle T)                   // go through each triangle
-	for (each sample (x, y, z) in T)
-		if (z&lt;zbuffer[x,y])             // closest sample so far
-			framebuffer[x,y] = rgb;     // update color
-			zbuffer[x,y] = z;           // update depth
-		else
-			... // do nothing<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for (each triangle T)                   // go through each triangle</span><br><span class="line">	for (each sample (x, y, z) in T)</span><br><span class="line">		if (z&lt;zbuffer[x,y])             // closest sample so far</span><br><span class="line">			framebuffer[x,y] = rgb;     // update color</span><br><span class="line">			zbuffer[x,y] = z;           // update depth</span><br><span class="line">		else</span><br><span class="line">			... // do nothing</span><br></pre></td></tr></tbody></table></figure>
 <p>简单而言就是遍历所有的三角，然后依据$z$值更新对应的DepthBuffer（代码中的zbuffer）和FrameBuffer。</p>
 <p>下图是一个更加直观的示例，其中R代表无限大：</p>
 <p><img src="37.png" width="60%"></p>

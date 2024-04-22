@@ -545,7 +545,7 @@ T(t_x,t_y,t_z)=\begin{bmatrix}1 & 0 & 0 & t_x\\0 & 1 & 0 & t_y\\0 & 0 & 1 & t_z\
 <script type="math/tex; mode=display">
 R_x(\alpha)=\begin{pmatrix}1 & 0 & 0 & 0\\0 & cos\alpha & -sin\alpha & 0\\ 0 & sin\alpha & cos\alpha & 0\\ 0 & 0 &0 & 1\end{pmatrix}\\
 R_y(\alpha)=\begin{pmatrix}cos\alpha & 0 & sin\alpha & 0\\0 & 1 & 0 & 0\\ -sin\alpha & 0 & cos\alpha & 0\\ 0 & 0 &0 & 1\end{pmatrix}\\
-R_z(\alpha)=\begin{pmatrix}cos\alpha & -sin\alpha & 0 & 0\\sin\alpha & cos\alpha & 0 & 0\\ 0 & 0 & 1 & 0\\ 0 & 0 &0 & 1\end{pmatrix}</script><p>其中$R_x(\alpha)$和$R_z(\alpha)$都包含有子矩阵$\begin{pmatrix}cos\alpha &amp; -sin\alpha \ sin\alpha &amp; cos\alpha\end{pmatrix}$，只有$R_y(\alpha)$是相反的旋转角。</p>
+R_z(\alpha)=\begin{pmatrix}cos\alpha & -sin\alpha & 0 & 0\\sin\alpha & cos\alpha & 0 & 0\\ 0 & 0 & 1 & 0\\ 0 & 0 &0 & 1\end{pmatrix}</script><p>其中$R_x(\alpha)$和$R_z(\alpha)$都包含有子矩阵$\begin{pmatrix}cos\alpha &amp; -sin\alpha \\ sin\alpha &amp; cos\alpha\end{pmatrix}$，只有$R_y(\alpha)$是相反的旋转角。</p>
 <p>以$z$轴举例（$x$轴同理），设$x$，$y$，$z$三个坐标轴上正方向的单位向量分别为$\boldsymbol{i}$，$\boldsymbol{j}$，$\boldsymbol{k}$，我们有：</p>
 <script type="math/tex; mode=display">
 i×j=k</script><p>也就是在右手定则下，绕$z$轴旋转的正方向会是先$x$后$y$，符合坐标顺序（也就是$xyz$顺序）。</p>
@@ -599,7 +599,7 @@ n_z & 0 & -n_x\\
 <script type="math/tex; mode=display">
 M_{view}=R_{view}T_{view}</script><p>平移矩阵$T_{view}$是很容易写出来的，只需要利用$e$就可以得出：</p>
 <script type="math/tex; mode=display">
-T_{view}=\begin{bmatrix}1 & 0 & 0 & -x_e\\0 & 1 & 0 & -y_e\\0 & 0 & 1 & -z_e\\0 & 0 & 0 & 1\\\end{bmatrix}</script><p>旋转矩阵$R<em>{view}$就比较复杂，现在我们的目标是将$\vec{g}$旋转到$z$轴负方向，$\vec{t}$旋转到$y$轴正方向，这其实是很难写的，但如果我们先求$R</em>{view}^{-1}$，那么就会变得容易一点。</p>
+T_{view}=\begin{bmatrix}1 & 0 & 0 & -x_e\\0 & 1 & 0 & -y_e\\0 & 0 & 1 & -z_e\\0 & 0 & 0 & 1\\\end{bmatrix}</script><p>旋转矩阵$R_{view}$就比较复杂，现在我们的目标是将$\vec{g}$旋转到$z$轴负方向，$\vec{t}$旋转到$y$轴正方向，这其实是很难写的，但如果我们先求$R_{view}^{-1}$，那么就会变得容易一点。</p>
 <p>那$R_{view}^{-1}$的目标，就是将$z$轴负方向旋转到$\vec{g}$，$y$轴正方向旋转到$\vec{t}$，我们可以使用取特殊点的方式来进行求解。</p>
 <p>假设$xyz$坐标系下有一点$(0,1,0)$，那在旋转后的坐标系下，其坐标应为$(x_t,y_t,z_t)$，也就是$\vec{t}$的三维</p>
 <p>（这里就是先前将$\vec{t}$取为单位向量的好处）</p>
