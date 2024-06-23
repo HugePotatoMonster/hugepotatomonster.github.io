@@ -686,13 +686,13 @@ D=\log_2{R}</script><p>这里的$D$可能为非整数，我们取每个像素最
 <p>这么做是在双线性插值上又做了一次插值，所以该方法被称为<strong>三线性插值</strong>。</p>
 <p>在使用了插值后，Mipmap的过渡就会变得更加平滑：</p>
 <p><img src="52.png" width="40%"></p>
-<h4 id="Anisotropic-Filtering——各异向性过滤"><a href="#Anisotropic-Filtering——各异向性过滤" class="headerlink" title="Anisotropic Filtering——各异向性过滤"></a>Anisotropic Filtering——各异向性过滤</h4><p>但Mipmap有一定的局限性，那就是只能查询方形区域的值，所以在某些场合下，使用Mipmap的效果也不尽人意。例如之前的场景，会出现过模糊的问题：</p>
+<h4 id="Anisotropic-Filtering——各向异性过滤"><a href="#Anisotropic-Filtering——各向异性过滤" class="headerlink" title="Anisotropic Filtering——各向异性过滤"></a>Anisotropic Filtering——各向异性过滤</h4><p>但Mipmap有一定的局限性，那就是只能查询方形区域的值，所以在某些场合下，使用Mipmap的效果也不尽人意。例如之前的场景，会出现过模糊的问题：</p>
 <p><img src="53.png" width="40%"></p>
 <p>这是因为在这张图中，很多像素在纹理坐标下并不再是方形的，而是呈现长条状，如下图所示：</p>
 <p><img src="55.png" width="60%"></p>
-<p>为了解决这一问题，我们可以使用一种更泛用的范围查询——各异向性过滤，相比Mipmap，这种方法会生成更多生成不同尺寸的纹理。</p>
+<p>为了解决这一问题，我们可以使用一种更泛用的范围查询——各向异性过滤，相比Mipmap，这种方法会生成更多生成不同尺寸的纹理。</p>
 <p><img src="56.png" width="35%"></p>
-<p>上图就是一个经典的各异向性过滤示例，其对角线上的纹理全是正方形，与Mipmap生成的各层级一致。除此此外，还有各种长宽比例的纹理，使用时根据纹理空间中的形状选用对应的纹理即可。</p>
+<p>上图就是一个经典的各向异性过滤示例，其对角线上的纹理全是正方形，与Mipmap生成的各层级一致。除此此外，还有各种长宽比例的纹理，使用时根据纹理空间中的形状选用对应的纹理即可。</p>
 <p>（当然其存储空间也相应变大，需要额外三倍于原纹理的空间）</p>
 <p>原教程中还简要提到了EWA过滤，这里就不做详细展开了。</p>
 <h2 id="纹理应用"><a href="#纹理应用" class="headerlink" title="纹理应用"></a>纹理应用</h2><p>除了单纯地给模型赋上花纹，纹理还有很多其他的应用。</p>

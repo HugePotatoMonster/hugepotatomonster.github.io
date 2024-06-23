@@ -6,7 +6,7 @@
   <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
   
   <link href="http://hugepotatomonster.github.io/"/>
-  <updated>2024-04-21T14:36:54.891Z</updated>
+  <updated>2024-06-22T15:57:59.928Z</updated>
   <id>http://hugepotatomonster.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101课程笔记（六）——Materials and Appearances</title>
+    <link href="http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/"/>
+    <id>http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/</id>
+    <published>2024-06-18T07:29:09.000Z</published>
+    <updated>2024-06-22T15:57:59.928Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（六）——Materials-and-Appearances&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（六）——Materials-and-Appearances&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
   
   <entry>
     <title>Diffusion Model入门</title>
@@ -44,7 +69,7 @@
     <link href="http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/"/>
     <id>http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/</id>
     <published>2024-03-12T15:14:13.000Z</published>
-    <updated>2024-04-21T14:38:17.717Z</updated>
+    <updated>2024-06-18T08:16:14.770Z</updated>
     
     
       
@@ -94,7 +119,7 @@
     <link href="http://hugepotatomonster.github.io/2023/11/13/games101-ke-cheng-bi-ji-san-shading/"/>
     <id>http://hugepotatomonster.github.io/2023/11/13/games101-ke-cheng-bi-ji-san-shading/</id>
     <published>2023-11-13T07:41:37.000Z</published>
-    <updated>2024-01-20T03:52:05.826Z</updated>
+    <updated>2024-06-22T14:53:19.328Z</updated>
     
     
       
