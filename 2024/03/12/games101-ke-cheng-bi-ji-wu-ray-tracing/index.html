@@ -732,7 +732,7 @@ X_i \sim p(x)</script><p>用该变量对$f(x)$进行采样，可获得定积分�
 <script type="math/tex; mode=display">
 F_N=\frac{1}{N}\sum_{i=1}^{N}\frac{f(X_i)}{p(X_i)}</script><p>其中$N$为采样次数，一般而言，采样次数越多，结果会越精确。</p>
 <p>更具体的理论知识这里就不展开了，这里只简单介绍该方法。</p>
-<h2 id="路径追踪"><a href="#路径追踪" class="headerlink" title="路径追踪"></a>路径追踪</h2><p>之前我们介绍过递归光追算法，它其实存在一些问题。</p>
+<h2 id="Path-Tracing——路径追踪"><a href="#Path-Tracing——路径追踪" class="headerlink" title="Path Tracing——路径追踪"></a>Path Tracing——路径追踪</h2><p>之前我们介绍过递归光追算法，它其实存在一些问题。</p>
 <p>主要的问题在反射上，该算法只考虑了镜面反射的情形，而忽略了漫反射情形，在面对下面两种材质时：</p>
 <p><img src="56.png" width="40%"></p>
 <p>递归光追可以计算左侧茶壶的光照，但右边的就不行。</p>

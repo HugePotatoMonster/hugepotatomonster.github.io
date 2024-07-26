@@ -574,7 +574,7 @@ R_0=(\frac{n_1-n_2}{n_1+n_2})^2</script><p>这个函数就是Schlick’s approxi
 <h3 id="非负性"><a href="#非负性" class="headerlink" title="非负性"></a>非负性</h3><script type="math/tex; mode=display">
 f_r(\omega_i \rightarrow \omega_r) \geq 0</script><p>这个很好理解，因为反射出去的能量肯定是非负的，不可能出现负能量的情况。</p>
 <h3 id="线性"><a href="#线性" class="headerlink" title="线性"></a>线性</h3><script type="math/tex; mode=display">
-L_r(\mathbf{p}, \omega_r) = \int_{H^2} f_r(\mathbf{p}, \omega_i \rightarrow \omega_r) L_i(\mathbf{p}, \omega_i) \cos \theta_i \, d\omega_i</script><p>我们之前介绍Blinn-phong模型时就使用过这一性质，当时我们分别计算了漫反射、高光和环境光，最后再相加起来。</p>
+L_r(\mathbf{p}, \omega_r) = \int_{H^2} f_r(\mathbf{p}, \omega_i \rightarrow \omega_r) L_i(\mathbf{p}, \omega_i) \cos \theta_i \, \mathrm{d}\omega_i</script><p>我们之前介绍Blinn-phong模型时就使用过这一性质，当时我们分别计算了漫反射、高光和环境光，最后再相加起来。</p>
 <p>其实这一方法可以推广到各种BRDF上，如下图：</p>
 <p><img src="28.png" width="50%"></p>
 <p>我们可以分别计算一部分BRDF的结果，最后再相加起来，其效果等同于计算总BRDF的结果。</p>
@@ -582,7 +582,7 @@ L_r(\mathbf{p}, \omega_r) = \int_{H^2} f_r(\mathbf{p}, \omega_i \rightarrow \ome
 f_r(\omega_r \rightarrow \omega_i) = f_r(\omega_i \rightarrow \omega_r)</script><p>由于光路可逆，BRDF自然也具有可逆性，交换入射方向和出射方向，BRDF值不变。</p>
 <p><img src="29.png" width="50%"></p>
 <h3 id="能量守恒"><a href="#能量守恒" class="headerlink" title="能量守恒"></a>能量守恒</h3><script type="math/tex; mode=display">
-\forall \omega_r \int_{H^2} f_r(\omega_i \rightarrow \omega_r) \cos \theta_i \, d\omega_i \leq 1</script><p>上式假设入射的所有能量为1，无论如何反射，反射出的能量绝对不可能超过入射能量。</p>
+\forall \omega_r \int_{H^2} f_r(\omega_i \rightarrow \omega_r) \cos \theta_i \, \mathrm{d}\omega_i \leq 1</script><p>上式假设入射的所有能量为1，无论如何反射，反射出的能量绝对不可能超过入射能量。</p>
 <h3 id="各向同性材质"><a href="#各向同性材质" class="headerlink" title="各向同性材质"></a>各向同性材质</h3><p>前文提到过，如果把表面转过任意角度$\phi$后（从俯视角看），BRDF没发生改变，那么该表面材质就是各向同性的。</p>
 <p>原来的BRDF需要四个参数：$\theta_i$、$\theta_o$、$\phi_i$和$\phi_o$，对于各向同性材质来说，就不需要特别指明$\phi_i$和$\phi_o$，只需要知道天顶角的夹角即可，即：</p>
 <script type="math/tex; mode=display">
@@ -860,7 +860,7 @@ f_r(\theta_i, \theta_r, \phi_r - \phi_i) = f_r(\theta_r, \theta_i, \phi_i - \phi
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            我就要成为计算机图形学高手！
+                            我只要成为计算机图形学高手！
                         
                     </div>
                     <div class="publish-info">
@@ -898,23 +898,23 @@ f_r(\theta_i, \theta_r, \phi_r - \phi_i) = f_r(\theta_r, \theta_i, \phi_i - \phi
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2024/04/21/diffusion-model-ru-men/">
+                <a href="/2024/06/18/games101-ke-cheng-bi-ji-qi-advanced-topics-in-rendering/">
                     <div class="card-image">
                         
-                        <img src="/medias/minefeatures/2.jpg" class="responsive-img" alt="Diffusion Model入门">
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（七）——Advanced Topics in Rendering">
                         
-                        <span class="card-title">Diffusion Model入门</span>
+                        <span class="card-title">GAMES101课程笔记（七）——Advanced Topics in Rendering</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            超简单的扩散模型介绍
+                            我非要成为计算机图形学高手！
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-18
                             </span>
                         <span class="publish-author">
                             
@@ -927,8 +927,12 @@ f_r(\theta_i, \theta_r, \phi_r - \phi_i) = f_r(\theta_r, \theta_i, \phi_i - \phi
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
-                        <span class="chip bg-color">人工智能</span>
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GAMES101/">
+                        <span class="chip bg-color">GAMES101</span>
                     </a>
                     
                 </div>
