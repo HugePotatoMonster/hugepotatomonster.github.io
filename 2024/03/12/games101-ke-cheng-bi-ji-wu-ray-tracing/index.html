@@ -1,0 +1,1591 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMES101课程笔记（五）——Ray Tracing, PotatoMonster">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMES101课程笔记（五）——Ray Tracing | PotatoMonster</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="PotatoMonster" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">土豆大魔王</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">PotatoMonster</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HugePotatoMonster" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Here Here!
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        // color: #0f9d58;
+        color: #1a1a1a;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HugePotatoMonster" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Here Here!" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMES101课程笔记（五）——Ray Tracing</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
+                            </a>
+                        
+                            <a href="/tags/GAMES101/">
+                                <span class="chip bg-color">GAMES101</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-03-12
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="GAMES101课程笔记（五）——Ray-Tracing"><a href="#GAMES101课程笔记（五）——Ray-Tracing" class="headerlink" title="GAMES101课程笔记（五）——Ray Tracing"></a>GAMES101课程笔记（五）——Ray Tracing</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>上篇笔记的发布已经是年前的事了，寒假忙着做自己的项目demo，疏于博客的撰写，拖得确实有点太长了，毕竟撰写一篇文章和单纯记笔记的区别还是挺大的，需要投入很大的精力。</p>
+<p>（其实是笔者沉迷于游戏的世界一去不返）</p>
+<p>本文将进入光线追踪的部分，这是笔者本科阶段非常感兴趣的一部分内容。现实世界的光照系统极其复杂，如何在虚拟世界中呈现出真实的光照效果是图形学中的一个重大问题，本篇文章篇幅较长，并且涉及较多的物理知识，希望读者耐心观看。</p>
+<p>前文指路：</p>
+<p><a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">GAMES101课程笔记（一）——Transformation</a></p>
+<p><a href="/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">GAMES101课程笔记（二）——Rasterization</a></p>
+<p><a href="/2023/11/13/games101-ke-cheng-bi-ji-san-shading/">GAMES101课程笔记（三）——Shading</a></p>
+<p><a href="/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/">GAMES101课程笔记（四）——Geometry</a></p>
+<h2 id="Shadow-Mapping——阴影映射"><a href="#Shadow-Mapping——阴影映射" class="headerlink" title="Shadow Mapping——阴影映射"></a>Shadow Mapping——阴影映射</h2><p>在Shading一节中，我们介绍过为物体着色的过程，但我们考虑的是一个非常理想化的场景，即场景中仅有光源和该物体本身。</p>
+<p>当我们引入一个比较复杂的场景后，之前的着色过程就不够用。当物体和光源间存在遮挡物后，物体上势必会留下阴影，但该着色过程无法计算阴影。</p>
+<p><img src="1.png" width="40%"></p>
+<p>阴影对真实感的影响非常强烈，很多时候它能影响人对对象位置的判断。例如上图中，人物脚底的影子让我们觉得人物是真的“站”在地面上的。</p>
+<p>阴影映射是一种在图像空间中的阴影计算方法，即该方法不需要获取场景中的几何信息。</p>
+<p>阴影映射的核心思想是：若一个点不在阴影中，那它一定同时被<strong>光源</strong>和<strong>相机</strong>观测到。</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>因此阴影映射的步骤就分为两步，先从光源进行观测，再从相机进行观测。</p>
+<p>第一步的示意图如下：</p>
+<p><img src="2.png" width="20%"></p>
+<p>我们从光源出发，找到所有能看到的点，但不先着色，而是记录下它们的深度，这里会用到我们之前提过的Z-Buffer。</p>
+<p>第二步中，我们从眼睛出发，如下所示：</p>
+<p><img src="3.png" width="20%"></p>
+<p>此时，我们将看到的点投影回光源的视角，并比较这些点的深度是否与之前记录的深度一致，如果一致，则表明该点不在阴影中（如图中橙色线标注的点），反之则在阴影中（如图中眼睛看到的另一点）。</p>
+<p>课件中提供了一个具体的例子，考虑下面这个场景：</p>
+<p><img src="4.png" width="40%"></p>
+<p>我们先从光源位置看向物体，得到深度图：</p>
+<p><img src="5.png" width="40%"></p>
+<p>将其与相机视角的结果进行比较，就能获得阴影的位置：</p>
+<p><img src="6.png" width="30%"></p>
+<p>上图中的非绿色部分就是阴影，我们进行对应的渲染，就可以获得最开始的那张图片。</p>
+<h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><p>阴影映射广泛应用于现在的游戏和早期的动画中，但它存有一定的缺点。</p>
+<p>首先是该方法基于点光源，获得的阴影是硬阴影，即每个点要么在阴影中，要么不在，因此阴影的边缘会非常清晰。</p>
+<p>这里我们插入介绍一下软硬阴影的概念，我们以太阳、月亮和地球构成的系统为例进行说明。</p>
+<p><img src="7.png" width="30%"></p>
+<p>我们知道月亮会遮挡住部分太阳光，但其实遮挡存在两种情形。</p>
+<p>一种是图中深色的锥形部分，这部分里太阳光被月亮完全遮蔽，我们称之为本影（Umbra）。</p>
+<p>另一种是其余的部分，由于太阳并非是一个点光源，因此会有些区域只接收到一部分阳光，我们称之为半影（Penumbra）。</p>
+<p>硬阴影其实就是只渲染本影的情况，而软阴影附加上了半影，由于现实中的多数光源都非点光源，所以一般都会存在半影。</p>
+<p>其次其渲染质量依赖于阴影图的分辨率，分辨率过低就会出现明显的锯齿现象。</p>
+<h2 id="光线追踪简介"><a href="#光线追踪简介" class="headerlink" title="光线追踪简介"></a>光线追踪简介</h2><p>现在我们正式进入光线追踪部分，我们使用光线追踪，主要是为了解决光栅化下一些无法处理的全局效果。</p>
+<p><img src="8.png" width="50%"></p>
+<p>上图中展示了几个典型的光栅化难以处理的效果，其中就包括了我们前文中提到的软阴影。</p>
+<p>光栅化还有一个特点是速度快但效果相对较差，例如PUBG里的场景，仔细看可以发现还是非常粗糙的。</p>
+<p><img src="9.png" width="40%"></p>
+<p>光线追踪的特点恰好与之相反，它拥有极度准确的效果，但需要较多的时间来渲染，因此我们在实时场景下会更多选用光栅化，而在离线场景下使用光线追踪。</p>
+<h2 id="基础算法"><a href="#基础算法" class="headerlink" title="基础算法"></a>基础算法</h2><p>介绍光线追踪算法前，我们先明确一下“光线”这个概念。</p>
+<p>主要是以下这三点：</p>
+<ul>
+<li>光沿直线传播</li>
+<li>光线之间不会发生碰撞现象，它们只会穿过然后沿原来的方向前进</li>
+<li>光线从光源传播到我们眼中，该光路是可逆的，即如果我从眼睛位置放射光线，也能传播到光源</li>
+</ul>
+<h3 id="Ray-Casting——光线投射"><a href="#Ray-Casting——光线投射" class="headerlink" title="Ray Casting——光线投射"></a>Ray Casting——光线投射</h3><p><img src="10.png" width="40%"></p>
+<p>光线投射的基本思路是从眼睛放出射线，穿过屏幕上的每一个像素，然后在触碰点上向光源放出射线，从而判断该点是否在阴影中。</p>
+<p>接下来我们对该算法进行具体的阐释，下图是一个典型的小孔相机模型（将相机/眼睛视为一个点）。</p>
+<p><img src="11.png" width="50%"></p>
+<p>我们从相机出发，向成像平面上的像素点放出射线，并找到最近的触碰点，图中该射线穿过了三个碰撞点，我们选取最近的那个，这对应光栅化中的深度测试。</p>
+<p><img src="12.png" width="40%"></p>
+<p>然后我们从该点向光源引一条射线，获知了光源和法线信息后，就可以用之前提到过的各种方法（如Bling-Pong模型）来进行渲染。</p>
+<p>不过光线投射算法只考虑到了单次反射的光线，现实中光线可以反射无数次，因此该方法的效果并不出众。</p>
+<h3 id="Recursive-Ray-Tracing——递归光追"><a href="#Recursive-Ray-Tracing——递归光追" class="headerlink" title="Recursive Ray Tracing——递归光追"></a>Recursive Ray Tracing——递归光追</h3><p>递归光追算法（也是Whitted-Style光追）在光线投射的基础上，允许光线进行多次反射和折射，同样以上述场景为例，在找到第一个触碰点之后，我们让射线按真实的物理法则进行反射和折射。</p>
+<p><img src="13.png" width="40%"></p>
+<p>从相机出发的这条射线我们称之为primary ray，经过折射和反射形成的新射线则是secondary ray，secondary ray也会找到自己的触碰点，最后我们从所有的触碰点向光源引一条射线（shadow ray），计算出所有触碰点的颜色后，叠加到原像素上，就获得了最终的渲染结果。</p>
+<p><img src="14.png" width="40%"></p>
+<p>值得一提的是，为了防止触碰点太多出现类似过曝光的效果，通常会限制光线的反射/折射次数，或者为光线附加一个能量，在每次反射/折射时能量就会衰减。</p>
+<p><img src="15.png" width="30%"></p>
+<h3 id="碰撞点"><a href="#碰撞点" class="headerlink" title="碰撞点"></a>碰撞点</h3><p>了解了光追算法的大致流程后，我们就可以探讨一些更细节的东西，例如碰撞点该如何计算。</p>
+<h4 id="基本计算"><a href="#基本计算" class="headerlink" title="基本计算"></a>基本计算</h4><p>接下来就要涉及很多数学公式了，在此之前，我们先对光线做一个数学定义。</p>
+<p>光线由其起点$o$和方向$d$定义，如下图所示：</p>
+<p><img src="16.png" width="30%"></p>
+<p>从而，我们得到光线的表达式为：</p>
+<script type="math/tex; mode=display">
+r(t)=o+td \\
+0\leq t<\infin</script><p>好的，那假设我们现在有一条光线和一个球体，我们该如何计算触碰点呢？</p>
+<p><img src="17.png" width="40%"></p>
+<p>其实很简单，用高中数学知识就知道，联立方程求解就行了，也就是解下述方程：</p>
+<script type="math/tex; mode=display">
+(o+td-c)^2-R^2=0</script><p>这是一个一元二次方程，在满足物理意义的前提下，其解个数反映了光线与球体的相交情况。</p>
+<p>（其实就是满足$0\leq t&lt;\infin$，下文中就不再特地注明这一点了）</p>
+<p><img src="18.png" width="25%"></p>
+<p>从这个特殊例子出发，我们可以得到一个更普遍的过程：</p>
+<ul>
+<li><p>已知光线方程：$r(t)=o+td$</p>
+</li>
+<li><p>已知几何体表面方程：$f(p)=0$</p>
+</li>
+</ul>
+<p>我们可以通过求解方程$f(o+td)=0$的形式来求得碰撞点。</p>
+<h4 id="三角面模型的碰撞点"><a href="#三角面模型的碰撞点" class="headerlink" title="三角面模型的碰撞点"></a>三角面模型的碰撞点</h4><p>现在我们考虑如何计算光线与一个三角面模型的碰撞点，因为这类模型通常只给出每个三角面的信息，所以我们没法用一个统一的方程来表示其表面，故而我们需要想一些其它方法。</p>
+<p><img src="19.png" width="25%"></p>
+<p>最简单的方法就是把所有三角面都算一遍，看是否与光线相交。</p>
+<p>至于如何计算光线和单个三角面的交点，我们会将这个问题拆为两个步骤解决：</p>
+<ol>
+<li>计算光线与三角面所在平面的交点</li>
+<li>判断交点是否在三角面内</li>
+</ol>
+<p><img src="20.png" width="25%"></p>
+<p>平面可以由其上一点$p’$加上其法向量$N$来定义，其数学表达式为：</p>
+<script type="math/tex; mode=display">
+(p-p')·N=0</script><p><img src="21.png" width="25%"></p>
+<p>这与高数中我们初次接触到的平面方程$ax+by+c+d=0$其实是一致的。</p>
+<p>知道了表达式，我们就可以用之前的步骤代入求解，我们的解为：</p>
+<script type="math/tex; mode=display">
+t=\frac{(p'-o)·N}{d·N}</script><p>（其实这里有可能出现光线与平面平行的情况，即$d·N=0$，但我们这里不列入讨论）</p>
+<h4 id="Moller–Trumbore算法"><a href="#Moller–Trumbore算法" class="headerlink" title="Möller–Trumbore算法"></a>Möller–Trumbore算法</h4><p>上面提到的方法还是比较麻烦的，Möller–Trumbore算法可以直接通过三角面的顶点坐标来计算交点坐标，该算法认为交点应满足方程：</p>
+<script type="math/tex; mode=display">
+o+td=(1-b_1-b_2)P_0+b_1P_1+b_2P_2</script><p>这里的$P_i$是三角面的顶点，等式右边用到了我们之前提到过的重心坐标，只要解出来系数满足重心坐标要求，就认为有交点，其解为：</p>
+<script type="math/tex; mode=display">
+\begin{bmatrix}
+t \\
+b_1 \\
+b_2 \\
+\end{bmatrix} 
+=
+\frac{1}{S_1·E_1} 
+\begin{bmatrix}
+S_2·E_3 \\
+S_1·S \\
+S_2·D \\
+\end{bmatrix}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+E_1 = P_1-P_0 \\
+E_2 = P_2-P_0 \\
+S = o-P_0 \\
+S_1 = d×E_2 \\
+S_2 = S×E_1</script><p>该算法就可以快速计算光线与三角面的交点。</p>
+<h3 id="包围盒"><a href="#包围盒" class="headerlink" title="包围盒"></a>包围盒</h3><p>为了加速对碰撞点的判断，我们可以引入包围盒。</p>
+<p><img src="22.png" width="40%"></p>
+<p>如上所示，包围盒是将物体完全包围在内的一种几何体，虽然其名为“盒”，但可以依据实际情况来选取不同形状的包围盒。</p>
+<p>包围盒的加速逻辑很简单：如果光线与包围盒都没有碰撞点，那它和物体也一定没有碰撞点。</p>
+<p>我们这里就讲长方体形的包围盒是如何起作用的。</p>
+<p>这里我们将长方体进行全新的理解，认为长方体是三组对面的交集。</p>
+<p><img src="23.png" width="20%"></p>
+<p>上图就是长方体的一组对面，三组对面刚好对应长方体的六个面。</p>
+<p>这么理解是因为我们常常会使用一种叫轴对齐包围盒（Axis-Aligned Bounding Box）的包围盒，简称AABB包围盒，它的对面全部与坐标轴平行或垂直。也就是说，AABB包围盒可以用三个轴上的三个区间来表达。</p>
+<p>我们以二维情况为例来解释AABB包围盒是如何计算碰撞点的。</p>
+<p><img src="24.png" width="50%"></p>
+<p>二维情况下，长方形包围盒由两个对面（其实应该叫对线）的交集构成，分别对应$x$方向与$y$方向。</p>
+<p>我们先求$x$方向上的对面与光线的交点，可以获得光线在这两个对面间的为$[t<em>{ {x}</em>{min} },t<em>{ {x}</em>{max} }]$对应的部分。</p>
+<p>而$y$方向上，我们虽然求得结果是$[t<em>{ {y}</em>{min} },t<em>{ {y}</em>{max} }]$，但为了保证$t\ge 0$，因此其区间为$[0,t<em>{ {y}</em>{max} }]$。</p>
+<p>最后，我们对这两个区间求交集，就获得了最终的区间为$[t<em>{ {x}</em>{min} },t<em>{ {y}</em>{max} }]$，而这就是光线在整个包围盒内部的部分，三维情况下同理。</p>
+<p><img src="25.png" width="25%"></p>
+<p>对平面求交点是一件比较简单的事情，上图中所示的情形，我们可以写出其解为：</p>
+<script type="math/tex; mode=display">
+t=\frac{p'_x-o_x}{d_x}</script><p>只需要一次减法一次除法，相比于对任意面的求解，减少了不少计算量。</p>
+<p>我们继续通过二维情况下的一个例子来说明包围盒是如何加速光线追踪的。</p>
+<p><img src="26.png" width="25%"></p>
+<p>考虑上图中的情况，我们已经找到了待渲染物体的一个包围盒，接下来我们要将该包围盒划分为数个网格（Grid）：</p>
+<p><img src="27.png" width="25%"></p>
+<p>之后我们将所有带有物体表面的网格标记出来：</p>
+<p><img src="28.png" width="25%"></p>
+<p>这样当我们计算光线追踪时，可以先判断光线穿过的网格是否被标记，只有被标记的网格才进行具体的计算：</p>
+<p><img src="29.png" width="25%"></p>
+<p>至于光线穿过的格子如何进行计算，那就是另一个话题了，其实本质上就是光栅化一条线的过程。</p>
+<p>网格的划分数量会影响加速的效果，极端情况下，只有一个网格时，就相当于没有划分，也就没有加速效果；而网格划分过于密集的话，又会因为要判断的网格太多，导致加速效果不明显，甚至起到反作用。</p>
+<p><img src="30.png" width="40%"></p>
+<p>一个普遍的结论是网格数与场景中的物体数相关，在三维情况下理想的数量应该是27倍的物体数，不过还是要具体问题具体分析。</p>
+<p>网格划分有一个问题，那就是适用于那些几何体均匀分布的场景，一旦面临分布不均匀的场景，会出现大量空白网格。</p>
+<h3 id="空间划分"><a href="#空间划分" class="headerlink" title="空间划分"></a>空间划分</h3><p>为了更好地应对几何体分布不均匀的场景，我们还会使用空间划分的方法，以下是几种典型的空间划分数据结构：</p>
+<p><img src="31.png" width="40%"></p>
+<p>图左是八叉树，就是将空间按直角坐标系划分为等大的八块区域，对新的小区域也能进一步进行划分（图中是2维情形，此时应该称为四叉树更恰当），我们可以为其指定一个划分终止条件，例如如果一次划分后的区域内只有一个区域内存在表面，则不进行该次划分，从而减少空白区域的出现。</p>
+<p>图中是KD树，它每次划分也按照直角坐标系方向，但只取一个方向将区域划分为两个部分，不过不要求这两个部分大小一致，一般来说通常会交替使用不同的坐标轴方向来划分，例如图中就是$x$方向和$y$方向交替划分，这样可以保证划分基本上是均匀的。</p>
+<p>图右是BSP树，它在KD树的基础上，允许划分朝任何方向，这带来了极高的划分自由度，但同时也带来了难以计算的难题。</p>
+<p>这里我们就详细介绍一下KD树，正如其名，它用树的形式保存了空间划分的信息，如下所示：</p>
+<p><img src="32.png" width="40%"></p>
+<p>其中的$ABCD$节点表示了几次划分，例如$B$是在$A$划分的右半区域上进行的，因此它就是$A$的右孩子，叶子节点则表示了最终划分完的所有区域，因此，非叶子节点和叶子节点要存储的信息是不同的。</p>
+<p>非叶子节点表达划分，因此要存储的信息包括：</p>
+<ul>
+<li>划分方向</li>
+<li>划分坐标</li>
+<li>孩子指针</li>
+</ul>
+<p>叶子节点要存储的信息有：</p>
+<ul>
+<li>几何体列表</li>
+</ul>
+<p>注意，<strong>非叶子节点中不存储任何几何体信息</strong>。</p>
+<p>KD树对光线追踪的加速，是通过逐个判断光线与划分是否相交来实现的，例如下图中的光线：</p>
+<p><img src="33.png" width="40%"></p>
+<p>我们首先明确一个事实：当光线穿过一个划分时，也必然穿过其划分出的两个区域。</p>
+<p>于是，我们就可以从根节点出发，逐个判断，在这个例子中，我们发现光线穿过了划分$A$，因此，对于$A$的左孩子区域1，我们需要进行进一步的计算；而对于其右孩子划分$B$，我们要再次进行判断：</p>
+<p><img src="34.png" width="40%"></p>
+<p>对于那些没有相交的划分，例如划分$D$，我们就可以不再遍历其子树，如下所示：</p>
+<p><img src="35.png" width="40%"></p>
+<p>从而能只计算那些可能有交点的区域。</p>
+<p>KD树存在下述问题：</p>
+<ul>
+<li>很难判断一个形状是否在一个区域内，也就是划分的位置不好确定</li>
+<li>划分无法保证物体只存在于一个区域内（例如上例中右下角的圆，同时出现在了三个区域中）</li>
+</ul>
+<p>因此KD树的使用也越来越少。</p>
+<h3 id="物体划分——层次包围体"><a href="#物体划分——层次包围体" class="headerlink" title="物体划分——层次包围体"></a>物体划分——层次包围体</h3><p>KD树的问题也是多数空间划分方法的共性问题，物体划分方法则能规避这些问题。</p>
+<p>物体划分从场景中的物体角度出发进行划分，这里介绍其中一种方法——层次包围体（Bounding Volume Hierarchy，简称BVH）。</p>
+<p>BVH也通过树形结构保存信息，这里介绍如何构建一棵BVH树。</p>
+<p><img src="36.png" width="40%"></p>
+<p>如上图中的这个场景，里面分布着许多的三角形，我们将原始的场景作为根节点。</p>
+<p>然后，我们将所有的三角形分为两部分，并求出它们的包围盒，分别作为根节点的左右孩子：</p>
+<p><img src="37.png" width="40%"></p>
+<p>反复重复上述步骤，直到满足实际要求，最终结果如下所示：</p>
+<p><img src="38.png" width="40%"></p>
+<p>关于划分方向和位置的确定，有一个简单的方法：</p>
+<ol>
+<li>每次划分把最长的那一维分割，例如矩形就垂直于长的那条边划分</li>
+<li>位置选取为中间的那个物体，注意这里并不是包围盒中间，而是次序中间</li>
+</ol>
+<p>同样，这里列出BVH树中存储的信息：</p>
+<p>非叶子节点表达划分，不同于KD树，只要保存包围盒信息就可以：</p>
+<ul>
+<li>包围盒</li>
+<li>孩子指针</li>
+</ul>
+<p>叶子节点要存储的信息有：</p>
+<ul>
+<li><p>包围盒</p>
+</li>
+<li><p>几何体列表</p>
+</li>
+</ul>
+<p>至于加速光线追踪的部分，其实和KD树是类似的，也是从根节点出发进行判断，这里给出伪代码：</p>
+<p><img src="39.png" width="40%"></p>
+<p>BHV的优点就在于一个物体只会存在于一个包围盒中，但是各个包围盒之间会出现重叠的现象，但相比于空间划分方法，BHV的实现更为简单，效率也更高，因此得到了广泛的应用。</p>
+<h2 id="基础辐射度量学"><a href="#基础辐射度量学" class="headerlink" title="基础辐射度量学"></a>基础辐射度量学</h2><p>在进一步深入前，为了能更准确地描述光的信息，我们需要一些辐射度量学的知识，这里仅介绍一些基础知识。</p>
+<h3 id="辐射能量与功率（通量）"><a href="#辐射能量与功率（通量）" class="headerlink" title="辐射能量与功率（通量）"></a>辐射能量与功率（通量）</h3><p>辐射的能量通常用符号$Q$表示，单位为焦耳（$J$）。</p>
+<p>功率代表着单位时间内放射、反射、传递等过程中的辐射能量，其定义式为：</p>
+<script type="math/tex; mode=display">
+\Phi=\frac{\mathrm{d}Q}{\mathrm{d}t}</script><p>单位为瓦特（$W$），在照明场景下，还有一个类似的概念称为光通量，其单位为流明（$lm$）。</p>
+<p><img src="40.png" width="25%"></p>
+<p>我们能在上图中看见有关通量的一个形象示例，在单位时间内通过右侧平面的光辐的数量就是光通量。</p>
+<h3 id="重要光照物理量"><a href="#重要光照物理量" class="headerlink" title="重要光照物理量"></a>重要光照物理量</h3><p><img src="41.png" width="35%"></p>
+<p>在了解了基础的能量与通量后，我们就能来关注以上几个重要的物理量，分别是发光强度、辐照度和辐射率，它们对应了上面三个典型的辐射场景。</p>
+<h4 id="Intensity——发光强度"><a href="#Intensity——发光强度" class="headerlink" title="Intensity——发光强度"></a>Intensity——发光强度</h4><p>当有一个在向外放射光线的点时，我们引入发光强度的概念来描述它。</p>
+<p>发光强度被定义为是点光源在单位立体角上放射出的功率，其数学表达式为：</p>
+<script type="math/tex; mode=display">
+I(\omega)=\frac{\mathrm{d}\Phi}{\mathrm{d}\omega}</script><p>其单位为坎德拉，简称坎（cd）。</p>
+<p>立体角的概念类似于角，角的定义是弧长比上半径，而立体角的定义是表面积比上半径，如下所示。</p>
+<p><img src="42.png" width="35%"></p>
+<p>单位立体角的计算如下：</p>
+<p><img src="43.png" width="35%"></p>
+<p>主要思路是先取单位表面积，然后求出单位立体角，其推导过程类似于高数中球坐标系下的三重积分，这里就不再详细深入。</p>
+<p><img src="44.png" width="25%"></p>
+<p>通常我们就用向量$\omega$来代表方向。</p>
+<p>特殊地，对于一个均匀放射光线的光源：</p>
+<p><img src="45.png" width="20%"></p>
+<p>如果我们将发光强度在整个表面上进行积分，那么就应该有：</p>
+<script type="math/tex; mode=display">
+\Phi=\int_{S^2}Id\omega=4\pi I</script><p>从而我们获得：</p>
+<script type="math/tex; mode=display">
+I=\frac{\Phi}{4\pi}</script><p>就能够轻松得到表面上任意点的发光强度。</p>
+<h4 id="Irradiance——辐照度"><a href="#Irradiance——辐照度" class="headerlink" title="Irradiance——辐照度"></a>Irradiance——辐照度</h4><p>辐照度用以描述一个区域吸收光照的情况，它被定义为是物体表面单位面积上所吸收的功率，其定义式为：</p>
+<script type="math/tex; mode=display">
+E(x)=\frac{\mathrm{d}\Phi}{\mathrm{d}A}</script><p>其单位为勒克斯（lx）。</p>
+<p>在Shading一文的Blin-Phong模型部分，我们其实已接触过辐照度的相关性质，我们得出过结论：</p>
+<ul>
+<li>着色点接收到的能量与入射角$\theta$的余弦值成正比。</li>
+<li>某一点接收到的能量，与它到光源距离的平方成反比</li>
+</ul>
+<p>即：</p>
+<script type="math/tex; mode=display">
+I\propto \cos\theta=\vec{n}·\vec{l} \\
+I\propto \frac{1}{r^2}</script><p>当时所说的能量，其实就是这里的辐照度（着色点就是单位面积）。</p>
+<p><img src="46.png" width="40%"></p>
+<p><img src="47.png" width="35%"></p>
+<h4 id="Radiance——辐射率"><a href="#Radiance——辐射率" class="headerlink" title="Radiance——辐射率"></a>Radiance——辐射率</h4><p>当我们要 描述一条光线在传播过程中的属性时，我们引入辐射率的概念。</p>
+<p>辐射率被定义为：指定方向上的单位立体角和垂直此方向的单位面积上的辐射通量。</p>
+<p>其定义式为：</p>
+<script type="math/tex; mode=display">
+L(p,\omega)=\frac{\mathrm{d}^2\Phi(p,\omega)}{\mathrm{d}\omega dAcos\theta}</script><p><img src="48.png" width="35%"></p>
+<p>其单位为尼特（nit）。</p>
+<p>从辐射率定义中的<strong>单位立体角</strong>和<strong>单位面积</strong>出发，我们可以将辐射率从另外两个角度理解：</p>
+<ul>
+<li>辐射率是单位立体角上的辐射度</li>
+<li>辐射率是单位面积上的发光强度</li>
+</ul>
+<h4 id="辐照度与辐射率"><a href="#辐照度与辐射率" class="headerlink" title="辐照度与辐射率"></a>辐照度与辐射率</h4><p>辐照度与辐射率在图形学中的使用非常广泛，我们着重讨论一下它们之间的关系。</p>
+<p>辐照度和辐射率之间的区别在于，辐照度描述一个区域吸收光照的情况，而辐射率描述该区域在<strong>特定方向</strong>上吸收光照的情况。</p>
+<p><img src="49.png" width="30%"></p>
+<p>如上图中，辐照度关注整个半球面吸收的所有光照，而辐射率仅关注$d\omega$方向上的光照，从而我们得出：只要把整个半球面上的辐射率积分，就能获得辐照度。</p>
+<p>即：</p>
+<script type="math/tex; mode=display">
+E(p)=\int_{H^2}L_i(p,\omega)cos\theta \mathrm{d}\omega \\
+dE(p)=L_i(p,\omega)cos\theta \mathrm{d}\omega</script><h2 id="双向反射分布函数——BRDF"><a href="#双向反射分布函数——BRDF" class="headerlink" title="双向反射分布函数——BRDF"></a>双向反射分布函数——BRDF</h2><p>双向反射分布函数（Bidirectional Reflection Distribution Function，简称BRDF）使用了我们提到的辐照度与辐射率之间的关系，是一个非常好的光照模型。</p>
+<p>我们现在来重新审视光的反射，在反射场景下，一束光会被反射到四面八方（漫反射与镜面反射）。</p>
+<p><img src="50.png" width="30%"></p>
+<p>在上图中，假设有一束光从$\omega_i$方向射向区域$dA$，进而发生反射，我们可以将这过程拆分为两步。</p>
+<p>首先，区域吸收入射光线的能量，我们有表达式：</p>
+<script type="math/tex; mode=display">
+dE(\omega_i)=L(\omega_i)cos\theta_i\mathrm{d}\omega_i</script><p>其次，从该区域朝某个特定方向放射出去的能量，我们设为$dL_r(x,\omega_r)$。</p>
+<p>那么我们只需要找到它们之间的比例，就能构建出漫反射的光照模型，具体而言就是找到函数：</p>
+<script type="math/tex; mode=display">
+f_r(\omega_i \rightarrow \omega_r)=\frac{dL_r(x,\omega_r)}{dE(\omega_i)}=\frac{dL_r(x,\omega_r)}{L(\omega_i)cos\theta_id\omega_i}</script><p>经过变形，我们可以获得：</p>
+<script type="math/tex; mode=display">
+L_r(x,\omega_r)=\int_{H^2}f_r(\omega_i \rightarrow \omega_r)L(\omega_i)cos\theta_i\mathrm{d}\omega_i</script><p>这个表达式告诉了我们，只要将所有入射光的能量全部加起来，就能获得某个出射方向上的总能量。</p>
+<p>不难发现，这个表达式的计算是递归的，因为等式左边的结果是辐射率，而其计算所需的也是辐射率，这和真实光照环境有着良好的对应关系：对于一个物体，照亮它的不仅是光源直射的光，还有其它物体反射的光。</p>
+<p>在这个表达式中，我们可以计算出物体的反射辐射率，并用该辐射率递归地参与其它物体的计算。</p>
+<p>该方程只描述了反射场景，而某些物体除了反射光线外，自身也会发出光线，于是我们为该式加上一个自发光项：</p>
+<script type="math/tex; mode=display">
+L_r(x,\omega_r)=L_e(x,\omega_r)+\int_{H^2}f_r(\omega_i \rightarrow \omega_r)L(\omega_i)cos\theta_i\mathrm{d}\omega_i</script><p>这个方程称为<strong>渲染方程</strong>。</p>
+<p><img src="51.png" width="40%"></p>
+<p>在渲染方程中，有些部分我们是已知的，包括自发光项、BRDF和余弦值，需要计算的其实只有两端的辐射率。</p>
+<p>从而我们能将其简写为：</p>
+<p><img src="52.png" width="40%"></p>
+<p>如果我们再引入算子，我们可以更进一步简写该式：</p>
+<p><img src="53.png" width="20%"></p>
+<p>解该方程，我们获得：</p>
+<script type="math/tex; mode=display">
+L=(I-K)^{-1}E=(I+K+K^2+...)E=E+KE+KE^2+...</script><p>这个式子实际上是按照反射次数对光线进行分解，如下所示：</p>
+<p><img src="54.png" width="40%"></p>
+<p>我们之前提到的的光栅化可以很快地计算前两项（也就是自发光和直射光），但难以涉及到后面几项。</p>
+<h2 id="蒙特卡洛积分"><a href="#蒙特卡洛积分" class="headerlink" title="蒙特卡洛积分"></a>蒙特卡洛积分</h2><p>计算光照的过程中，我们会有很多的积分计算，但不是所有的积分都能够直接计算，所以我们介绍蒙特卡洛积分法。</p>
+<p>（这里我们只讨论定积分）</p>
+<p>对于一般的积分问题，被积函数可能较为复杂，难以直接写出其定积分公式，如下所示：</p>
+<p><img src="55.png" width="40%"></p>
+<p>传统的黎曼积分利用$dx$对应的矩形面积来计算，而蒙特卡洛积分则基于随机采样来进行计算。</p>
+<p>具体而言，假设我们现在要求的积分为：</p>
+<script type="math/tex; mode=display">
+\int^b_a{f(x)}\mathrm{d}x</script><p>我们可以任取一种分布的随机变量（分布在积分域间）：</p>
+<script type="math/tex; mode=display">
+X_i \sim p(x)</script><p>用该变量对$f(x)$进行采样，可获得定积分的近似值：</p>
+<script type="math/tex; mode=display">
+F_N=\frac{1}{N}\sum_{i=1}^{N}\frac{f(X_i)}{p(X_i)}</script><p>其中$N$为采样次数，一般而言，采样次数越多，结果会越精确。</p>
+<p>更具体的理论知识这里就不展开了，这里只简单介绍该方法。</p>
+<h2 id="Path-Tracing——路径追踪"><a href="#Path-Tracing——路径追踪" class="headerlink" title="Path Tracing——路径追踪"></a>Path Tracing——路径追踪</h2><p>之前我们介绍过递归光追算法，它其实存在一些问题。</p>
+<p>主要的问题在反射上，该算法只考虑了镜面反射的情形，而忽略了漫反射情形，在面对下面两种材质时：</p>
+<p><img src="56.png" width="40%"></p>
+<p>递归光追可以计算左侧茶壶的光照，但右边的就不行。</p>
+<p>引申出来的另一个问题就是会丢失漫反射物体之间相互反射的光线，如下图中：</p>
+<p><img src="57.png" width="40%"></p>
+<p>由于只考虑直接光照，递归光追算法会计算出很多暗区（左图的天花板等），而事实上，经过多次漫反射后，这些暗区其实是能够被点亮的（右图）。</p>
+<p>更细节的地方是，这些暗区不仅是是否点亮的问题，可以看见右图中的两个长方体，都被照上了墙壁的颜色，而连照亮都没法考虑到的递归算法，自然也没法计算这部分着色。</p>
+<p>为了解决这些问题，我们引入路径追踪算法，该算法基于渲染方程，这里我们再写一遍渲染方程：</p>
+<script type="math/tex; mode=display">
+L_r(p,\omega_o)=L_e(p,\omega_o)+\int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)(n·\omega_i)\mathrm{d}\omega_i</script><p>现在我们介绍如何解该渲染方程。</p>
+<p>这里我们先忽略自发光项，仅考虑反射项，即只计算：</p>
+<script type="math/tex; mode=display">
+L_0(p,\omega_o)=\int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)(n·\omega_i)\mathrm{d}\omega_i</script><p><img src="58.png" width="25%"></p>
+<p>这是一个积分域为半球面的积分，我们使用蒙特卡洛积分来计算。</p>
+<p>这里我们的被积函数为：</p>
+<script type="math/tex; mode=display">
+L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)(n·\omega_i)</script><p>采样的概率密度函数（PDF）有很多种取法，最简单的一种取法为均匀采样：</p>
+<script type="math/tex; mode=display">
+f(\omega_i)=\frac{1}{2\pi}</script><p>从而依据蒙特卡洛积分法，我们有：</p>
+<script type="math/tex; mode=display">
+L_0(p,\omega_o)\approx \frac{1}{N}\sum_{i=1}^{N}\frac{L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)(n·\omega_i)}{f(\omega_i)}</script><p>这个形式就可以用计算机来进行计算了，我们只需要多取几个入射方向$\omega _i$然后将结果求和就可以，其伪代码形式为：</p>
+<pre class="line-numbers language-none"><code class="language-none">shade(p, wo)
+	Randomly choose N directions wi~pdf
+	Lo = 0.0
+	For each wi
+	\\ 对于每个入射方向
+		Trace a ray r(p, wi)
+		\\ 向该方向放出射线
+		If ray r hit the light
+		\\ 如果射线触碰到光源
+			Lo += (1 / N) * L_i * f_r * cosine / pdf(wi)
+			\\ 积分累加
+	Return Lo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>接下来我们需要完善另一种情形，就是入射光是由其它物体反射过来的，如下图所示：</p>
+<p><img src="59.png" width="50%"></p>
+<p>这种情况其实相当于我们从$P$点观测$Q$点，因此我们可以递归地计算，伪代码修改起来很简单，只要在入射方向中增加一个判断：</p>
+<pre class="line-numbers language-none"><code class="language-none">shade(p, wo)
+	Randomly choose N directions wi~pdf
+	Lo = 0.0
+	For each wi
+	// 对于每个入射方向
+		Trace a ray r(p, wi)
+		// 向该方向放出射线
+		If ray r hit the light
+		// 如果射线触碰到光源
+			Lo += (1 / N) * L_i * f_r * cosine / pdf(wi)
+			// 积分累加
+       Else If ray r hit an object at q
+       // 如果射线触碰到其它物体
+			Lo += (1 / N) * shade(q, -wi) * f_r * cosine / pdf(wi)
+			// 递归计算
+	Return Lo<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是，该方法仍然存在一些问题。</p>
+<p>第一个问题，光线的数量会随着反射次数的增加指数级增长。</p>
+<p><img src="60.png" width="50%"></p>
+<p>例如上图，假设我们每个反射采样100次，那么三次反射后，采样数会变为1000000，这还仅是一个初始反射点。</p>
+<p>为了避免这种问题，我们将采样次数限定为1次（1的任何次幂都是1），从而伪代码修改为：</p>
+<pre class="line-numbers language-none"><code class="language-none">shade(p, wo)
+	Randomly choose ONE directions wi~pdf
+	// 只选择一个方向
+	Lo = 0.0
+   Trace a ray r(p, wi)
+   // 向该方向放出射线
+   If ray r hit the light
+   // 如果射线触碰到光源
+       Return L_i * f_r * cosine / pdf(wi)
+       // 直接计算
+   Else If ray r hit an object at q
+   // 如果射线触碰到其它物体
+       Return* shade(q, -wi) * f_r * cosine / pdf(wi)
+       // 递归计算<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>这种只有1次采样的方法，就是我们所说的路径追踪。</p>
+<p>（因为这相当于只有一条射线在反射，故称为路径）</p>
+<p>不过大家很容易就会想到，这样的结果肯定会非常不准确，那这又该如何解决？</p>
+<p>很简单，虽然我们的反射退化为路径，但我们可以计算多条路径，如下图：</p>
+<p><img src="61.png" width="40%"></p>
+<p>由于像素存在大小，因此对于每个像素，我们可以引出很多条路径，只要路径数目足够，我们就能消除退化带来的不准确。</p>
+<p>（事实上，即使像素是一个点，我们也可以在同一个方向上计算多次路径）</p>
+<p>这个过程的伪代码为：</p>
+<pre class="line-numbers language-none"><code class="language-none">ray_generation(camPos, pixel)
+	Uniformly choose N sample positions within the pixel
+	// 在一个像素上选择多个采样方向
+	pixel_radiance = 0.0
+	For each sample in the pixel
+	// 对于每个方向
+		Shoot a ray r(camPos, cam_to_sample)
+		// 向该方向放出射线
+		If ray r hit the scene at p
+		// 如果射线触碰到物体
+			pixel_radiance += 1 / N * shade(p, sample_to_cam)
+			// 累加计算
+	Return pixel_radiance<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>第二个问题就是shading函数的中止条件，在该函数中，我们还没有设置递归的出口，如果有射线进行了无限（足够多）次反射，同样会引发计算问题。</p>
+<p>我们不能简单地使用反射次数来判断中止，因为截断反射意味着截断能量，导致光照失真。</p>
+<p>我们有一个3次反射截断的渲染场景：</p>
+<p><img src="62.png" width="40%"></p>
+<p>相同的场景，我们如果在17次截断，效果是这样的：</p>
+<p><img src="63.png" width="40%"></p>
+<p>不难发现，上方的灯盒左侧墙壁都变得更加真实，而我们其实还不知道，17次反射是否已经足够。</p>
+<p>解决的方案是使用俄罗斯轮盘赌（Russian Roulette，简称PR）。</p>
+<p>简单来说就是限制一个概率$P$，对于每次shading函数，我们增加一个判断：</p>
+<ul>
+<li>在$P$的概率下，我们返回$L_o/P$</li>
+<li>在$1-P$的概率下，我们返回0</li>
+</ul>
+<p>这么做可以让函数在某个递归时结束计算的同时，保证期望仍然准确，因为其期望为：</p>
+<script type="math/tex; mode=display">
+E=P*(L_o/P)+(1-P)*0=L_o</script><p>我们只需要在原先的伪代码前加上一段，并在结果上除以对应的概率即可：</p>
+<pre class="line-numbers language-none"><code class="language-none">shade(p, wo)
+    Manually specify a probability P_RR
+    // 定义概率
+    Randomly select ksi in a uniform dist. in [0, 1]
+    If (ksi &gt; P_RR) return 0.0;
+    // 概率截断
+    
+    Randomly choose ONE direction wi~pdf(w)
+    Trace a ray r(p, wi)
+   // 向该方向放出射线
+   If ray r hit the light
+   // 如果射线触碰到光源
+       Return L_i * f_r * cosine / pdf(wi) / P_RR
+       // 直接计算（除以概率）
+   Else If ray r hit an object at q
+   // 如果射线触碰到其它物体
+       Return* shade(q, -wi) * f_r * cosine / pdf(wi) / P_RR
+       // 递归计算（除以概率）<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>到此，我们就获得了一个完全正确的路径追踪算法。</p>
+<p>不过它仍旧不够高效，我们看下图中的对比：</p>
+<p><img src="64.png" width="50%"></p>
+<p>左图是单个像素引出路径较少时的情形，可以看见噪点非常多，只有当路径数很多时，才能有右图这样的效果。</p>
+<p>这是因为每条路径是否能够触碰到光源是一个比较“随缘”的过程，如下图：</p>
+<p><img src="65.png" width="40%"></p>
+<p>对于光源比较大的情形（左图），我们可能几条路径都能触碰到光源，从而计算较快，但如果光源比较小（右图），那就可能在放出很多条路径的情况下也没几条能够触碰到光源，从而进行无效计算。</p>
+<p> 因此如果我们能只采样光源，那么就可以避免这些无效的计算。</p>
+<p>我们假设现在是这样一个场景：</p>
+<p><img src="66.png" width="30%"></p>
+<p>假设光源面积为$A$，由于我们的目标是采样光源，那么PDF应该是：</p>
+<script type="math/tex; mode=display">
+pdf=1/A</script><p>不过在渲染方中，我们的积分项是$d \omega$，因此我们知道它们之间的关系，这个关系其实并不难计算：</p>
+<script type="math/tex; mode=display">
+d \omega = \frac{dA \cos{\theta'}}{||x'-x||^2}</script><p>简单来说就是先计算$dA$在$d \omega$上的投影，然后利用相似缩放的性质获得结果。</p>
+<p>（微分弧面近似于微分平面）</p>
+<p>从而渲染方程改写为：</p>
+<script type="math/tex; mode=display">
+L_0(p,\omega_o)=\int_{\Omega^+}L_i(p,\omega_i)f_r(p,\omega_i,\omega_o)\frac{\cos{\theta} \cos{\theta'}}{||x'-x||^2}dA</script><p>从而我们将光照拆分为两个部分：</p>
+<p><img src="67.png" width="40%"></p>
+<p>蓝色的是直接光照部分，使用改写的渲染方程；橙色的是其它光照部分，使用原始渲染方程。</p>
+<p>同时我们考虑下遮挡的情况：</p>
+<p><img src="68.png" width="30%"></p>
+<p>于是，我们修改伪代码为：</p>
+<pre class="line-numbers language-none"><code class="language-none">shade(p, wo)
+    # 直接光照部分
+    Uniformly sample the light at x’ (pdf_light = 1 / A)
+    Shoot a ray from p to x’
+    If the ray is not blocked in the middle
+    	L_dir = L_i * f_r * cos θ * cos θ’ / |x’ - p|^2 / pdf_light 
+    
+    # 其它反射部分
+    L_indir = 0.0
+    Test Russian Roulette with probability P_RR
+    Uniformly sample the hemisphere toward wi (pdf_hemi = 1 / 2pi)
+    Trace a ray r(p, wi)
+    If ray r hit a non-emitting object at q
+    	L_indir = shade(q, -wi) * f_r * cos θ / pdf_hemi / P_RR
+    
+    Return L_dir + L_indir<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但对于路径追踪来说，点光源非常难处理，这里就不介绍了。</p>
+<p>至此，光线追踪章节正式结束，这应该是本系列最长的的一篇文章，笔者在撰写时也受益良多，学无止境啊。</p>
+<p>好的，那我们下篇文章见。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">PotatoMonster</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/">http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">PotatoMonster</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
+                                </a>
+                            
+                                <a href="/tags/GAMES101/">
+                                    <span class="chip bg-color">GAMES101</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢老爷~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/04/21/diffusion-model-ru-men/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/2.jpg" class="responsive-img" alt="Diffusion Model入门">
+                        
+                        <span class="card-title">Diffusion Model入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            超简单的扩散模型介绍
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（四）——Geometry">
+                        
+                        <span class="card-title">GAMES101课程笔记（四）——Geometry</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我仍要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-01-16
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GAMES101/">
+                        <span class="chip bg-color">GAMES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2024</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">PotatoMonster</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugePotatoMonster" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

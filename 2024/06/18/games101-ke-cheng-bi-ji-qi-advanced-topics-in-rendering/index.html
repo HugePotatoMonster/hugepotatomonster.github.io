@@ -1,0 +1,1266 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMES101课程笔记（七）——Advanced Topics in Rendering, PotatoMonster">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMES101课程笔记（七）——Advanced Topics in Rendering | PotatoMonster</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="PotatoMonster" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">土豆大魔王</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">PotatoMonster</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HugePotatoMonster" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Here Here!
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        // color: #0f9d58;
+        color: #1a1a1a;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HugePotatoMonster" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Here Here!" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMES101课程笔记（七）——Advanced Topics in Rendering</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
+                            </a>
+                        
+                            <a href="/tags/GAMES101/">
+                                <span class="chip bg-color">GAMES101</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-06-18
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="GAMES101课程笔记（七）——Advanced-Topics-in-Rendering"><a href="#GAMES101课程笔记（七）——Advanced-Topics-in-Rendering" class="headerlink" title="GAMES101课程笔记（七）——Advanced Topics in Rendering"></a>GAMES101课程笔记（七）——Advanced Topics in Rendering</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>OK，这篇博客我们来介绍一些高级内容，课程PPT上的标题为“高级光线传播与复杂外观建模”。虽然听上去很难，但其实课程涉及到的部分都没有很深入的介绍，毕竟GAMES101还是属于入门级的课程，因此笔者认为这部分还是偏科普性的，相较于前面的部分（说的就是你，光线追踪），还是简单不少。</p>
+<p>不过也因如此，本文大多数的内容都是纯文字，与之前的风格相比还是有点区别的。</p>
+<p>随着博客的更新，这个系列也开始进入进入倒计时了，不管怎么样，希望自己的这些小小努力能够起到一些作用。</p>
+<p>前文指路：</p>
+<p><a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">GAMES101课程笔记（一）——Transformation</a></p>
+<p><a href="/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">GAMES101课程笔记（二）——Rasterization</a></p>
+<p><a href="/2023/11/13/games101-ke-cheng-bi-ji-san-shading/">GAMES101课程笔记（三）——Shading</a></p>
+<p><a href="/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/">GAMES101课程笔记（四）——Geometry</a></p>
+<p><a href="">GAMES101课程笔记（五）——Ray Tracing</a></p>
+<p><a href="">GAMES101课程笔记（六）——Materials and Appearances</a></p>
+<h2 id="高级光线传播"><a href="#高级光线传播" class="headerlink" title="高级光线传播"></a>高级光线传播</h2><h3 id="无偏-vs-有偏"><a href="#无偏-vs-有偏" class="headerlink" title="无偏 vs. 有偏"></a>无偏 vs. 有偏</h3><p>在计算光照的时候，我们经常使用蒙特卡洛积分法，而具体实施的蒙特卡洛积分法又可以分为无偏和有偏两种。</p>
+<p>无偏，即指使用蒙特卡洛积分法时，结果的期望和实际值永远是一致的；相应地，其他的方法就被归类于有偏的。</p>
+<p>值得一提的是，有偏中有一种特殊情况，就是在有限的样本下，得不到期望的结果，但在样本无穷多时，却又能达到正确的结果，这种方法被特殊地归类于<strong>一致</strong>的，不过它的本质还是一种无偏方法。</p>
+<p>接下来，我们将分别去看看，哪些光线传播算法是无偏的，哪些是有偏的。</p>
+<h3 id="无偏光线传播算法"><a href="#无偏光线传播算法" class="headerlink" title="无偏光线传播算法"></a>无偏光线传播算法</h3><h4 id="Bidirectional-Path-Tracing——双向路径追踪"><a href="#Bidirectional-Path-Tracing——双向路径追踪" class="headerlink" title="Bidirectional Path Tracing——双向路径追踪"></a>Bidirectional Path Tracing——双向路径追踪</h4><p>双向路径追踪（BDPT），顾名思义，是从两个方向开始生成路径。</p>
+<p>在光线追踪一文中，我们介绍过路径追踪算法，当时，我们是从相机出发，寻找一条从相机到光源到光源的路径。而BDPT同时从光源和相机向外寻找路径，这种路径被称为半路径（下图中的实向量），然后将半路径的终点相连（下图中的虚线），就获得了一条路径。</p>
+<p><img src="1.png" width="50%"></p>
+<p>BDPT有其独特的优势，例如下图这个场景中，BDPT（右图）的效果远比路径追踪（左图）要好：</p>
+<p><img src="2.png" width="50%"></p>
+<p>在这个场景中，主要的光源集中在左上角的角落里，整个房间基本都是被间接光照亮的。</p>
+<p>回忆光线追踪的过程，我们的第一次反射大概率是在漫反射表面上，光线很难被选择反射到光源处，所以使用路径追踪时，想要找到一条带有大量能量的路径是比较困难的。</p>
+<p>而BDPT同时从光源引出半路径，因此漫反射的总会落到光源处，从而达到更好的效果。</p>
+<p>但BDPT的缺点也非常明显，就是太难实现了（别看原理简单，真的很难），速度也非常慢</p>
+<h4 id="Metropolis-Light-Transport——MLT"><a href="#Metropolis-Light-Transport——MLT" class="headerlink" title="Metropolis Light Transport——MLT"></a>Metropolis Light Transport——MLT</h4><p>这个算法是以Metropolis这个人的名字命名的，总之我们就直接称呼其简称MLT了，它同样是一种无偏算法。</p>
+<p>MLT使用的原理是马尔科夫链，有过机器学习背景的读者应该会比较了解。马尔科夫链能够从当前样本，生成一个靠近的下一个样本，这与一般算法中的均匀选取或者随机选取有很大的差异。</p>
+<p>蒙特卡洛方法中，我们可以用任意PDF来对目标函数进行积分，但各种PDF其实也有优劣之分，其中效果最好的的PDF其实是和目标函数形状一致时的PDF。而MLT引入马尔科夫链后，能够以任意形状的PDF来进行采样，这意味着它可以用更好的PDF来进行采样。</p>
+<p><img src="3.png" width="50%"></p>
+<p>上图反映了MLT的特点，即非常擅长局部探索困难的光路。MLT的主要思想就是在已有的光路（图中蓝线）上，增添一个扰动，从而形成一条新的光路（图中橙线），以此类推，找到所有的光路。</p>
+<p><img src="4.png" width="50%"></p>
+<p>上图中可以看出，在更复杂的场景下，MLT会有更好的表现。因为MLT只需要一条正确的光路作为种子，就可以源源不断地形成新光路。</p>
+<p><img src="5.png" width="50%"></p>
+<p>MLT的缺点在于难以估计其收敛的时间，而且由于其局部特性，从每个种子向外扩散，因此收敛不一定均匀，一定程度上会导致画面变”脏“（上图），所以MLT通常不会被用来渲染动画。</p>
+<p>（因为帧与帧之间不均匀的收敛会产生明显的“抖动”）</p>
+<h3 id="有偏光线传播算法"><a href="#有偏光线传播算法" class="headerlink" title="有偏光线传播算法"></a>有偏光线传播算法</h3><h4 id="Photon-Mapping——光子映射"><a href="#Photon-Mapping——光子映射" class="headerlink" title="Photon Mapping——光子映射"></a>Photon Mapping——光子映射</h4><p>光子映射是一种有偏的二阶段光线传播算法，非常适用于渲染含有caustics的场景：</p>
+<p>（caustics在上一篇文章中有详细介绍）</p>
+<p><img src="6.png" width="50%"></p>
+<p>接下来我们介绍光子映射算法的两个阶段，这里只介绍光子映射的一种方法。</p>
+<p>首先来看第一阶段，在这个阶段，我们从光源出发，向外射出光子，正常进行反射和折射。不过一旦接触到Diffuse表面，我们就记录这个位置，认为该地方留下了一颗光子，如下图所示：</p>
+<p><img src="7.png" width="40%"></p>
+<p>第二阶段，我们从相机出发，生成半路径，同样也是正常进行反射和折射，直到接触到Diffuse表面。</p>
+<p>下图是光子映射的最后一步——局部密度估计，这一步的主要思路是：带有越多光子的地方，应该会更亮。</p>
+<p><img src="8.png" width="50%"></p>
+<p>具体来说，对于第二步我们找到的接触点，去找到离它最近的N个光子，这N个光子会占据一个区域（上图阴影部分），光子数量除以该区域的面积，就获得了该处的密度。</p>
+<p><img src="9.png" width="25%"></p>
+<p>显而易见的是，N的取值会大大影响最后的渲染效果，如果N的取值较小，会导致更多的噪声；反之若N取值过大，会导致模糊。</p>
+<p>到这里其实就可以解释为什么光子映射是一种有偏算法，因为我们实质上是用了$\Delta N/\Delta A$来代替了$\mathrm{d}N/\mathrm{d}A$。</p>
+<p>如果打出的光子够多，在场景中的密度更高，那么N个光子占据的面积就越小，从而$\Delta N/\Delta A$更逼近$\mathrm{d}N/\mathrm{d}A$，效果也就越真实。理论上说，只要光子是无限的，那么它就能呈现真实效果，所以说光子映射是一致的。</p>
+<h4 id="Vertex-Connection-and-Merging"><a href="#Vertex-Connection-and-Merging" class="headerlink" title="Vertex Connection and Merging"></a>Vertex Connection and Merging</h4><p>这个方法直译为顶点连接与合并，简称为VCM，是一种将BDPT和光子映射结合起来的方法。</p>
+<p><img src="10.png" width="50%"></p>
+<p>上图给出了这个方法的大致示意图，上面那张表示BDPT的过程，在BDPT中，我们先生成半路径，再寻找连接点。</p>
+<p>但BDPT连接时，实际上是将漫反射的光路给定向化了，假如出现了下面那张的情形，即两个半路径的终点几乎在同一个局部区域中时，那就不可能产生从$x^*_2$到$x_2$的漫反射，这两条半路径就相当于“作废“了。</p>
+<p>而在VCM中，下图这种情况发生时，会将这个局部区域用光子映射的方式结合在一起。</p>
+<p>VCM的实施有很多细节和困难，这里也是只介绍其大致思路。</p>
+<h3 id="Instant-Radiosity——实时辐射度"><a href="#Instant-Radiosity——实时辐射度" class="headerlink" title="Instant Radiosity——实时辐射度"></a>Instant Radiosity——实时辐射度</h3><p>接下来介绍另一种算法——实时辐射度算法（IR），它的主要思路是这样的：如果某个表面已经被照亮了，那我们可以认为它们是光源，用它们来照亮其它物体。</p>
+<p><img src="11.png" width="50%"></p>
+<p>不难发现，这和“双向”的思路其实也是相通的。</p>
+<p>IR算法能够快速高质量地生成漫反射表面的光照，但也存在缺点，比如下图：</p>
+<p><img src="12.png" width="30%"></p>
+<p>可以看见在边缘相接处出现了很多奇怪的亮点，这主要是因为该方法对面积采样，而不是对立体角采样，而且该算法也不适用于镜面。</p>
+<h2 id="高级外观建模"><a href="#高级外观建模" class="headerlink" title="高级外观建模"></a>高级外观建模</h2><p>我们之前提到过，外观=材质=BRDF，但事实上远不止此，在这里，我们介绍一些其他的外观建模方法。</p>
+<p>PS：这部分内容都比较偏向介绍，没有深入具体的细节。</p>
+<h3 id="非表面模型"><a href="#非表面模型" class="headerlink" title="非表面模型"></a>非表面模型</h3><h4 id="Participating-Media——散射介质"><a href="#Participating-Media——散射介质" class="headerlink" title="Participating Media——散射介质"></a>Participating Media——散射介质</h4><p>散射介质指那些定义在空间中而非表面上的材质，例如云和雾这类材质。</p>
+<p><img src="13.png" width="40%"></p>
+<p>当光线穿过散射介质时，会发生以下几种情形：</p>
+<p><img src="14.png" width="60%"></p>
+<p>总的来说，其实就是吸收光线和放出光线，有些光线在穿过介质后被散射，有些光线穿过介质后被并入观测路径。</p>
+<p>这里散射可就不是像漫反射一样的均匀散射了，为了定义该散射，引入了<strong>Phase Function（相位函数）</strong>来描述它，如下：</p>
+<p><img src="15.png" width="60%"></p>
+<p>这里就规定了三种相位函数，对应三种散射情形。</p>
+<p>当渲染散射介质时，就和在物体表面应用BRDF差不多，只是将物体表面的反射替换为散射介质的散射，如下图所示：</p>
+<p><img src="16.png" width="60%"></p>
+<p>可以看见在示例的内部，我们同样生成路径，然后计算光照。</p>
+<h4 id="Hair-Appearance——头发材质"><a href="#Hair-Appearance——头发材质" class="headerlink" title="Hair Appearance——头发材质"></a>Hair Appearance——头发材质</h4><p>现在来看另一种材质——头发，相较于我们之前讨论的“面”反射，头发材质关注光线和“线”之间的关系。</p>
+<p><img src="17.png" width="40%"></p>
+<p>我们可以看到，当光线照射到头发上时，同时产生了无色和有色的高光，为了分析原因，我们介绍Kajiya-Kay Model，这是自研究头发开始，人们就广泛使用的一种模型：</p>
+<p><img src="18.png" width="40%"></p>
+<p>图中的圆柱就是头发，我们认为光线照射到头发后，会在一个圆锥范围内进行散射，同时又有一部分光线朝四面八方散射（图中橘色部分），这部分类似漫反射。不过这个模型和真实的情况还是有出入的，下面是该模型的渲染效果：</p>
+<p><img src="19.png" width="40%"></p>
+<p>现在被广泛应用的模型是Marschner Model，如下所示：</p>
+<p><img src="20.png" width="40%"></p>
+<p>该模型中，光线会考虑TT和TRT两种情形，前者指的是光线进入头发，产生一次折射（T），再从头发传出，产生第二次折射（T）；后者指的是光线进入头发，产生折射（T），触碰到对侧头发壁厚，发生反射（R），最后再折射出去（T）。</p>
+<p>下图是一个更详细的示意：</p>
+<p><img src="21.png" width="40%"></p>
+<p>该模型的渲染结果就非常好：</p>
+<p><img src="22.png" width="40%"></p>
+<h4 id="Fur-Appearance——毛发材质"><a href="#Fur-Appearance——毛发材质" class="headerlink" title="Fur Appearance——毛发材质"></a>Fur Appearance——毛发材质</h4><p>我们刚才讨论了有关头发的渲染问题，那么动物的毛发是否能用相同的方式渲染？</p>
+<p>很可惜，答案是不可以，如下图所示，直接在动物毛发上应用Marschner Model的效果并不好：</p>
+<p><img src="23.png" width="50%"></p>
+<p>人的头发和动物的毛发在结构上是相似的，它们都包含有Cortex、Medulla和Cuticle三部分。</p>
+<p><img src="24.png" width="50%"></p>
+<p>但区别在于，头发中Medulla非常纤细，而毛发中的Medulla则要粗很多，这意味着光线在毛发中更容易发生散射。</p>
+<p>之前的Marschner Model还没有考虑到这个问题，通过引入Medulla，毛发的渲染会更加真实：</p>
+<p><img src="25.png" width="50%"></p>
+<p>即使是对于头发，Medulla的引入也使得效果更加逼真：</p>
+<p><img src="26.png" width="50%"></p>
+<p>这种改进后的模型就是Double Cylinder Model（双重圆柱模型），如下所示：</p>
+<p><img src="27.png" width="50%"></p>
+<p>在该模型中，除了TT和TRT，还考虑了穿过medulla时的情况，也就是下图中的TTs和TRTs</p>
+<p><img src="28.png" width="50%"></p>
+<p>从而最终的结果由这五种情况叠加产生：</p>
+<p><img src="29.png" width="50%"></p>
+<p>（这个模型就是闫老师提出的）</p>
+<h4 id="Granular-Material——颗粒材质"><a href="#Granular-Material——颗粒材质" class="headerlink" title="Granular Material——颗粒材质"></a>Granular Material——颗粒材质</h4><p>这里我们要研究的是由一堆颗粒堆积而成的材质，下图展示了很多颗粒材质，包括盐、米、面粉等等。</p>
+<p><img src="30.png" width="50%"></p>
+<p>这种材质还是非常难做的，一种思路是将模型想象为几种颗粒按一定比例的构成进行渲染：</p>
+<p><img src="31.png" width="50%"></p>
+<p>只是即使这样，也很难保证渲染的效率，这里也就不详细说了。</p>
+<h3 id="表面模型"><a href="#表面模型" class="headerlink" title="表面模型"></a>表面模型</h3><h4 id="Translucent-Material——透射材质"><a href="#Translucent-Material——透射材质" class="headerlink" title="Translucent Material——透射材质"></a>Translucent Material——透射材质</h4><p>很多时候我们会混淆透射材质和半透明材质的概念，它们实际上是不同的，透射材质中光线会在物体内部产生散射，再向外出射，而半透明材质一般没有散射这一环节。</p>
+<p>透射材质中的一个代表性材质就是玉石：</p>
+<p><img src="32.png" width="40%"></p>
+<p>这里牵涉到的物理模型是次表面散射模型，描述的就是刚才我们提到的过程：</p>
+<p><img src="33.png" width="40%"></p>
+<p>次表面散射模型使用BSSRDF（Bidirectional Subsurface Scattering Reflection Distribution Function）来进行描述，这其实是对BRDF的扩展。BRDF中，我们只考虑方向，因为我们默认入射点和出射点是一致的，而在BSSRDF中，还要考虑出射点的位置：</p>
+<p><img src="34.png" width="70%"></p>
+<p>所以计算光照时，不仅要对方向进行积分，还要对面积进行积分。</p>
+<p>不过这种方法的计算量很大，我们可以用两个光源来模拟次表面散射：</p>
+<p><img src="35.png" width="50%"></p>
+<p>至于为什么可以这么替代，我们就不详细展开了，总之这么做的效果是非常好的：</p>
+<p><img src="36.png" width="50%"></p>
+<h4 id="Cloth——布料"><a href="#Cloth——布料" class="headerlink" title="Cloth——布料"></a>Cloth——布料</h4><p>接下来我们来看布料，为了知道如何渲染布料，我们得先知道布料是如何构成的，布料的构成可以分为下面两个层级：</p>
+<p><img src="37.png" width="50%"></p>
+<p>具体而言，就是Fiber（也就是最基础的纤维，例如羊毛）首先被缠绕成Ply（中文翻译应该是股？），然后Ply再被缠绕为Yarn，也就是一般我们所说的线。这些线经过编织，形成了我们看到的各色衣物：</p>
+<p><img src="38.png" width="50%"></p>
+<p>不难想象，计算这样复杂的布料肯定是很困难的。首先可以确定的是，最后的渲染结果肯定与编织的方式有关，因此可以根据编织的方式定义BRDF：</p>
+<p><img src="39.png" width="30%"></p>
+<p>不过这么做并不全面，因为不是所有布料的表面都是这种偏平整的表面，一些织物的表面的线会呈现出向外的特征，这时还使用BRDF就不太合适了。</p>
+<p><img src="40.png" width="50%"></p>
+<p>一种解决办法是把布料当做散射介质，假想对象由无数个小单元组成，每个单元用散射介质的方式来进行渲染，这种方式虽然结果准确，但计算量极大：</p>
+<p><img src="41.png" width="50%"></p>
+<p>另一种办法是逐Fiber进行渲染，缺点和刚才这一种是一致的，不过这么计算从理论上更加贴合实际的结果：</p>
+<p><img src="42.png" width="50%"></p>
+<p>布料解算到现在都还是一个很重要的课题，也一直是渲染的难点。</p>
+<h4 id="Detailed-Appearance——细节外观"><a href="#Detailed-Appearance——细节外观" class="headerlink" title="Detailed Appearance——细节外观"></a>Detailed Appearance——细节外观</h4><p>我们已经聊了很多渲染理论和方法，但我们实际上手时，渲染出的图片却总感觉不真实：</p>
+<p><img src="43.png" width="50%"></p>
+<p>最大的原因其实还是渲染的结果太“真实”了，现实中根本不可能存在这么完美的赛车和鼠标，表面完全光滑，没有一丝划痕。</p>
+<p>在实际生活中，它们大都是长这样的：</p>
+<p><img src="44.png" width="50%"></p>
+<p>之前我们提到过微表面模型的概念，这里重新贴一下该模型的示意图：</p>
+<p><img src="45.png" width="40%"></p>
+<p>为了获得表面细节，我们可以在NDF上做出修改，如下所示：</p>
+<p><img src="46.png" width="50%"></p>
+<p>一般我们统计获得的理想模型都是如上图左这样的，不过实际的NDF可能就更接近右边这种。</p>
+<p>通过这种方式，我们可以为渲染对象增添不少的细节：</p>
+<p><img src="47.png" width="35%"></p>
+<p>上图使用了200K*200K的法线贴图进行渲染，在蜗牛壳上出现了非常好的效果。</p>
+<p>不过还是那个老问题——太慢了，光是这张图的渲染就要耗费大概20天的时间。这里计算慢的原因主要是使用微表面模型后，表面上的镜面微元太多了，从相机引出的射线少有能反射到光源上的（反之亦然）：</p>
+<p><img src="48.png" width="50%"></p>
+<p>一种解决方案是不逐个计算镜面微元，而是把穿过单个像素的光线，视为照射到一个区域上，用该区域来计算反射：</p>
+<p><img src="49.png" width="50%"></p>
+<p>这个区域的大小会影响我们的最终结果（这句话好像是废话），具体来说，区域越小，就更加还原细节；区域越大，则效果跟接近统计结果：</p>
+<p><img src="50.png" width="30%"></p>
+<p>除此之外，法线贴图本身的样子也会影响P-NDF的样子：</p>
+<p><img src="51.png" width="40%"></p>
+<p>如果再深入的话，就会出现更麻烦的事情。一旦细节的规模小于光的波长，我们就不能用现在的光学模型来进行建模了，此时需要进入到波动光学的范畴，但波动光学的内容实在是太难了（至少对笔者这种非物理专业的人来说），GAMES101课程也就没再深入讲解了。</p>
+<p>（说实话，感觉讲了笔者可能也理解不了）</p>
+<h3 id="Procedural-Appearance——程序化生成表面"><a href="#Procedural-Appearance——程序化生成表面" class="headerlink" title="Procedural Appearance——程序化生成表面"></a>Procedural Appearance——程序化生成表面</h3><p>程序化生成表面的思想是这样的：当我需要渲染某一点时，我不进行真实的计算，而是采用预先定义好的某种函数（或者极其简单的计算），直接获取材质信息。</p>
+<p><img src="52.png" width="40%"></p>
+<p>这种函数被称之为<strong>Noise函数</strong>。注意，这种函数被定义在空间中，可以理解为是$f(x,y,z)$形式的，因此不论要渲染的对象形态是什么样的，都能通过该函数获取表面材质。</p>
+<p>这种方式可以很方便地用于简单细节材质的创建，例如车辆表面的锈迹：</p>
+<p><img src="53.png" width="30%"></p>
+<p>（这种车的应用场景，大概是游戏中路边那些随处可见的车，玩家不会很认真地去纠结它的细节）</p>
+<p>这种方式在生成山峰和木头纹理时的效果还是非常不错的，是一种很好的替代计算的方案：</p>
+<p><img src="54.png" width="30%"></p>
+<p>那么这篇文章的内容到此为止，我们下篇文章见！</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">PotatoMonster</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-qi-advanced-topics-in-rendering/">http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-qi-advanced-topics-in-rendering/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">PotatoMonster</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
+                                </a>
+                            
+                                <a href="/tags/GAMES101/">
+                                    <span class="chip bg-color">GAMES101</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢老爷~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（六）——Materials and Appearances">
+                        
+                        <span class="card-title">GAMES101课程笔记（六）——Materials and Appearances</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我只要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2024-06-18
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GAMES101/">
+                        <span class="chip bg-color">GAMES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/04/21/diffusion-model-ru-men/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/2.jpg" class="responsive-img" alt="Diffusion Model入门">
+                        
+                        <span class="card-title">Diffusion Model入门</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            超简单的扩散模型介绍
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-04-21
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">
+                        <span class="chip bg-color">人工智能</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2024</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">PotatoMonster</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugePotatoMonster" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

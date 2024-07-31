@@ -1,0 +1,1328 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="GAMES101课程笔记（八）——Cameras, Lenses and Light Fields, PotatoMonster">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>GAMES101课程笔记（八）——Cameras, Lenses and Light Fields | PotatoMonster</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="PotatoMonster" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">土豆大魔王</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">PotatoMonster</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/HugePotatoMonster" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Here Here!
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+            <style>
+    .nav-transparent .github-corner {
+        display: none !important;
+    }
+
+    .github-corner {
+        position: absolute;
+        z-index: 10;
+        top: 0;
+        right: 0;
+        border: 0;
+        transform: scale(1.1);
+    }
+
+    .github-corner svg {
+        // color: #0f9d58;
+        color: #1a1a1a;
+        fill: #fff;
+        height: 64px;
+        width: 64px;
+    }
+
+    .github-corner:hover .octo-arm {
+        animation: a 0.56s ease-in-out;
+    }
+
+    .github-corner .octo-arm {
+        animation: none;
+    }
+
+    @keyframes a {
+        0%,
+        to {
+            transform: rotate(0);
+        }
+        20%,
+        60% {
+            transform: rotate(-25deg);
+        }
+        40%,
+        80% {
+            transform: rotate(10deg);
+        }
+    }
+</style>
+
+<a href="https://github.com/HugePotatoMonster" class="github-corner tooltipped hide-on-med-and-down" target="_blank"
+   data-tooltip="Here Here!" data-position="left" data-delay="50">
+    <svg viewBox="0 0 250 250" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor" class="octo-body"></path>
+    </svg>
+</a>
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/minefeatures/1.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">GAMES101课程笔记（八）——Cameras, Lenses and Light Fields</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        padding: 35px 0 15px 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        padding-bottom: 30px;
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                <span class="chip bg-color">计算机图形学</span>
+                            </a>
+                        
+                            <a href="/tags/GAMES101/">
+                                <span class="chip bg-color">GAMES101</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2024-07-29
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields"><a href="#GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields" class="headerlink" title="GAMES101课程笔记（八）——Cameras, Lenses and Light Fields"></a>GAMES101课程笔记（八）——Cameras, Lenses and Light Fields</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>相机、透镜与光场，今天的这个章节其实并不是图形学专属的主题，我们主要来谈谈成像相关的一些知识，比起图形学其实更偏向于物理学。内容总的来说还是挺基础的，就算没看过本系列之前的内容，应该也能够进行消化。</p>
+<p>其实吧，咱们搞图形的，多学点物理挺好的，毕竟我们的目的是为了呈现出想象中的视觉效果，必然脱离不了这些知识（尤其是光学）。闲话也不多说，咱们直接进入今天的主题。</p>
+<p>前文指路：</p>
+<p><a href="/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/">GAMES101课程笔记（一）——Transformation</a></p>
+<p><a href="/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/">GAMES101课程笔记（二）——Rasterization</a></p>
+<p><a href="/2023/11/13/games101-ke-cheng-bi-ji-san-shading/">GAMES101课程笔记（三）——Shading</a></p>
+<p><a href="/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/">GAMES101课程笔记（四）——Geometry</a></p>
+<p><a href="">GAMES101课程笔记（五）——Ray Tracing</a></p>
+<p><a href="">GAMES101课程笔记（七）——Advanced Topics in Rendering</a></p>
+<h2 id="成像"><a href="#成像" class="headerlink" title="成像"></a>成像</h2><p>此前的课程中，我们提到过光栅化成像和光线追踪成像，它们其实都属于同一种成像方法——合成。</p>
+<p>成像的方法主要就是合成和捕捉，刚才说到的合成是指用一些本来不存在于自然界中的东西进行成像；相对地，捕捉指的就是将现实生活中存在的东西进行成像，最简单的例子就是用相机拍摄。</p>
+<p><img src="1.png" width="50%"></p>
+<h2 id="相机"><a href="#相机" class="headerlink" title="相机"></a>相机</h2><p>那么我们就从相机开始，这里给出一个相机的剖面图：</p>
+<p><img src="2.png" width="40%"></p>
+<p>可以看到相机内包含多个透镜和感光元件，接下来我们就来介绍一下相机的工作原理。</p>
+<h3 id="基本构造"><a href="#基本构造" class="headerlink" title="基本构造"></a>基本构造</h3><p>虽然现在我们提到相机，会很自然地联想到其<strong>镜头</strong>上的透镜，但在更早以前，人们对成像的认知还是通过小孔：</p>
+<p><img src="3.png" width="40%"></p>
+<p>基于这种原理的相机被称为针孔相机，如上图上，它假定对象上每一点会向小孔反射一条光线，最后这些光线在传感器上成像。不过针孔相机基本上已经被淘汰了，现在的相机大都基于上图下的这种透镜成像，原理这里就先不细究了。</p>
+<p>在镜头之后，就是相机的<strong>快门</strong>了，这个部件是用来控制光进入感光元件的时间：</p>
+<p><img src="4.png" width="40%"></p>
+<p>光线通过快门后，需要被捕捉才能成像，<strong>传感器</strong>就是这个用于捕捉的部件：</p>
+<p><img src="5.png" width="40%"></p>
+<p>值得一提的是，传感器记录的物理量就是Irradiance，这也能解释为什么一定需要一个透镜（或者小孔），才能正常成像。</p>
+<p><img src="6.png" width="30%"></p>
+<p>如上图所示，由于Irradiance记录各个方向上的能量，所以直接使用传感器的话，传感器上任一点都会收到对象上所有点反射的能量，导致无法成像。</p>
+<p>不过小孔和透镜的原理并不一样，小孔是控制进入光线的数量（这么说并不严谨），理想情况下只留下一个点的光线；透镜是将进入光线的方向聚焦到一点，避免出现上图中的情况。</p>
+<h3 id="针孔相机"><a href="#针孔相机" class="headerlink" title="针孔相机"></a>针孔相机</h3><p>虽说针孔相机逐渐被淘汰了，但它依然是可以使用的，下图展示了一个用硬纸板制作的针孔相机：</p>
+<p><img src="7.png" width="40%"></p>
+<p>这里再展示一张世界上最大的针孔相机照片：</p>
+<p><img src="8.png" width="40%"></p>
+<p>针孔相机拍摄的照片并没有深度信息，其所有像素都是锐利的，没有现代相机的“虚化”效果，这个话题我们后面会具体说明。</p>
+<h3 id="Field-of-View（FOV）——视场"><a href="#Field-of-View（FOV）——视场" class="headerlink" title="Field of View（FOV）——视场"></a>Field of View（FOV）——视场</h3><p>FOV——视场，是我们在聊到摄像时经常提到的一个名词，FOV代表了相机能拍摄到多大的范围，其定义式为：</p>
+<script type="math/tex; mode=display">
+\mathrm{FOV}=2\arctan{\frac{h}{2f}}</script><p>其中$h$指的是传感器的长度（FOV一般会在水平和竖直两个方向上定义），$f$是相机的焦距，一般传感器的大小不会改变，所以在真实世界中，影响FOV的主要因素是相机的焦距，焦距越大，FOV越小：</p>
+<p><img src="9.png" width="40%"></p>
+<p>一般我们购买相机时，看到的参数却并非FOV，而是只标注焦距，这会有一个问题：FOV需要胶片（传感器）大小和焦距二者决定，只给出焦距的情况下，我不就无法得知FOV了吗？</p>
+<p>这里的焦距其实是“等效焦距”，由于历史原因，现在这种标注的焦距都是假设胶片大小为35mm下的等效焦距：</p>
+<p><img src="10.png" width="40%"></p>
+<p>例如我们买手机的时候，看见手机摄像头参数为28mm，显然这是不现实的，手机总共就这么点厚度，根本塞不下这么大一个摄像头。</p>
+<p>这是因为手机的传感器比较小，放到35mm胶片的等效焦距下，自然比实际焦距大很多。</p>
+<p>以下是不同FOV下的拍摄效果：</p>
+<p><img src="11.png" width="50%"></p>
+<h3 id="Exposure——曝光"><a href="#Exposure——曝光" class="headerlink" title="Exposure——曝光"></a>Exposure——曝光</h3><p>接下来我们介绍另外一个概念——曝光，其表达式如下：</p>
+<script type="math/tex; mode=display">
+\mathrm{H(Exposure)}=\mathrm{T(Time)}×\mathrm{E(Irradiance)}</script><p>其中曝光时间由快门决定，而Irradiance则会受到很多方面的影响，例如光圈、焦距等。</p>
+<p>在真实摄影中，影响成像的因素主要有以下三点：</p>
+<ol>
+<li><p>光圈大小：</p>
+<p>光圈是仿照人的瞳孔进行设计的，目的在于控制光进入的多少，显然当光圈比较大时，Irradiance越大，反之越小。</p>
+</li>
+<li><p>快门速度：</p>
+<p>快门的速度实际影响的是传感器接受光线的持续时间，持续时间越长，曝光度越高。</p>
+</li>
+<li><p>ISO（感光度）：</p>
+<p>感光度用以修正传感器值到实际像素值的过程，可以是硬件实现也能是软件实现（例如放大几倍）。</p>
+</li>
+</ol>
+<p>这里展示不同参数组合下的照片效果：</p>
+<p><img src="12.png" width="50%"></p>
+<p>接下来我们给出各个参数的“基本”介绍，<strong>注意，这里的介绍并不正确，只是简单地进行理解</strong>，后期我们会给出正确的原理。</p>
+<h4 id="光圈"><a href="#光圈" class="headerlink" title="光圈"></a>光圈</h4><p>光圈大小用F数（缩写为FN或者F/N）来进行表达，F数越大，光圈越小（这里的逗号是欧洲写法，代表的其实就是小数点）。当光圈很小时，相机就接近于针孔相机，照片的各个像素都会变得锐利；当光圈很大，照片上的某些深度区域就会出现虚化现象。</p>
+<p>FN代表光圈大小的倒数，通过增大光圈，可以增加相同时间内的曝光度：</p>
+<p><img src="13.png" width="50%"></p>
+<h4 id="快门速度"><a href="#快门速度" class="headerlink" title="快门速度"></a>快门速度</h4><p>快门速度直接用时间进行衡量，单位为秒。假设拍摄一个正在奔跑的人，用短时间的快门更容易捕获其某个时刻的动作，如果快门的时间过长，会导致传感器记录下对象这段时间内的运动，导致照片模糊。</p>
+<p>不光是因为对象移动，即使是自己拍照时手抖也会出现这种问题，这被称之为运动模糊（Motion blur）：</p>
+<p><img src="14.png" width="40%"></p>
+<p>但运动模糊不一定是坏事，因为在一张静态照片中，如果想要表达动感，就需要这种模糊，如下图：</p>
+<p><img src="15.png" width="50%"></p>
+<p>明显感觉左图更有锤击的感觉，右图更像是锤子悬浮在半空。</p>
+<p>之前我们聊到反走样时，用模糊来解决反走样的问题，如果把这里的运动理解为在时间维度上采样，那运动模糊的使用其实和解决反走样的思路是非常相似的。</p>
+<p>另外快门还有一个问题——Rolling shutter。当物体的运动速度极快时，每个像素上采集到的不一定是同一时刻的光照，从而导致照片出现扭曲，如下图中飞机的螺旋桨：</p>
+<p><img src="16.png" width="50%"></p>
+<h4 id="ISO"><a href="#ISO" class="headerlink" title="ISO"></a>ISO</h4><p>ISO的话，我们就暂且理解为将像素值按照对应比例放大，例如200就是在100的基础上再翻一倍。增大ISO可以增加照片的亮度，但同时也会使得信号里的噪点更加明显，出现预期之外的成像（变得更加noisy）。</p>
+<p><img src="17.png" width="50%"></p>
+<h4 id="光圈与快门"><a href="#光圈与快门" class="headerlink" title="光圈与快门"></a>光圈与快门</h4><p>从之前的内容来看，如果我们因为拍摄需求不得不调整参数，例如为了拍摄一张静态照片，必须使用很短的快门时间，会导致曝光度的下降。为了解决这个问题，可以调整光圈的大小，使得单位时间进入的光照更多，从曝光度的计算式来看，这其实是令光圈和快门达到了一种平衡。（不过严格来说，并非简单相乘）</p>
+<p><img src="18.png" width="50%"></p>
+<p>上图中的这些参数组合，最后拍摄出来的曝光度都是差不多的，在现实中，这种技巧非常有用，两个代表例子就是高速摄影和低速摄影。</p>
+<h5 id="高速摄影"><a href="#高速摄影" class="headerlink" title="高速摄影"></a>高速摄影</h5><p>高速摄像用于拍摄运动物体某些时刻的样子，因此快门时间非常短，此时就需要调大光圈，维持曝光度：</p>
+<p><img src="19.png" width="30%"></p>
+<h5 id="低速摄影"><a href="#低速摄影" class="headerlink" title="低速摄影"></a>低速摄影</h5><p>低速摄影的光圈非常小，但有很长的快门时间，可以记录下物体的运动轨迹，也被称为“延时摄影”：</p>
+<p><img src="20.png" width="40%"></p>
+<h2 id="薄透镜近似"><a href="#薄透镜近似" class="headerlink" title="薄透镜近似"></a>薄透镜近似</h2><p>目前市面上的相机都不是用简单的一个透镜来做镜头，一般都是使用一个透镜组，结构非常复杂：</p>
+<p><img src="21.png" width="30%"></p>
+<p>另外还有一些奇怪的透镜，它们并不能把平行光聚于一点，这种情况被称为Aberration：</p>
+<p><img src="22.png" width="40%"></p>
+<p>这里我们先讨论我们理想中的透镜。</p>
+<h3 id="焦点"><a href="#焦点" class="headerlink" title="焦点"></a>焦点</h3><p>在理想薄透镜中，平行光穿过透镜后，最终会聚集到一点上：</p>
+<p><img src="23.png" width="40%"></p>
+<p>这一点被称之为<strong>焦点</strong>，而焦点到透镜中心的距离就是<strong>焦距</strong>。</p>
+<p>由于光路是可逆的，因此理想薄透镜还有另一个性质：从焦点处射出的光线经过透镜后，会变成平行光。</p>
+<p>另外再补充一条性质：穿过透镜中心的光线，方向不会发生改变。</p>
+<p>总结一下：</p>
+<ol>
+<li>平行光经过透镜后，会聚集到焦点。</li>
+<li>从焦点处射出的光线经过透镜后，会变成平行光。</li>
+<li>穿过透镜中心的光线，方向不会发生改变。</li>
+</ol>
+<p>除了上述三条性质，<strong>在以下的讨论中，我们认为透镜的焦距是可以调整的</strong>。这其实是现代摄像机使用透镜组的一个好处，通过不同透镜间的排列组合，能够调整整个镜头的焦距。</p>
+<h3 id="薄透镜公式"><a href="#薄透镜公式" class="headerlink" title="薄透镜公式"></a>薄透镜公式</h3><p>假设我们有这样一个场景：</p>
+<p><img src="24.png" width="50%"></p>
+<p>左侧箭头代表物体，右侧箭头代表成像，其中物体到透镜的距离为$z_0$，这个距离称为<strong>物距</strong>；成像到透镜的距离为$z_i$，这个距离称为<strong>像距</strong>。</p>
+<p>初中物理课上我们应该都学过，焦距、物距和相距满足：</p>
+<script type="math/tex; mode=display">
+\frac{1}{f}=\frac{1}{z_0}+\frac{1}{z_i}</script><p>这个公式的推理其实并不复杂，其实就是借助于两对相似三角形：</p>
+<p><img src="25.png" width="50%"></p>
+<p>通过蓝色和红色的两对相似三角形，我们可以获得两组等式：</p>
+<script type="math/tex; mode=display">
+\frac{h_0}{z_0-f}=\frac{h_i}{f} \\
+\frac{h_0}{f}=\frac{h_i}{z_i-f}</script><p>经过一些简单的代换和变形，就能获得上述公式，这里就直接贴一张推导的过程图在这里了：</p>
+<p><img src="26.png" width="40%"></p>
+<h3 id="Defocus-Blur——散焦模糊"><a href="#Defocus-Blur——散焦模糊" class="headerlink" title="Defocus Blur——散焦模糊"></a>Defocus Blur——散焦模糊</h3><p>考虑这样一个场景，我们有一个很小的点物体，它反射的光线经过透镜后聚集在一点上（使用上述公式），但我的传感器平面却不在这个距离上，而是比像距更远，如下图所示：</p>
+<p><img src="27.png" width="50%"></p>
+<p>此时由该点反射的光线分散到了一片区域（圆形）上，这个区域被称之为Circle of Confusion（CoC），同样使用相似三角形性质，有：</p>
+<script type="math/tex; mode=display">
+\frac{C}{A}=\frac{d'}{z_i}=\frac{|z_s-z_i|}{z_i}</script><p>当各个距离都维持不变时，CoC的大小和光圈直径$A$成正比，由于一点的光线被分散，最终的照片上会出现模糊，这就是散焦模糊。</p>
+<p>下图中印证了这一点，大光圈中，散焦模糊会更加明显：</p>
+<p><img src="28.png" width="50%"></p>
+<p>到这里我们可以来正确定义一下光圈F数的含义了，F数的正确定义是<strong>焦距和光圈直径的比值</strong>，即：</p>
+<script type="math/tex; mode=display">
+N=\frac{f}{A}</script><p>从而有：</p>
+<script type="math/tex; mode=display">
+C=A\frac{|z_s-z_i|}{z_i}=\frac{f}{N}\frac{|z_s-z_i|}{z_i}</script><p>因此F数越大，整个图像就更加锐利：</p>
+<p><img src="29.png" width="40%"></p>
+<h3 id="使用透镜的光线追踪"><a href="#使用透镜的光线追踪" class="headerlink" title="使用透镜的光线追踪"></a>使用透镜的光线追踪</h3><p>回想之前我们介绍的光线追踪算法，其实默认都使用的是小孔成像的原理，我们可以将刚才的透镜引入，渲染出下图这样的效果：</p>
+<p><img src="30.png" width="50%"></p>
+<p>为了实现这个目标，我们自然需要定义很多属性，这里给出一种定义方式：</p>
+<ul>
+<li>选定传感器大小，透镜焦距和光圈大小</li>
+<li>选定兴趣平面的位置$z_0$（就是要着重拍摄的距离）</li>
+<li>运用薄透镜公式，计算出传感器到透镜的距离$z_i$</li>
+</ul>
+<p><img src="31.png" width="50%"></p>
+<p>具体的渲染过程为：</p>
+<ul>
+<li>对于传感器上的每一点$x’$：<ul>
+<li>在透镜平面上随机采样一点$x’’$</li>
+<li>假设有光线$x’x’’$，可以计算出该光线会被折射到兴趣平面上一点$x’’’$</li>
+<li>估计光线$x’’x’’’$上的Irradiance</li>
+</ul>
+</li>
+</ul>
+<h3 id="景深"><a href="#景深" class="headerlink" title="景深"></a>景深</h3><p>我们之前提到过，光圈的大小会影响模糊的范围，现在我们来具体探讨一下这个问题：</p>
+<p><img src="32.png" width="50%"></p>
+<p>其实就是在聚焦的过程中，理想焦点前后的一小块区域内，CoC的面积非常小，因而这部分图像的清晰度会很高：</p>
+<p><img src="33.png" width="50%"></p>
+<p>而这部分区域对应的，真实世界中的物体到相机的距离，就被称之为<strong>景深</strong>，接下来我们来看看景深如何计算：</p>
+<p><img src="34.png" width="50%"></p>
+<p>上图左侧这片区域对应的距离就是景深，右侧对应的就是CoC很小的那块区域。</p>
+<p>这张图看上去很复杂，其实用到的无非还是之前的公式，列出右边六条公式后简单解一下，就可以得到景深（DOF）的公式。</p>
+<h2 id="Light-Field-Lumigraph——光场"><a href="#Light-Field-Lumigraph——光场" class="headerlink" title="Light Field/Lumigraph——光场"></a>Light Field/Lumigraph——光场</h2><p>光场，对应的英文名有Light Field和Lumigraph两个，这属于历史遗留问题，我们就不再纠结这个问题。</p>
+<p>在说明光场之前，我们先想象这样一个普通的场景：我们坐在椅子上观察这个世界，最终形成了一副二维的图像。</p>
+<p><img src="35.png" width="50%"></p>
+<p>现在我们在这个过程中改动一点点：我们在房间中拉上一块幕布，但这块幕布严格地将之前的光线复刻，那在我们眼中的图像，看上去就像没发生任何变化一样。</p>
+<p><img src="36.png" width="50%"></p>
+<p>（这其实就是虚拟现实的原理）</p>
+<h4 id="全光函数"><a href="#全光函数" class="headerlink" title="全光函数"></a>全光函数</h4><p>这里我们提出一个概念——全光函数，它用以描述我们可以看到的所有东西的集合。</p>
+<p><img src="37.png" width="50%"></p>
+<p>现在这个描述听上去非常抽象，接下来我们从最简单的全光函数开始，一层层理解。</p>
+<p>由于需要描述空间中观察任何角度时的信息，全光函数一定会有<strong>角度</strong>作为参数，告诉我们向某个方向观测时，获取到的值：</p>
+<p><img src="38.png" width="50%"></p>
+<p>由于只有一个值，所以此时的全光函数只能描述灰度。</p>
+<p>为了加入颜色，我们可以再引入一个参数——<strong>波长</strong>，表示该方向上特定波长光的值：</p>
+<p><img src="39.png" width="50%"></p>
+<p>这样，全光函数就包含了颜色信息。</p>
+<p>接着我们考虑时间维度，为了能包含所有东西，自然要加上一个时间参数：</p>
+<p><img src="40.png" width="50%"></p>
+<p>最后，我们让观测者可以在空间中任何一地方，在函数中加上观测者的位置参数：</p>
+<p><img src="41.png" width="50%"></p>
+<p>现在这个函数涵盖了所有空间和时间，真的可以描述我们可以看到的所有东西，这便是全光函数。</p>
+<p>全光函数的示意图如下，不过要注意的是，全光函数是连续值，而下图中只绘制了部分，因此看上去是离散的：</p>
+<p><img src="42.png" width="40%"></p>
+<p>而我们要介绍的光场，就是全光函数中的一个部分。</p>
+<h4 id="光场"><a href="#光场" class="headerlink" title="光场"></a>光场</h4><p>正式定义光场之前，我们要先定义光线，回忆我们定义过的光线，当时我们是这么做的：</p>
+<p><img src="43.png" width="40%"></p>
+<p>即使用一个起点（3维）和一个方向（2维）来定义一条光线，这里使用了5个维度。</p>
+<p>不过在光场这个背景下，我们只需要一个点（2维）和一个方向（2维）就可以定义一条光线：</p>
+<p><img src="44.png" width="40%"></p>
+<p>这样就只需要4个维度，接下来我们解释为什么。</p>
+<p>假设我们要描述一个物体，我们只需要描述从任何角度看向该物体的信息，根据光路的可逆性，这就等同于描述物体向所有方向放射出的光照信息：</p>
+<p><img src="45.png" width="30%"></p>
+<p>于这些信息就是我们的主角——光场，光场被定义为：在任何一个位置，向任何一个方向放出的光的强度。</p>
+<p>根据前面的知识，我们知道，物体的包围盒可以展开为二维表面，因此可以用二维坐标来表示包围盒上任意一点，因此在光场背景下，我们只需要4个维度描述光线。</p>
+<p>有了光场，我们可以从任何角度观察物体，通过光场获得对应的光照强度，从而进行渲染：</p>
+<p><img src="46.png" width="30%"></p>
+<p>此时，物体本身的形状并不是必须的，就像本节最开始举的例子一样，我们完全可以使用一个“幕布”，在上面复刻光场信息，这也就做到了用四维描述该物体的所有光照信息：</p>
+<p><img src="47.png" width="30%"></p>
+<p>此时我们使用坐标+方向的方式来定义光线，相当于使用了一个附加了角度的平面来定义光场：</p>
+<p><img src="48.png" width="30%"></p>
+<p>我们知道，方向其实是可以用两点来表示的，所以还可以用两个平面来定义光场：</p>
+<p><img src="49.png" width="30%"></p>
+<p>这样就把在平面上任意一点的任意方向，转化为了在两个平面上各取一点，因此次平时描述光场时，往往使用$(u,v)$加上$(s,t)$的方式：</p>
+<p><img src="50.png" width="30%"></p>
+<p>我们可以从两个角度来理解这种双平面的表达方式，如下所示：</p>
+<p><img src="51.png" width="50%"></p>
+<p>上半表示固定$(u,v)$，观察整个$st$平面，这样每个$(u,v)$坐标都相当于一个针孔相机，看见的是从不同角度观察到的完整场景。</p>
+<p>下半表示固定$(s,t)$，从$uv$平面上任意点观察该点，这样其实是获得了从所有角度观察点$(s,t)$的情况，也就是该像素上不同角度的Radiance。</p>
+<p>斯坦福大学就依据光场原理搭建了一个相机矩阵：</p>
+<p><img src="52.png" width="30%"></p>
+<p>通过该相机矩阵，可以大致还原一个场景的所有光照信息。</p>
+<p>不过在生物界中，本身就有光场原理的完美应用——复眼：</p>
+<p><img src="53.png" width="50%"></p>
+<p>假设我们有来自三个方向的光，也就是图中的蓝绿红光（注意，这里不代表光的颜色，只是为了区分光的颜色）。在复眼的每个晶状体上，并没有简单地将三个方向上的光进行简单的叠加，而是将其“分”到了不同的位置上，这样就保留下了角度信息。</p>
+<p>用我们之前的知识来说，就是此时，记录下的信息不再是Irradiance，而是Radiance。</p>
+<h4 id="光场相机"><a href="#光场相机" class="headerlink" title="光场相机"></a>光场相机</h4><p>光场相机和复眼的原理非常像，由于它能记录下Radiance信息，所以可以实现<strong>先拍照、再调整</strong>的效果。</p>
+<p>在课程PPT中给了一个例子，但由于图片数量有点多，不方便在博客中展示，这里就贴出链接：</p>
+<p><a target="_blank" rel="noopener" href="https://sites.cs.ucsb.edu/~lingqi/teaching/resources/GAMES101_Lecture_20.pdf">GAMES101_Lecture_20 (ucsb.edu)</a></p>
+<p>（主要就是拍摄完后，可以调整聚焦平面的位置，达到自己想要的成像效果）</p>
+<p>以下是光场相机的结构，不难发现和复眼真的非常类似：</p>
+<p><img src="54.png" width="50%"></p>
+<p>原先我们只在像素上存储光线强度的叠加，而在光场相机中，用微透镜替代像素，进行了分光操作，此时像素拓展为一个区域，区域内的各个像素记录了不同角度的Radiance。</p>
+<p>当我们想要获得正常的相片时，只需要在每个区域内，获取特定方向的Radiance，每个Radiance占据一像素，重新组合为相片即可：</p>
+<p><img src="55.png" width="20%"></p>
+<p>由于光场相机本质上就是记录了光场，自然也可以实现重新聚焦的过程，不过这里就不详细展开了。</p>
+<p>不过光场相机也有如下几个缺点：</p>
+<ul>
+<li>分辨率不足。由于用区域来记录原来一个像素的信息，使用分辨率相同的胶片，分辨率会较低。</li>
+<li>高成本。一是由于分辨率问题，要采用分辨率更高的胶片才能达到原先的效果；二是微透镜的制作成本更高。</li>
+</ul>
+<p>这些问题其实和在编程时，我们遇到的空间和时间之间的抉择是类似，整个图形学其实就是一个trade-off的过程。</p>
+<p>好了，本篇文章就此结束，真是一篇很好的摄影入门教程啊（雾）。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">PotatoMonster</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/">http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">PotatoMonster</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                                    <span class="chip bg-color">计算机图形学</span>
+                                </a>
+                            
+                                <a href="/tags/GAMES101/">
+                                    <span class="chip bg-color">GAMES101</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">感谢老爷~</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（八）——Cameras, Lenses and Light Fields">
+                        
+                        <span class="card-title">GAMES101课程笔记（八）——Cameras, Lenses and Light Fields</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我终要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-07-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GAMES101/">
+                        <span class="chip bg-color">GAMES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/minefeatures/1.jpg" class="responsive-img" alt="GAMES101课程笔记（六）——Materials and Appearances">
+                        
+                        <span class="card-title">GAMES101课程笔记（六）——Materials and Appearances</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            我只要成为计算机图形学高手！
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2024-06-18
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            PotatoMonster
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/">
+                        <span class="chip bg-color">计算机图形学</span>
+                    </a>
+                    
+                    <a href="/tags/GAMES101/">
+                        <span class="chip bg-color">GAMES101</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2023-2024</span>
+            
+            <span id="year">2023</span>
+            <a href="/about" target="_blank">PotatoMonster</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/HugePotatoMonster" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+	
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

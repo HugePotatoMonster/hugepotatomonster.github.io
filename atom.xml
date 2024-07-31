@@ -6,7 +6,7 @@
   <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
   
   <link href="http://hugepotatomonster.github.io/"/>
-  <updated>2023-10-24T06:51:22.516Z</updated>
+  <updated>2024-07-31T16:29:05.813Z</updated>
   <id>http://hugepotatomonster.github.io/</id>
   
   <author>
@@ -17,11 +17,184 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>GAMES101课程笔记（八）——Cameras, Lenses and Light Fields</title>
+    <link href="http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/"/>
+    <id>http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/</id>
+    <published>2024-07-29T14:41:08.000Z</published>
+    <updated>2024-07-31T16:29:05.813Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（六）——Materials and Appearances</title>
+    <link href="http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/"/>
+    <id>http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-liu-materials-and-appearances/</id>
+    <published>2024-06-18T07:29:09.000Z</published>
+    <updated>2024-07-22T15:00:42.643Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（六）——Materials-and-Appearances&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（六）——Materials-and-Appearances&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（七）——Advanced Topics in Rendering</title>
+    <link href="http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-qi-advanced-topics-in-rendering/"/>
+    <id>http://hugepotatomonster.github.io/2024/06/18/games101-ke-cheng-bi-ji-qi-advanced-topics-in-rendering/</id>
+    <published>2024-06-18T07:29:09.000Z</published>
+    <updated>2024-07-29T14:35:44.141Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（七）——Advanced-Topics-in-Rendering&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（七）——Advanced-Topics-in-Rendering&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Diffusion Model入门</title>
+    <link href="http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/"/>
+    <id>http://hugepotatomonster.github.io/2024/04/21/diffusion-model-ru-men/</id>
+    <published>2024-04-21T13:54:53.000Z</published>
+    <updated>2024-07-22T02:26:31.178Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Diffusion-Model——扩散模型&quot;&gt;&lt;a href=&quot;#Diffusion-Model——扩散模型&quot; class=&quot;headerlink&quot; title=&quot;Diffusion Model——扩散模型&quot;&gt;&lt;/a&gt;Diffusion</summary>
+        
+      
+    
+    
+    
+    
+    <category term="人工智能" scheme="http://hugepotatomonster.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（五）——Ray Tracing</title>
+    <link href="http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/"/>
+    <id>http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/</id>
+    <published>2024-03-12T15:14:13.000Z</published>
+    <updated>2024-07-30T13:21:35.995Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（五）——Ray-Tracing&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（五）——Ray-Tracing&quot; class=&quot;headerlink&quot; title=&quot;GAMES101课程笔记（五）——Ray</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（四）——Geometry</title>
+    <link href="http://hugepotatomonster.github.io/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/"/>
+    <id>http://hugepotatomonster.github.io/2024/01/16/games101-ke-cheng-bi-ji-si-geometry/</id>
+    <published>2024-01-16T06:32:31.000Z</published>
+    <updated>2024-03-20T05:58:42.434Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（四）——Geometry&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（四）——Geometry&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>GAMES101课程笔记（三）——Shading</title>
+    <link href="http://hugepotatomonster.github.io/2023/11/13/games101-ke-cheng-bi-ji-san-shading/"/>
+    <id>http://hugepotatomonster.github.io/2023/11/13/games101-ke-cheng-bi-ji-san-shading/</id>
+    <published>2023-11-13T07:41:37.000Z</published>
+    <updated>2024-07-22T02:26:31.181Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（三）——Shading&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（三）——Shading&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
+  
+  <entry>
     <title>GAMES101课程笔记（二）——Rasterization</title>
     <link href="http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/"/>
     <id>http://hugepotatomonster.github.io/2023/10/01/games101-ke-cheng-bi-ji-er-rasterization/</id>
     <published>2023-10-01T05:13:02.000Z</published>
-    <updated>2023-10-24T06:51:22.516Z</updated>
+    <updated>2024-03-20T05:58:42.412Z</updated>
     
     
       
@@ -37,7 +210,7 @@
     
     <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    <category term="GANES101" scheme="http://hugepotatomonster.github.io/tags/GANES101/"/>
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
     
   </entry>
   
@@ -46,7 +219,7 @@
     <link href="http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/"/>
     <id>http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/</id>
     <published>2023-09-14T06:30:12.000Z</published>
-    <updated>2023-10-24T05:37:34.934Z</updated>
+    <updated>2024-03-20T05:58:42.397Z</updated>
     
     
       
@@ -62,7 +235,7 @@
     
     <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
     
-    <category term="GANES101" scheme="http://hugepotatomonster.github.io/tags/GANES101/"/>
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
     
   </entry>
   
