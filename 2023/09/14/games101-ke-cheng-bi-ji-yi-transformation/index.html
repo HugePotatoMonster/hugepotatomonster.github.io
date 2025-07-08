@@ -657,13 +657,13 @@ M_{ortho}=\begin{bmatrix}\frac{2}{r-l} & 0 & 0 & 0 \\0 & \frac{2}{t-b} & 0 & 0 \
 M_{persp\rightarrow{ortho}}\begin{pmatrix}x\\y\\z\\1\end{pmatrix}=\begin{pmatrix}nx\\ny\\unknown\\z\end{pmatrix}
 \tag{1}</script><p>不难解得$M_{persp\rightarrow{ortho}}$的一部分参数为：</p>
 <script type="math/tex; mode=display">
-M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 0 & 1 \end{bmatrix}</script><p>其中$a$，$b$，$c$，$d$仍是未知数。</p>
+M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 1 & 0 \end{bmatrix}</script><p>其中$a$，$b$，$c$，$d$仍是未知数。</p>
 <p>刚才我们提到过，远近平面上的点，其$z$坐标不会改变，那我们可以取远近平面上的点来进一步求解。</p>
 <p>取近平面上任意一点$(x,y,n)$，该点变换后的坐标应仍是$(x,y,n)$，即为：</p>
 <script type="math/tex; mode=display">
 \begin{pmatrix}x''\\y''\\z''\\1\end{pmatrix}=\begin{pmatrix}x\\y\\n\\1\end{pmatrix}==\begin{pmatrix}nx\\ny\\n^2\\n\end{pmatrix}</script><p>由公式(1)，有：</p>
 <script type="math/tex; mode=display">
-\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 0 & 1 \end{bmatrix}\begin{pmatrix}x\\y\\n\\1\end{pmatrix}=\begin{pmatrix}nx\\ny\\n^2\\n\end{pmatrix}</script><p>即对任意的$(x,y,n)$，有：</p>
+\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\a & b & c & d \\0 & 0 & 1 & 0 \end{bmatrix}\begin{pmatrix}x\\y\\n\\1\end{pmatrix}=\begin{pmatrix}nx\\ny\\n^2\\n\end{pmatrix}</script><p>即对任意的$(x,y,n)$，有：</p>
 <script type="math/tex; mode=display">
 ax+by+cn+d=n^2</script><p>可得$a=0$，$b=0$，所以该式可以简化为：</p>
 <script type="math/tex; mode=display">
@@ -678,7 +678,7 @@ cf+d=f^2
 c=n+f\\
 d=-nf</script><p>至此，我们完成了$M_{persp\rightarrow{ortho}}$的求解，该矩阵的完整形式为：</p>
 <script type="math/tex; mode=display">
-M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\0 & 0 & n+f & -nf \\0 & 0 & 0 & 1 \end{bmatrix}</script><p>将其与正交投影的变换矩阵相乘，就得到了投影变换的变换矩阵$M_{persp}$：</p>
+M_{persp\rightarrow{ortho}}=\begin{bmatrix}n & 0 & 0 & 0 \\0 & n & 0 & 0 \\0 & 0 & n+f & -nf \\0 & 0 & 1 & 0 \end{bmatrix}</script><p>将其与正交投影的变换矩阵相乘，就得到了投影变换的变换矩阵$M_{persp}$：</p>
 <script type="math/tex; mode=display">
 M_{persp}=M_{ortho}M_{persp\rightarrow{ortho}}</script><h4 id="一些常见概念"><a href="#一些常见概念" class="headerlink" title="一些常见概念"></a>一些常见概念</h4><p>在很多时候我们会提到<strong>视场</strong>（Field-of-View，即FOV）以及<strong>纵横比</strong>（Aspect Ratio）这两个概念，在这里可以做出解释。</p>
 <p>之前提到过，我们可以用$[l,r]×[b,t]×[f,n]$的方式来表示三维空间中的长方体，于是我们定义：</p>
@@ -1160,7 +1160,7 @@ aspect=\frac{r}{t}</script><p>其中$fovY$表示$y$方向上的视场，$x$方�
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2023-2024</span>
+                <span id="year">2023-2025</span>
             
             <span id="year">2023</span>
             <a href="/about" target="_blank">PotatoMonster</a>

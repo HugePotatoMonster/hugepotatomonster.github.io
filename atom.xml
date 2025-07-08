@@ -6,7 +6,7 @@
   <link href="http://hugepotatomonster.github.io/atom.xml" rel="self"/>
   
   <link href="http://hugepotatomonster.github.io/"/>
-  <updated>2024-07-26T15:48:08.032Z</updated>
+  <updated>2025-07-08T14:20:17.803Z</updated>
   <id>http://hugepotatomonster.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GAMES101课程笔记（八）——Cameras, Lenses and Light Fields</title>
+    <link href="http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/"/>
+    <id>http://hugepotatomonster.github.io/2024/07/29/games101-ke-cheng-bi-ji-ba-cameras-lenses-and-light-fields/</id>
+    <published>2024-07-29T14:41:08.000Z</published>
+    <updated>2025-07-08T14:20:17.803Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields&quot;&gt;&lt;a href=&quot;#GAMES101课程笔记（八）——Cameras-Lenses-and-Light-Fields&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="计算机图形学" scheme="http://hugepotatomonster.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/"/>
+    
+    <category term="GAMES101" scheme="http://hugepotatomonster.github.io/tags/GAMES101/"/>
+    
+  </entry>
   
   <entry>
     <title>GAMES101课程笔记（七）——Advanced Topics in Rendering</title>
@@ -94,7 +119,7 @@
     <link href="http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/"/>
     <id>http://hugepotatomonster.github.io/2024/03/12/games101-ke-cheng-bi-ji-wu-ray-tracing/</id>
     <published>2024-03-12T15:14:13.000Z</published>
-    <updated>2024-07-26T13:35:11.923Z</updated>
+    <updated>2025-07-08T14:20:17.802Z</updated>
     
     
       
@@ -194,7 +219,7 @@
     <link href="http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/"/>
     <id>http://hugepotatomonster.github.io/2023/09/14/games101-ke-cheng-bi-ji-yi-transformation/</id>
     <published>2023-09-14T06:30:12.000Z</published>
-    <updated>2024-01-20T03:51:50.410Z</updated>
+    <updated>2025-07-08T14:08:09.899Z</updated>
     
     
       
